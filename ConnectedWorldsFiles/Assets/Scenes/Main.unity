@@ -420,6 +420,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 3
   jumpForce: 300
+  chargedJumpForce: 300
+  chargedJumpMaxTime: 1.5
   canJump: 1
 --- !u!1001 &3911046938709919997
 PrefabInstance:

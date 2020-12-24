@@ -13,14 +13,14 @@ public class PlayerGroundCheck : MonoBehaviour
     {
         if (collision.tag == "ground")
         {
-            playerMovement.canJump = true;
+            playerMovement.grounded = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.tag == "ground")
         {
-            playerMovement.canJump = false;
+            playerMovement.grounded = false;
         }
     }
 }
