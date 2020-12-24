@@ -5,21 +5,26 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    // Move parameters
     [SerializeField] float movementSpeed = 3f;
+    // Attack parameters
     public Transform firePoint;
+    public FirePointRotate firePointRotate;
     public GameObject bulletPrefab;
     public float bulletForce;
-    public Camera cam;
-    public Rigidbody2D playerRB;
-    public FirePointRotate firePointRotate;
+
+    // Jump parameters
     [SerializeField] float jumpForce = 30f;
     // Charged jump parameters
     [SerializeField] float chargedJumpForce = 30f;
     [SerializeField] float chargedJumpMaxTime = 1.5f;
     [SerializeField] Slider chargeIndicator;
 
+    // Refernces
+    private Rigidbody2D playerRB;
+    public Camera cam;
 
-    private Rigidbody2D rb;
+    // move
     private float horizontalMovement;
     // Player state
     public bool grounded = false;
@@ -27,10 +32,6 @@ public class PlayerMovement : MonoBehaviour
 
     // Charged Jump
     private float chargeStartTime;
-    
-
-
-    private bool grounded = false;
 
     // Wall Jump 
     public Transform frontCheck;
@@ -49,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        playerRB = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -62,14 +63,14 @@ public class PlayerMovement : MonoBehaviour
     {
         MovePlayer();
         aiming();
-        attack();
         WallSliding(IsWallSliding());
-
     }
 
     private void getInputs()
     {
         horizontalMovement = Input.GetAxis("Horizontal");
+        // Attack
+        if (Input.GetMouseButtonDown(0)) attack();
         // Jump
         if (Input.GetKeyDown(KeyCode.Space) && grounded) Jump();
         // Charged Jump
@@ -81,14 +82,14 @@ public class PlayerMovement : MonoBehaviour
     private void MovePlayer()
     {
         if (canMove) { 
-        Vector3 targetVelocity = new Vector2(horizontalMovement * movementSpeed, rb.velocity.y);
-        rb.velocity = targetVelocity;
+        Vector3 targetVelocity = new Vector2(horizontalMovement * movementSpeed, playerRB.velocity.y);
+        playerRB.velocity = targetVelocity;
         }
     }
 
     private void Jump()
     {
-        rb.AddForce(new Vector2(0, jumpForce));
+        playerRB.AddForce(new Vector2(0, jumpForce));
     }
 
     private void ChargingJump()
@@ -107,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
         if (grounded)
         {
             float chargeDuration = Time.time - chargeStartTime;
-            rb.AddForce(new Vector2(0, Mathf.Min(chargeDuration, chargedJumpMaxTime) * chargedJumpForce));
+            playerRB.AddForce(new Vector2(0, Mathf.Min(chargeDuration, chargedJumpMaxTime) * chargedJumpForce));
         }
     }
 
@@ -118,13 +119,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void attack()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
             Debug.Log("Fired");
-        }
     }
 
     private bool IsWallSliding()
@@ -146,7 +144,9 @@ public class PlayerMovement : MonoBehaviour
     private void WallJump()
     {
         bool isWallSliding = IsWallSliding();
+#pragma warning disable CS8321 // Local function is declared but never used
         void SetWallJumpToFalse()
+#pragma warning restore CS8321 // Local function is declared but never used
         {
             isWallSliding = false;
         }
