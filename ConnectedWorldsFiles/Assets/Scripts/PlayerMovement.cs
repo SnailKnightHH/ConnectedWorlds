@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     // Charged jump parameters
     [SerializeField] float chargedJumpForce = 30f;
     [SerializeField] float chargedJumpMaxTime = 1.5f;
+    [SerializeField] Slider chargeIndicator;
 
 
     private Rigidbody2D rb;
@@ -19,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Charged Jump
     private float chargeStartTime;
+    
 
     private void Awake()
     {
@@ -38,12 +41,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void getInputs()
     {
-        horizontalMovement = Input.GetAxisRaw("Horizontal");
+        horizontalMovement = Input.GetAxis("Horizontal");
         // Jump
         if (Input.GetKeyDown(KeyCode.Space) && grounded) Jump();
         // Charged Jump
-        if (Input.GetKeyDown(KeyCode.LeftControl) && grounded) ChargingJump();
-        if (Input.GetKeyUp(KeyCode.LeftControl) && grounded) ReleaseJump();
+        if (Input.GetKeyDown(KeyCode.LeftControl)) ChargingJump();
+        if (Input.GetKey(KeyCode.LeftControl)) UpdateIndicator();
+        if (Input.GetKeyUp(KeyCode.LeftControl)) ReleaseJump();
 
     }
     private void MovePlayer()
@@ -61,14 +65,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void ChargingJump()
     {
-        canMove = false;
+        chargeIndicator.gameObject.SetActive(true);
+        chargeIndicator.value = 0f;
         chargeStartTime = Time.time;
     }
-
+    private void UpdateIndicator()
+    {
+        chargeIndicator.value = Mathf.Min((Time.time - chargeStartTime) / chargedJumpMaxTime, 1f);
+    }
     private void ReleaseJump()
     {
-        canMove = true;
-        float chargeDuration = Time.time - chargeStartTime;
-        rb.AddForce(new Vector2(0, Mathf.Min(chargeDuration, chargedJumpMaxTime) * chargedJumpForce));
+        chargeIndicator.gameObject.SetActive(false);
+        if (grounded)
+        {
+            float chargeDuration = Time.time - chargeStartTime;
+            rb.AddForce(new Vector2(0, Mathf.Min(chargeDuration, chargedJumpMaxTime) * chargedJumpForce));
+        }
     }
 }
