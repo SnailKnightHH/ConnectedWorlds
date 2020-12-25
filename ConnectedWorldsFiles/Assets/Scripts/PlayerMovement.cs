@@ -16,10 +16,12 @@ public class PlayerMovement : MonoBehaviour
 
     // Jump parameters
     [SerializeField] private float jumpForce = 30f;
+    [SerializeField] private float jumpTime;
     // Charged jump parameters
     [SerializeField] private float chargedJumpForce = 30f;
     [SerializeField] private float chargedJumpMaxTime = 1.5f;
     [SerializeField] private Slider chargeIndicator;
+
 
     // Refernces
     private Rigidbody2D playerRB;
@@ -34,6 +36,10 @@ public class PlayerMovement : MonoBehaviour
     // Player state
     public bool grounded = false;
     private bool canMove = true;
+
+    // Jump
+    private float jumpTimer;
+    private bool isJumping;
 
     // Charged Jump
     private float chargeStartTime;
@@ -81,12 +87,14 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) attack();
         // Jump
         if (Input.GetKeyDown(KeyCode.Space) && grounded) Jump();
+        if (Input.GetKey(KeyCode.Space)) JumpHigher();
+        if (Input.GetKeyUp(KeyCode.Space)) isJumping = false;
         // Charged Jump
         if (Input.GetKeyDown(KeyCode.LeftControl)) ChargingJump();
         if (Input.GetKey(KeyCode.LeftControl)) UpdateIndicator();
         if (Input.GetKeyUp(KeyCode.LeftControl)) ReleaseJump();
-
     }
+
     private void MovePlayer()
     {
         if (canMove) { 
@@ -117,7 +125,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        playerRB.AddForce(new Vector2(0, jumpForce));
+        isJumping = true;
+        jumpTimer = jumpTime;
+        playerRB.velocity = Vector2.up * jumpForce;
+    }
+    private void JumpHigher()
+    {
+        if (jumpTimer > 0)
+        {
+            playerRB.velocity = Vector2.up * jumpForce;
+            jumpTimer -= Time.deltaTime;
+        }
+        else isJumping = false;
     }
 
     private void ChargingJump()
