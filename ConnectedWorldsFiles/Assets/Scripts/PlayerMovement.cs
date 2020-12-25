@@ -17,11 +17,6 @@ public class PlayerMovement : MonoBehaviour
     // Jump parameters
     [SerializeField] private float jumpForce = 30f;
     [SerializeField] private float jumpTime;
-    // Charged jump parameters
-    [SerializeField] private float chargedJumpForce = 30f;
-    [SerializeField] private float chargedJumpMaxTime = 1.5f;
-    [SerializeField] private Slider chargeIndicator;
-
 
     // Refernces
     private Rigidbody2D playerRB;
@@ -40,9 +35,6 @@ public class PlayerMovement : MonoBehaviour
     // Jump
     private float jumpTimer;
     private bool isJumping;
-
-    // Charged Jump
-    private float chargeStartTime;
 
     // Wall Jump 
     public Transform frontCheck;
@@ -89,10 +81,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && grounded) Jump();
         if (Input.GetKey(KeyCode.Space)) JumpHigher();
         if (Input.GetKeyUp(KeyCode.Space)) isJumping = false;
-        // Charged Jump
-        if (Input.GetKeyDown(KeyCode.LeftControl)) ChargingJump();
-        if (Input.GetKey(KeyCode.LeftControl)) UpdateIndicator();
-        if (Input.GetKeyUp(KeyCode.LeftControl)) ReleaseJump();
     }
 
     private void MovePlayer()
@@ -137,26 +125,6 @@ public class PlayerMovement : MonoBehaviour
             jumpTimer -= Time.deltaTime;
         }
         else isJumping = false;
-    }
-
-    private void ChargingJump()
-    {
-        chargeIndicator.gameObject.SetActive(true);
-        chargeIndicator.value = 0f;
-        chargeStartTime = Time.time;
-    }
-    private void UpdateIndicator()
-    {
-        chargeIndicator.value = Mathf.Min((Time.time - chargeStartTime) / chargedJumpMaxTime, 1f);
-    }
-    private void ReleaseJump()
-    {
-        chargeIndicator.gameObject.SetActive(false);
-        if (grounded)
-        {
-            float chargeDuration = Time.time - chargeStartTime;
-            playerRB.AddForce(new Vector2(0, Mathf.Min(chargeDuration, chargedJumpMaxTime) * chargedJumpForce));
-        }
     }
 
     private void aiming()
