@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,8 +24,10 @@ public class PlayerMovement : MonoBehaviour
     // Refernces
     private Rigidbody2D playerRB;
     public Camera cam;
-    [SerializeField] private Animator animator;
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
+
+    // Animations
 
     // move
     private float horizontalMovement;
@@ -97,8 +100,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void AnimatePlayer()
     {
-        if (horizontalMovement == 0) ChangeAnimationState("character_idle");
-        else ChangeAnimationState("character_run");
+        if (grounded) { 
+            if (horizontalMovement == 0) ChangeAnimationState("character_idle");
+            else ChangeAnimationState("character_run");
+        }
+        else
+        {
+            ChangeAnimationState("character_jump");
+        }
     }
 
     private void ChangeAnimationState(string newState)
