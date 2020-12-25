@@ -9,8 +9,7 @@ public class PlayerMovement : MonoBehaviour
     // Move parameters
     [SerializeField] private float movementSpeed = 3f;
     // Attack parameters
-    [SerializeField] private Transform firePoint;
-    [SerializeField] private FirePointRotate firePointRotate;
+    [SerializeField] private GameObject firePoint;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float bulletForce;
 
@@ -35,6 +34,11 @@ public class PlayerMovement : MonoBehaviour
     // Jump
     private float jumpTimer;
     private bool isJumping;
+
+    // Attack
+    Vector2 mousePos;
+    Vector2 lookDir;
+    Vector2 fireDir;
 
     // Wall Jump 
     public Transform frontCheck;
@@ -68,14 +72,13 @@ public class PlayerMovement : MonoBehaviour
     {
         MovePlayer();
         AnimatePlayer();
-        aiming();
-       // WallSliding(IsWallSliding());
     }
 
     private void getInputs()
     {
         horizontalMovement = Input.GetAxis("Horizontal");
         // Attack
+        GetMousePosition();
         if (Input.GetMouseButtonDown(0)) attack();
         // Jump
         if (Input.GetKeyDown(KeyCode.Space) && grounded) Jump();
@@ -85,12 +88,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        if (canMove) { 
+        if (canMove) {
         Vector3 targetVelocity = new Vector2(horizontalMovement * movementSpeed, playerRB.velocity.y);
         playerRB.velocity = targetVelocity;
             //flip character sprite
-            if (horizontalMovement < 0) spriteRenderer.flipX = true;
-            else if (horizontalMovement > 0) spriteRenderer.flipX = false;
+            if (lookDir.x < 0) transform.localScale = new Vector2 (-1, transform.localScale.y);
+            else if (lookDir.x >= 0) transform.localScale = new Vector2(1, transform.localScale.y);
         }
     }
 
@@ -119,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void JumpHigher()
     {
-        if (jumpTimer > 0)
+        if (jumpTimer > 0 && isJumping)
         {
             playerRB.velocity = Vector2.up * jumpForce;
             jumpTimer -= Time.deltaTime;
@@ -127,16 +130,20 @@ public class PlayerMovement : MonoBehaviour
         else isJumping = false;
     }
 
-    private void aiming()
+    private void GetMousePosition()
     {
-        firePointRotate.firePointAiming();
+        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        lookDir = mousePos - (Vector2) transform.position;
+        fireDir = mousePos - (Vector2) firePoint.transform.position;
+        float FireAngle = Mathf.Atan2(fireDir.y, fireDir.x) * Mathf.Rad2Deg - 90f;
+        firePoint.transform.eulerAngles = new Vector3(firePoint.transform.rotation.x, firePoint.transform.rotation.y, FireAngle);
     }
 
     private void attack()
     {
-            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation);
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.AddForce(firePoint.transform.up * bulletForce, ForceMode2D.Impulse);
     }
 
     private bool IsWallSliding()
