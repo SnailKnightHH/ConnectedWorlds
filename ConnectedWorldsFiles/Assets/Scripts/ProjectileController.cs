@@ -6,6 +6,7 @@ public class ProjectileController : MonoBehaviour
 {
     public int damage;
     public float areaOfEffect;
+    [SerializeField] private GameObject explosion;
     public LayerMask destructableEnvironment; 
 
     private void OnTriggerEnter2D(Collider2D collider2D)
@@ -17,14 +18,14 @@ public class ProjectileController : MonoBehaviour
             {
                 objectsToDamage[i].GetComponent<Destructable>().ReceiveDamage(damage);
             }
+            Instantiate(explosion, transform.position, Quaternion.Euler(new Vector3( 0f, 0f ,0f))); 
             Destroy(gameObject);
         }
-        
     }
 
-    void OnDrawGizmosSelected()
+/*    void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, areaOfEffect);
-    }
+    }*/
 }
