@@ -112,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 scaler = frontCheck.localScale;
         scaler.x *= -1;
         frontCheck.localScale = scaler;
-        //spriteRenderer.flipX = !spriteRenderer.flipX;
+        //spriteRenderer.flipX = !spriteRenderer.flipX;  
 
     }
 
@@ -158,8 +158,7 @@ public class PlayerMovement : MonoBehaviour
         //if(touchWallClass.currentWall == )
         //playerRB.velocity = new Vector2(xWallForce * -1, yWallForce);
         isWallJumping = true;
-        if(horizontalMovement > 0)
-            playerRB.velocity = new Vector3(xWallForce * -horizontalMovement, yWallForce, 0);
+        playerRB.velocity = new Vector3(xWallForce * -horizontalMovement, yWallForce, 0);
         Invoke("SetIsWallJumpingToFalse", JumpTime);
         Debug.Log("Reached");
         //isWallJumping = false;
