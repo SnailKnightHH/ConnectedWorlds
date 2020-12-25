@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     // Refernces
     private Rigidbody2D playerRB;
     public Camera cam;
+    [SerializeField] private Animator animator;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     // move
     private float horizontalMovement;
@@ -51,6 +53,8 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         playerRB = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -62,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
+        AnimatePlayer();
         aiming();
        // WallSliding(IsWallSliding());
     }
@@ -84,7 +89,21 @@ public class PlayerMovement : MonoBehaviour
         if (canMove) { 
         Vector3 targetVelocity = new Vector2(horizontalMovement * movementSpeed, playerRB.velocity.y);
         playerRB.velocity = targetVelocity;
+            //flip character sprite
+            if (horizontalMovement < 0) spriteRenderer.flipX = true;
+            else if (horizontalMovement > 0) spriteRenderer.flipX = false;
         }
+    }
+
+    private void AnimatePlayer()
+    {
+        if (horizontalMovement == 0) ChangeAnimationState("character_idle");
+        else ChangeAnimationState("character_run");
+    }
+
+    private void ChangeAnimationState(string newState)
+    {
+        animator.Play(newState);
     }
 
     private void Jump()
