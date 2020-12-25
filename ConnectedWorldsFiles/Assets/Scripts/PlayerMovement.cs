@@ -6,19 +6,19 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     // Move parameters
-    [SerializeField] float movementSpeed = 3f;
+    [SerializeField] private float movementSpeed = 3f;
     // Attack parameters
-    public Transform firePoint;
-    public FirePointRotate firePointRotate;
-    public GameObject bulletPrefab;
-    public float bulletForce;
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private FirePointRotate firePointRotate;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private float bulletForce;
 
     // Jump parameters
-    [SerializeField] float jumpForce = 30f;
+    [SerializeField] private float jumpForce = 30f;
     // Charged jump parameters
-    [SerializeField] float chargedJumpForce = 30f;
-    [SerializeField] float chargedJumpMaxTime = 1.5f;
-    [SerializeField] Slider chargeIndicator;
+    [SerializeField] private float chargedJumpForce = 30f;
+    [SerializeField] private float chargedJumpMaxTime = 1.5f;
+    [SerializeField] private Slider chargeIndicator;
 
     // Refernces
     private Rigidbody2D playerRB;
@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
     {
         MovePlayer();
         aiming();
-        WallSliding(IsWallSliding());
+       // WallSliding(IsWallSliding());
     }
 
     private void getInputs()
@@ -122,7 +122,6 @@ public class PlayerMovement : MonoBehaviour
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
-            Debug.Log("Fired");
     }
 
     private bool IsWallSliding()

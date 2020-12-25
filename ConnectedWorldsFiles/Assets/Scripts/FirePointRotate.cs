@@ -33,6 +33,6 @@ public class FirePointRotate : MonoBehaviour
         Vector2 lookDir = mousePos - playerRB.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
         firePointRB.rotation = angle;
-        Debug.Log(lookDir + " " + angle);
+        //Debug.Log(lookDir + " " + angle);
     }
 }

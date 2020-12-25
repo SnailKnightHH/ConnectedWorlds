@@ -22,7 +22,7 @@ public class ProjectileController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider2D)
     {
-        if (collider2D.CompareTag("Wall"))
+        if (collider2D.CompareTag("Wall") || collider2D.CompareTag("Ground"))
         {
             Collider2D[] objectsToDamage = Physics2D.OverlapCircleAll(transform.position, areaOfEffect, destructableEnvironment);
             for (int i = 0; i < objectsToDamage.Length; i++)

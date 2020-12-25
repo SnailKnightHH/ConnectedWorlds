@@ -11,14 +11,14 @@ public class PlayerGroundCheck : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "ground")
+        if (collision.tag == "Ground")
         {
             playerMovement.grounded = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "ground")
+        if (collision.tag == "Ground")
         {
             playerMovement.grounded = false;
         }

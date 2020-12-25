@@ -157,7 +157,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.7216981, g: 0.8299266, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -254,7 +254,7 @@ PrefabInstance:
     - target: {fileID: 3911046939020813367, guid: 577b37fe5b21153458b156eaf6c590e7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3911046939020813367, guid: 577b37fe5b21153458b156eaf6c590e7,
         type: 3}
@@ -348,7 +348,7 @@ PrefabInstance:
     - target: {fileID: 532757603854737345, guid: b2383e0e861b09248928cd9f4700bf2c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 532757603854737345, guid: b2383e0e861b09248928cd9f4700bf2c,
         type: 3}
@@ -950,7 +950,7 @@ Transform:
   m_Children:
   - {fileID: 334309287}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1811159739
 Rigidbody2D:
