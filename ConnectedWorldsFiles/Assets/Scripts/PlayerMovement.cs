@@ -34,13 +34,18 @@ public class PlayerMovement : MonoBehaviour
     private float chargeStartTime;
 
     // Wall Jump 
-    public Transform frontCheck;
-    public float frontCheckRadius;
-    public float wallSlidingSpeed;
-    private bool isWallJumping;
+    public bool isTouchingWall;
     public float xWallForce;
     public float yWallForce;
-    public float wallJumpTime;
+   // public IsTouchingWall touchWallClass;
+    public float wallHopForce;
+    private int facingDirection = 1;
+    public float wallSlidingSpeed;
+    private bool isWallJumping = false;
+    public float JumpTime;
+    public bool isFlipping;
+    private bool facingRight = false;
+    public Transform frontCheck; 
 
     // Glide
     [Range(0, 1)]
@@ -58,12 +63,14 @@ public class PlayerMovement : MonoBehaviour
         getInputs();
     }
 
-    
+
     private void FixedUpdate()
     {
         MovePlayer();
         aiming();
-       // WallSliding(IsWallSliding());
+        // playerRB.AddForce(new Vector2(xWallForce, yWallForce), ForceMode2D.Impulse); 
+        //playerRB.velocity = new Vector2(xWallForce * -horizontalMovement, yWallForce);
+        //playerRB.AddForce(new Vector2(wallHopForce * wallHopDirection.x * -facingDirection, wallHopForce * wallHopDirection.y), ForceMode2D.Impulse);
     }
 
     private void getInputs()
@@ -78,13 +85,35 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl)) UpdateIndicator();
         if (Input.GetKeyUp(KeyCode.LeftControl)) ReleaseJump();
 
+        if (Input.GetKeyDown(KeyCode.Space) && isTouchingWall && !grounded) WallJump();
+        if (horizontalMovement != 0 && isTouchingWall && !grounded) WallSliding();
+        if (facingRight == false && horizontalMovement > 0) Flip();
+        else if (facingRight == true && horizontalMovement < 0) Flip();
     }
+
+    private void WallSliding()
+    {
+        playerRB.velocity = new Vector2(playerRB.velocity.x, Mathf.Clamp(playerRB.velocity.y, -wallSlidingSpeed, float.MaxValue));
+    }
+
+
     private void MovePlayer()
     {
-        if (canMove) { 
-        Vector3 targetVelocity = new Vector2(horizontalMovement * movementSpeed, playerRB.velocity.y);
-        playerRB.velocity = targetVelocity;
+        if (!isWallJumping)
+        {
+            Vector3 targetVelocity = new Vector2(horizontalMovement * movementSpeed, playerRB.velocity.y);
+            playerRB.velocity = targetVelocity;
         }
+    }
+
+    public void Flip()
+    {
+        facingRight = !facingRight;
+        Vector3 scaler = frontCheck.localScale;
+        scaler.x *= -1;
+        frontCheck.localScale = scaler;
+        //spriteRenderer.flipX = !spriteRenderer.flipX;
+
     }
 
     private void Jump()
@@ -119,50 +148,38 @@ public class PlayerMovement : MonoBehaviour
 
     private void attack()
     {
-            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
-    }
-
-    private bool IsWallSliding()
-    {
-        Collider2D checkTouchingWall;
-        checkTouchingWall = Physics2D.OverlapCircle(frontCheck.position, frontCheckRadius);
-        if (checkTouchingWall.gameObject.CompareTag("Wall") && grounded == false)
-            return true;
-        else
-            return false;
-    }
-
-    private void WallSliding(bool canWallSlide)
-    {
-        if (canWallSlide)
-            playerRB.velocity = new Vector2(playerRB.velocity.x, Mathf.Clamp(playerRB.velocity.y, -wallSlidingSpeed, float.MaxValue));
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
     }
 
     private void WallJump()
     {
-        bool isWallSliding = IsWallSliding();
-#pragma warning disable CS8321 // Local function is declared but never used
-        void SetWallJumpToFalse()
-#pragma warning restore CS8321 // Local function is declared but never used
-        {
-            isWallSliding = false;
-        }
-        if(Input.GetKeyDown(KeyCode.Space) && isWallSliding)
-        {
-            isWallJumping = true;
-            Invoke("SetWallJumpToFalse", wallJumpTime);
-        }
+        //if(touchWallClass.currentWall == )
+        //playerRB.velocity = new Vector2(xWallForce * -1, yWallForce);
+        isWallJumping = true;
+        if(horizontalMovement > 0)
+            playerRB.velocity = new Vector3(xWallForce * -horizontalMovement, yWallForce, 0);
+        Invoke("SetIsWallJumpingToFalse", JumpTime);
+        Debug.Log("Reached");
+        //isWallJumping = false;
+        /*        Vector2 forceToAdd = new Vector2(wallHopForce * wallHopDirection.x * -facingDirection, wallHopForce * wallHopDirection.y);
+                playerRB.AddForce(forceToAdd, ForceMode2D.Impulse);
+                wallJumpTime = wallJumpTimeStart;*/
+        //Debug.Log(playerRB.velocity.x);
+        /*        if (wallJumpTime <= 0)
+                {
 
-        if (isWallJumping)
-            playerRB.velocity = new Vector2(xWallForce * -horizontalMovement, yWallForce);
+                }
+                else
+                {
+                    wallJumpTime -= Time.deltaTime;
+                }*/
     }
 
-    private void Glide()
+    void SetIsWallJumpingToFalse()
     {
-        if(!grounded && Input.GetKey(KeyCode.Space))
-            playerRB.velocity = new Vector2(glidingSpeedComparedToWalkX * horizontalMovement * movementSpeed, glideSpeedY);
+        isWallJumping = false;
     }
 
 }
