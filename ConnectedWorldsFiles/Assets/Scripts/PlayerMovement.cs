@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     // Animations
+    private bool isWallSliding = false;
 
     // move
     private float horizontalMovement;
@@ -82,8 +83,11 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) attack();
         // Jump
         if (Input.GetKeyUp(KeyCode.Space)) isJumping = false;
-        if (Input.GetKeyDown(KeyCode.Space) && isTouchingWall && !grounded) WallJump();
-        if (horizontalMovement != 0 && isTouchingWall && !grounded) WallSliding();
+        if(isTouchingWall && !grounded)
+        {
+            if (Input.GetKeyDown(KeyCode.Space)) WallJump();
+            if (horizontalMovement != 0) WallSliding();
+        }
         if (!isWallJumping)
         {
             if (Input.GetKeyDown(KeyCode.Space) && grounded) Jump();
@@ -95,6 +99,7 @@ public class PlayerMovement : MonoBehaviour
     private void WallSliding()
     {
         playerRB.velocity = new Vector2(playerRB.velocity.x, Mathf.Clamp(playerRB.velocity.y, -wallSlidingSpeed, float.MaxValue));
+        isWallSliding = true;
     }
 
 
@@ -114,6 +119,9 @@ public class PlayerMovement : MonoBehaviour
         {
             if (horizontalMovement == 0) ChangeAnimationState("character_idle");
             else ChangeAnimationState("character_run");
+        } else if (isWallSliding)
+        {
+            ChangeAnimationState("character_wallSlide");
         }
         else
         {
@@ -162,6 +170,7 @@ public class PlayerMovement : MonoBehaviour
     private void WallJump()
     {
         isWallJumping = true;
+        isWallSliding = false;
         playerRB.velocity = new Vector3(xWallForce * -horizontalMovement, yWallForce, 0);
         Invoke("SetIsWallJumpingToFalse", wallJumpTime);
     }
@@ -179,3 +188,4 @@ public class PlayerMovement : MonoBehaviour
 
 
 }
+
