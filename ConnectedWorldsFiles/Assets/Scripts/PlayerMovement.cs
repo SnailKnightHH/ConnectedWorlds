@@ -63,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
     public float dashSpeed;
     public int dashCountInitial;
     private int dashCount;
+    private bool isDashing = false;
+    public float dashResetTime;
 
     private void Awake()
     {
@@ -74,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        getInputs(); Debug.Log(dashCount);
+        getInputs(); 
     }
 
 
@@ -83,7 +85,6 @@ public class PlayerMovement : MonoBehaviour
         if (!isWallJumping) MovePlayer();
         if (!isTouchingWall) SetIsWallSlidingToFalse();
         AnimatePlayer();
-        Debug.Log(lookDir);
     }
 
     private void getInputs()
@@ -96,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) attack();
         // Jump
         if (Input.GetKeyUp(KeyCode.Space)) isJumping = false;
-        if(isTouchingWall && !grounded)
+        if(isTouchingWall && !grounded && !isDashing)
         {
             if (Input.GetKeyDown(KeyCode.Space)) WallJump();
             if (horizontalMovement != 0) WallSliding();
@@ -106,11 +107,9 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space) && grounded) Jump();
             if (Input.GetKey(KeyCode.Space)) JumpHigher();
             if (!grounded && !isTouchingWall && Input.GetKey(KeyCode.Space)) Glide();
+            if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)) Dash();
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
-        {
-            Dash();
-        }
+
         if (grounded) DashCountRefresh();
     }
 
@@ -216,7 +215,13 @@ public class PlayerMovement : MonoBehaviour
     private void Dash()
     {
         if (dashCount-- > 0)
-            playerRB.MovePosition((Vector2)transform.position + new Vector2(horizontalMovement, verticalMovement) * dashSpeed * Time.deltaTime);
+        {
+            isDashing = true;
+            Vector2 dashDirection = new Vector2(horizontalMovement, verticalMovement);
+            playerRB.velocity = dashDirection.normalized * dashSpeed;
+            Invoke("SetIsDashingToFalse", dashResetTime);
+        }
+            
        
         // playerRB.position = Vector3.Lerp(transform.position, (Vector2)transform.position + lookDir * dashSpeed * Time.deltaTime, 10);
         //StartCoroutine(DashCoroutine());
@@ -225,6 +230,11 @@ public class PlayerMovement : MonoBehaviour
     private void DashCountRefresh()
     {
         dashCount = dashCountInitial;
+    }
+
+    private void SetIsDashingToFalse()
+    {
+        isDashing = false;
     }
 
 
