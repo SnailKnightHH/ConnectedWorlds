@@ -29,7 +29,6 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalMovement;
     // Player state
     public bool grounded = false;
-    private bool canMove = true;
 
     // Jump
     private float jumpTimer;
@@ -49,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
     private int facingDirection = 1;
     public float wallSlidingSpeed;
     private bool isWallJumping = false;
-    public float JumpTime;
+    public float wallJumpTime;
     public bool isFlipping;
     private bool facingRight = false;
     public Transform frontCheck; 
@@ -75,11 +74,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        MovePlayer();
-        aiming();
-        // playerRB.AddForce(new Vector2(xWallForce, yWallForce), ForceMode2D.Impulse); 
-        //playerRB.velocity = new Vector2(xWallForce * -horizontalMovement, yWallForce);
-        //playerRB.AddForce(new Vector2(wallHopForce * wallHopDirection.x * -facingDirection, wallHopForce * wallHopDirection.y), ForceMode2D.Impulse);
+        if (!isWallJumping) MovePlayer();
         AnimatePlayer();
     }
 
@@ -90,11 +85,14 @@ public class PlayerMovement : MonoBehaviour
         GetMousePosition();
         if (Input.GetMouseButtonDown(0)) attack();
         // Jump
-        if (Input.GetKeyDown(KeyCode.Space) && grounded) Jump();
-        if (Input.GetKey(KeyCode.Space)) JumpHigher();
         if (Input.GetKeyUp(KeyCode.Space)) isJumping = false;
         if (Input.GetKeyDown(KeyCode.Space) && isTouchingWall && !grounded) WallJump();
         if (horizontalMovement != 0 && isTouchingWall && !grounded) WallSliding();
+        if (!isWallJumping)
+        {
+            if (Input.GetKeyDown(KeyCode.Space) && grounded) Jump();
+            if (Input.GetKey(KeyCode.Space)) JumpHigher();
+        }
     }
 
     private void WallSliding()
@@ -105,13 +103,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        if (canMove) {
         Vector3 targetVelocity = new Vector2(horizontalMovement * movementSpeed, playerRB.velocity.y);
         playerRB.velocity = targetVelocity;
-            //flip character sprite
-            if (lookDir.x < 0) transform.localScale = new Vector2 (-1, transform.localScale.y);
-            else if (lookDir.x >= 0) transform.localScale = new Vector2(1, transform.localScale.y);
-        }
+
+        //flip character sprite
+        if (lookDir.x < 0) transform.localScale = new Vector2(-1, transform.localScale.y);
+        else if (lookDir.x >= 0) transform.localScale = new Vector2(1, transform.localScale.y);
     }
 
     private void AnimatePlayer()
@@ -163,43 +160,13 @@ public class PlayerMovement : MonoBehaviour
         rb.AddForce(firePoint.transform.up * bulletForce, ForceMode2D.Impulse);
     }
 
-    private bool IsWallSliding()
-    {
-        Collider2D checkTouchingWall;
-        checkTouchingWall = Physics2D.OverlapCircle(frontCheck.position, frontCheckRadius);
-        if (checkTouchingWall.gameObject.CompareTag("Wall") && grounded == false)
-            return true;
-        else
-            return false;
-    }
-
-    private void WallSliding(bool canWallSlide)
-    {
-        if (canWallSlide)
-            playerRB.velocity = new Vector2(playerRB.velocity.x, Mathf.Clamp(playerRB.velocity.y, -wallSlidingSpeed, float.MaxValue));
-    }
 
     private void WallJump()
     {
-        //if(touchWallClass.currentWall == )
-        //playerRB.velocity = new Vector2(xWallForce * -1, yWallForce);
         isWallJumping = true;
         playerRB.velocity = new Vector3(xWallForce * -horizontalMovement, yWallForce, 0);
-        Invoke("SetIsWallJumpingToFalse", JumpTime);
+        Invoke("SetIsWallJumpingToFalse", wallJumpTime);
         Debug.Log("Reached");
-        //isWallJumping = false;
-        /*        Vector2 forceToAdd = new Vector2(wallHopForce * wallHopDirection.x * -facingDirection, wallHopForce * wallHopDirection.y);
-                playerRB.AddForce(forceToAdd, ForceMode2D.Impulse);
-                wallJumpTime = wallJumpTimeStart;*/
-        //Debug.Log(playerRB.velocity.x);
-        /*        if (wallJumpTime <= 0)
-                {
-
-                }
-                else
-                {
-                    wallJumpTime -= Time.deltaTime;
-                }*/
     }
 
     void SetIsWallJumpingToFalse()
