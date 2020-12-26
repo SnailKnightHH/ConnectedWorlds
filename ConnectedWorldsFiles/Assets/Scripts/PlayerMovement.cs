@@ -17,6 +17,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce = 30f;
     [SerializeField] private float jumpTime;
 
+    // Wall Jump parameters
+    [SerializeField] private float xWallForce;
+    [SerializeField] private float yWallForce;
+    [SerializeField] private float wallJumpOverideTime;
+    [SerializeField] private float wallSlidingSpeed;
+
+
+
+
+
     // Refernces
     private Rigidbody2D playerRB;
     public Camera cam;
@@ -46,14 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Wall Jump 
     public bool isTouchingWall;
-    public float xWallForce;
-    public float yWallForce;
-    public float wallHopForce;
-    public float wallSlidingSpeed;
     private bool isWallJumping = false;
-    public float wallJumpTime;
-    public bool isFlipping;
-    public Transform frontCheck;
 
     // Glide
     public float glideSpeedX;
@@ -193,7 +196,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isWallJumping = true;
         playerRB.velocity = new Vector3(xWallForce * -horizontalMovement, yWallForce, 0);
-        Invoke("SetIsWallJumpingToFalse", wallJumpTime);
+        Invoke("SetIsWallJumpingToFalse", wallJumpOverideTime);
     }
 
     void SetIsWallJumpingToFalse()
