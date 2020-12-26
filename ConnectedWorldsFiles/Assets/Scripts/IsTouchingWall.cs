@@ -12,7 +12,6 @@ public class IsTouchingWall : MonoBehaviour
     {
         if (collision.tag == "Wall")
         {
-            playerMovement.isTouchingWall = true;
         }
             
         //Debug.Log(collision.gameObject);
@@ -23,7 +22,6 @@ public class IsTouchingWall : MonoBehaviour
     {
         if (collision.tag == "Wall")
         {
-            playerMovement.isTouchingWall = false;
         }
         //Debug.Log(playerMovement.isTouchingWall);
     }
