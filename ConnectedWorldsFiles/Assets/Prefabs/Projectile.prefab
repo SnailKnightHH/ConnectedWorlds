@@ -45,9 +45,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.5
-  m_Color: {r: 0.9960785, g: 0.7137255, b: 0.21960786, a: 1}
-  m_Intensity: 3.81
+  m_FalloffIntensity: 0.785
+  m_Color: {r: 1, g: 0.26166108, b: 0, a: 1}
+  m_Intensity: 0.94
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
@@ -58,8 +58,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 2.689715
+  m_PointLightInnerRadius: 0.12
+  m_PointLightOuterRadius: 4.31
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -146,7 +146,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 7
   m_Sprite: {fileID: 5353841184698615464, guid: 72322eb24edca3e44a8f8364b55f97b3,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

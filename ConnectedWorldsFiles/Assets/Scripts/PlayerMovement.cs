@@ -43,19 +43,15 @@ public class PlayerMovement : MonoBehaviour
     public bool isTouchingWall;
     public float xWallForce;
     public float yWallForce;
-   // public IsTouchingWall touchWallClass;
     public float wallHopForce;
-    private int facingDirection = 1;
     public float wallSlidingSpeed;
     private bool isWallJumping = false;
     public float wallJumpTime;
     public bool isFlipping;
-    private bool facingRight = false;
-    public Transform frontCheck; 
+    public Transform frontCheck;
 
     // Glide
-    [Range(0, 1)]
-    public float glidingSpeedComparedToWalkX;
+    public float glideSpeedX;
     public float glideSpeedY;
 
 
@@ -92,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space) && grounded) Jump();
             if (Input.GetKey(KeyCode.Space)) JumpHigher();
+            if (!grounded && !isTouchingWall && Input.GetKey(KeyCode.Space)) Glide();
         }
     }
 
@@ -113,7 +110,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void AnimatePlayer()
     {
-        if (grounded) { 
+        if (grounded)
+        {
             if (horizontalMovement == 0) ChangeAnimationState("character_idle");
             else ChangeAnimationState("character_run");
         }
@@ -147,8 +145,8 @@ public class PlayerMovement : MonoBehaviour
     private void GetMousePosition()
     {
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-        lookDir = mousePos - (Vector2) transform.position;
-        fireDir = mousePos - (Vector2) firePoint.transform.position;
+        lookDir = mousePos - (Vector2)transform.position;
+        fireDir = mousePos - (Vector2)firePoint.transform.position;
         float FireAngle = Mathf.Atan2(fireDir.y, fireDir.x) * Mathf.Rad2Deg - 90f;
         firePoint.transform.eulerAngles = new Vector3(firePoint.transform.rotation.x, firePoint.transform.rotation.y, FireAngle);
     }
@@ -166,7 +164,6 @@ public class PlayerMovement : MonoBehaviour
         isWallJumping = true;
         playerRB.velocity = new Vector3(xWallForce * -horizontalMovement, yWallForce, 0);
         Invoke("SetIsWallJumpingToFalse", wallJumpTime);
-        Debug.Log("Reached");
     }
 
     void SetIsWallJumpingToFalse()
@@ -174,4 +171,12 @@ public class PlayerMovement : MonoBehaviour
         isWallJumping = false;
     }
 
+    private void Glide()
+    {
+        playerRB.velocity = new Vector2(Mathf.Clamp(playerRB.velocity.x, -glideSpeedX, float.MaxValue),
+                                        Mathf.Clamp(playerRB.velocity.y, -glideSpeedY, float.MaxValue));
+    }
+
+
 }
+
