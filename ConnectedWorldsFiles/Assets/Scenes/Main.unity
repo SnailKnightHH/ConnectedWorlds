@@ -1609,6 +1609,7 @@ MonoBehaviour:
   glideSpeedX: 1
   glideSpeedY: 1
   dashSpeed: 100
+  dashCountInitial: 1
 --- !u!95 &1575663323
 Animator:
   serializedVersion: 3
