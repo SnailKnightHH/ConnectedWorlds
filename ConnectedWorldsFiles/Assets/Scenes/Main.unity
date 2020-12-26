@@ -942,7 +942,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.20342979, y: -0.009345114}
+  m_Offset: {x: 0.17557344, y: -0.009345114}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -953,7 +953,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.13310522, y: 0.95638955}
+  m_Size: {x: 0.07739252, y: 0.95638955}
   m_EdgeRadius: 0
 --- !u!61 &1033367181
 BoxCollider2D:
@@ -968,7 +968,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.2149854, y: -0.0072264075}
+  m_Offset: {x: -0.19040626, y: -0.0072264075}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -979,7 +979,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.11837953, y: 0.95302856}
+  m_Size: {x: 0.06922126, y: 0.95302856}
   m_EdgeRadius: 0
 --- !u!4 &1216049336 stripped
 Transform:
@@ -1487,7 +1487,7 @@ MonoBehaviour:
   wallJumpTime: 0.05
   isFlipping: 0
   frontCheck: {fileID: 1033367178}
-  glidingSpeedComparedToWalkX: 0
+  glideSpeedX: 0
   glideSpeedY: 0
 --- !u!95 &1575663323
 Animator:
