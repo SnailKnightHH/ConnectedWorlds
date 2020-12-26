@@ -25,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
 
     // Animations
     private bool isWallSliding = false;
+    public BoxCollider2D LeftBoxCollider;
+    public BoxCollider2D RightBoxCollider;
 
     // move
     private float horizontalMovement;
@@ -55,6 +57,8 @@ public class PlayerMovement : MonoBehaviour
     public float glideSpeedX;
     public float glideSpeedY;
 
+    // Dash
+    public float dashForce;
 
     private void Awake()
     {
@@ -72,7 +76,9 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         if (!isWallJumping) MovePlayer();
+        if (!isTouchingWall) SetIsWallSlidingToFalse();
         AnimatePlayer();
+        Debug.Log(lookDir);
     }
 
     private void getInputs()
@@ -94,12 +100,16 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.Space)) JumpHigher();
             if (!grounded && !isTouchingWall && Input.GetKey(KeyCode.Space)) Glide();
         }
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        {
+            Dash();
+        }
     }
 
     private void WallSliding()
     {
-        playerRB.velocity = new Vector2(playerRB.velocity.x, Mathf.Clamp(playerRB.velocity.y, -wallSlidingSpeed, float.MaxValue));
         isWallSliding = true;
+        playerRB.velocity = new Vector2(playerRB.velocity.x, Mathf.Clamp(playerRB.velocity.y, -wallSlidingSpeed, float.MaxValue));
     }
 
 
@@ -108,9 +118,13 @@ public class PlayerMovement : MonoBehaviour
         Vector3 targetVelocity = new Vector2(horizontalMovement * movementSpeed, playerRB.velocity.y);
         playerRB.velocity = targetVelocity;
 
-        //flip character sprite
-        if (lookDir.x < 0) transform.localScale = new Vector2(-1, transform.localScale.y);
-        else if (lookDir.x >= 0) transform.localScale = new Vector2(1, transform.localScale.y);
+        if (!isWallSliding)
+        {
+            //flip character sprite
+            if (lookDir.x < 0) transform.localScale = new Vector2(-1, transform.localScale.y);
+            else if (lookDir.x >= 0) transform.localScale = new Vector2(1, transform.localScale.y);
+        }
+
     }
 
     private void AnimatePlayer()
@@ -119,7 +133,8 @@ public class PlayerMovement : MonoBehaviour
         {
             if (horizontalMovement == 0) ChangeAnimationState("character_idle");
             else ChangeAnimationState("character_run");
-        } else if (isWallSliding)
+        } 
+        else if (isWallSliding)
         {
             ChangeAnimationState("character_wallSlide");
         }
@@ -170,7 +185,6 @@ public class PlayerMovement : MonoBehaviour
     private void WallJump()
     {
         isWallJumping = true;
-        isWallSliding = false;
         playerRB.velocity = new Vector3(xWallForce * -horizontalMovement, yWallForce, 0);
         Invoke("SetIsWallJumpingToFalse", wallJumpTime);
     }
@@ -180,12 +194,38 @@ public class PlayerMovement : MonoBehaviour
         isWallJumping = false;
     }
 
+    void SetIsWallSlidingToFalse()
+    {
+        isWallSliding = false;
+    }
+
     private void Glide()
     {
         playerRB.velocity = new Vector2(Mathf.Clamp(playerRB.velocity.x, -glideSpeedX, float.MaxValue),
                                         Mathf.Clamp(playerRB.velocity.y, -glideSpeedY, float.MaxValue));
     }
 
+    private void Dash()
+    {
+        playerRB.AddForce(lookDir * dashForce, ForceMode2D.Impulse);
+    }
+
+/*    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == LeftBoxCollider.name)
+        {
+            transform.localScale = new Vector2(1, transform.localScale.y);
+            Debug.Log("Trigger Left reached");
+        }
+            
+        else if (collision.gameObject.name == RightBoxCollider.name)
+        {
+            transform.localScale = new Vector2(-1, transform.localScale.y); 
+            Debug.Log("Trigger Left reached");
+        }
+            
+        
+    }*/
 
 }
 
