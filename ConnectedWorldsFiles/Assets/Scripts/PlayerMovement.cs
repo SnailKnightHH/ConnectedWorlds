@@ -58,18 +58,21 @@ public class PlayerMovement : MonoBehaviour
     public float glideSpeedY;
 
     // Dash
-    public float dashForce;
+    public float dashSpeed;
+    public int dashCountInitial;
+    private int dashCount;
 
     private void Awake()
     {
         playerRB = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        dashCount = dashCountInitial;
     }
 
     void Update()
     {
-        getInputs();
+        getInputs(); Debug.Log(dashCount);
     }
 
 
@@ -104,6 +107,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Dash();
         }
+        if (grounded) DashCountRefresh();
     }
 
     private void WallSliding()
@@ -207,8 +211,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void Dash()
     {
-        playerRB.AddForce(lookDir * dashForce, ForceMode2D.Impulse);
+        if (dashCount-- > 0)
+            playerRB.MovePosition((Vector2)transform.position + lookDir.normalized * dashSpeed * Time.deltaTime);
+       
+        // playerRB.position = Vector3.Lerp(transform.position, (Vector2)transform.position + lookDir * dashSpeed * Time.deltaTime, 10);
+        //StartCoroutine(DashCoroutine());
     }
+
+    private void DashCountRefresh()
+    {
+        dashCount = dashCountInitial;
+    }
+
 
 /*    private void OnTriggerStay2D(Collider2D collision)
     {
