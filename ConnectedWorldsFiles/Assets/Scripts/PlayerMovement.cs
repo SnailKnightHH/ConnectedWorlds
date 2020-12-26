@@ -30,6 +30,8 @@ public class PlayerMovement : MonoBehaviour
 
     // move
     private float horizontalMovement;
+    private float verticalMovement;
+
     // Player state
     public bool grounded = false;
 
@@ -87,6 +89,8 @@ public class PlayerMovement : MonoBehaviour
     private void getInputs()
     {
         horizontalMovement = Input.GetAxis("Horizontal");
+        verticalMovement = Input.GetAxis("Vertical");
+
         // Attack
         GetMousePosition();
         if (Input.GetMouseButtonDown(0)) attack();
@@ -212,7 +216,7 @@ public class PlayerMovement : MonoBehaviour
     private void Dash()
     {
         if (dashCount-- > 0)
-            playerRB.MovePosition((Vector2)transform.position + lookDir.normalized * dashSpeed * Time.deltaTime);
+            playerRB.MovePosition((Vector2)transform.position + new Vector2(horizontalMovement, verticalMovement) * dashSpeed * Time.deltaTime);
        
         // playerRB.position = Vector3.Lerp(transform.position, (Vector2)transform.position + lookDir * dashSpeed * Time.deltaTime, 10);
         //StartCoroutine(DashCoroutine());
