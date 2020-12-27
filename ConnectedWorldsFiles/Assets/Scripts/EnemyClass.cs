@@ -10,7 +10,6 @@ public class EnemyClass : MonoBehaviour
     public float movementSpeed;
     public Transform[] path;
     private int spotNumber;
-    public Rigidbody2D enemyRB;
     public PlayerController player;
 
     void Start()
@@ -26,7 +25,7 @@ public class EnemyClass : MonoBehaviour
 
     public void movePath()
     {
-        enemyRB.position = Vector2.MoveTowards(transform.position, path[spotNumber].position, movementSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, path[spotNumber].position, movementSpeed * Time.deltaTime);
         if (Vector2.Distance(transform.position, path[spotNumber].position) < 0.2f)
             spotNumber++;
         if (spotNumber == path.Length) spotNumber = 0;

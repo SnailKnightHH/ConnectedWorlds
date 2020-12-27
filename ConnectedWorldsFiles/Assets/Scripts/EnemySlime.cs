@@ -8,7 +8,7 @@ public class EnemySlime : EnemyClass
     {
         movePath();
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {

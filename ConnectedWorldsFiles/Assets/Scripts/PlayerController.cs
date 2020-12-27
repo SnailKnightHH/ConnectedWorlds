@@ -8,10 +8,17 @@ public class PlayerController : MonoBehaviour
 {
     // Move parameters
     [SerializeField] private float movementSpeed = 3f;
+
     // Attack parameters
     [SerializeField] private GameObject firePoint;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float bulletForce;
+    [SerializeField] private int attackCharge;
+    [SerializeField] private float rechargeTimeInitial;
+
+    // Charge UI Parameters
+    [SerializeField] public AttackChargeUI attackChargeUI;
+    
 
     // Jump parameters
     [SerializeField] private float jumpForce = 30f;
@@ -42,8 +49,6 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     // Animations
-    public BoxCollider2D LeftBoxCollider;
-    public BoxCollider2D RightBoxCollider;
 
     // move
     [SerializeField] private float horizontalInput;
@@ -64,12 +69,15 @@ public class PlayerController : MonoBehaviour
     private Vector2 mousePos;
     private Vector2 lookDir;
     private Vector2 fireDir;
+    [SerializeField] private int currentAttackCharge;
+    private float rechargeTime;
 
     // Health 
     [Range(0, 5)]
     public int health;
     public float invincibleTimeInitial;
     public float invincibleTime;
+    private bool isInvincible = false;
 
     // Wall Slide
     [SerializeField] private bool isWallSliding = false;
@@ -92,12 +100,22 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         dashCount = dashCountInitial;
         invincibleTime = invincibleTimeInitial;
+        currentAttackCharge = attackCharge;
+        rechargeTime = rechargeTimeInitial;
+        // Attack Charge UI 
+        attackChargeUI.leftUI.value = 1;
+        attackChargeUI.midUI.value = 1;
+        attackChargeUI.rightUI.value = 1;
     }
 
     void Update()
     {
         getInputs();
         UpdatePlayerState();
+        InvincibleTime();
+        playerDeath();
+        if (currentAttackCharge < attackCharge) RechargeAttack();
+        RechargeAttackUI();
     }
 
     private void FixedUpdate()
@@ -161,9 +179,10 @@ public class PlayerController : MonoBehaviour
 
     private void HorizontalMove()
     {
-        if(!isDashing && !isWallJumping) { 
-        Vector3 targetVelocity = new Vector2(horizontalInput * movementSpeed, playerRB.velocity.y);
-        playerRB.velocity = targetVelocity; // horizontal move
+        if (!isDashing && !isWallJumping)
+        {
+            Vector3 targetVelocity = new Vector2(horizontalInput * movementSpeed, playerRB.velocity.y);
+            playerRB.velocity = targetVelocity; // horizontal move
         }
     }
 
@@ -211,7 +230,8 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (grounded){
+        if (grounded)
+        {
             isJumping = true;
             jumpTimer = jumpTime;
             playerRB.velocity = Vector2.up * jumpForce; // first jump
@@ -238,9 +258,46 @@ public class PlayerController : MonoBehaviour
 
     private void attack()
     {
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation);
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(firePoint.transform.up * bulletForce, ForceMode2D.Impulse);
+        if (currentAttackCharge > 0)
+        {
+            currentAttackCharge--;
+            GameObject bullet = Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation);
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+            rb.AddForce(firePoint.transform.up * bulletForce, ForceMode2D.Impulse);
+        }
+        Debug.Log(currentAttackCharge);
+    }
+
+    private void RechargeAttack()
+    {
+        if (rechargeTime <= 0)
+        {
+            currentAttackCharge++;
+            rechargeTime = rechargeTimeInitial;
+        }
+        else rechargeTime -= Time.deltaTime;
+    }
+
+    private void RechargeAttackUI()
+    {
+        if(currentAttackCharge == 2)
+        {
+            attackChargeUI.leftUI.value = 1;
+            attackChargeUI.midUI.value = 1;
+            attackChargeUI.rightUI.value =  1 - rechargeTime;
+        }
+        if (currentAttackCharge == 1)
+        {
+            attackChargeUI.leftUI.value = 1;
+            attackChargeUI.midUI.value = 1 - rechargeTime;
+            attackChargeUI.rightUI.value = 0;
+        }
+        if (currentAttackCharge == 0)
+        {
+            attackChargeUI.leftUI.value = 1 - rechargeTime;
+            attackChargeUI.midUI.value = 0;
+            attackChargeUI.rightUI.value = 0;
+        }
     }
 
     private void WallJump()
@@ -270,7 +327,7 @@ public class PlayerController : MonoBehaviour
         if (dashCount-- > 0)
         {
             isDashing = true;
-            if(horizontalInput == 0 && verticalInput == 0)
+            if (horizontalInput == 0 && verticalInput == 0)
             {
                 if (isFacingRight) dashDirection = Vector2.right;
                 else dashDirection = Vector2.left;
@@ -292,20 +349,29 @@ public class PlayerController : MonoBehaviour
         playerRB.velocity = new Vector2(playerRB.velocity.x, 0f);
     }
 
-    public void ReceiveDamage (int damageAmount)
+    public void ReceiveDamage(int damageAmount)
     {
-        if (invincibleTime > 0)
-            invincibleTime -= Time.deltaTime;
-        else
+        if (!isInvincible)
         {
             health -= damageAmount;
             invincibleTime = invincibleTimeInitial;
+            isInvincible = true;
         }
     }
 
+    private void InvincibleTime()
+    {
+        if (isInvincible)
+            invincibleTime -= Time.deltaTime;
+        if (invincibleTime <= 0)
+            isInvincible = false;
+
+    }
+
+
     private void playerDeath()
     {
-        if(health <= 0)
+        if (health <= 0)
         {
             Debug.Log("Failed.");
         }
