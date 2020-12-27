@@ -11,14 +11,14 @@ public class EnemyHound : EnemyClass
     void Update()
     {
         playerPos = player.transform.position;
-        if (Vector2.Distance(enemyRB.position, playerPos) < 0.2f && (enemyRB.position.y - playerPos.y) < 0.1f) HoundAttack(damage);
-        if (Vector2.Distance(enemyRB.position, playerPos) < 5f && (enemyRB.position.y - playerPos.y) < 0.1f) detectPlayer(detectRange);
+        if (Vector2.Distance(transform.position, playerPos) < 0.2f && (transform.position.y - playerPos.y) < 0.1f) HoundAttack(damage);
+        if (Vector2.Distance(transform.position, playerPos) < 5f && (transform.position.y - playerPos.y) < 0.1f) detectPlayer(detectRange);
         else movePath();
     }
 
     private void detectPlayer(float detectRange)
     {
-        enemyRB.position = Vector2.MoveTowards(enemyRB.position, player.transform.position, movementSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
     }
 
     private void HoundAttack(int damage)
