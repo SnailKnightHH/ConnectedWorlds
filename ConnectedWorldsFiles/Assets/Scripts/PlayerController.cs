@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 fireDir;
 
     // Health 
-    [Range (0, 5)]
+    [Range(0, 5)]
     public int health;
     public float invincibleTimeInitial;
     public float invincibleTime;
@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isWallJumping;
 
     // Glide
-    [SerializeField] private bool isFalling;  
+    [SerializeField] private bool isFalling;
 
     // Dash
     [SerializeField] private int dashCount;
@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.Space)) isJumping = false;
             if (Input.GetKeyDown(KeyCode.LeftShift)) Dash();
         }
-        
+
 
         //Dash(chargeLeft>0)
         //WallJump(isWallSliding)
@@ -151,7 +151,7 @@ public class PlayerController : MonoBehaviour
     {
         isWallSliding = (isTouchingWall && !grounded && horizontalInput != 0);
         if (isWallSliding || isDashing) isJumping = false;
-        if (grounded && !isDashing) DashCountRefresh();
+        if ((grounded || isWallSliding) && !isDashing) DashCountRefresh();
         isFalling = !(grounded || isJumping || isWallSliding);
         isFacingRight = lookDir.x > 0;
         isTouchingWall = isTouchingFrontWall || isTouchingBackWall;
