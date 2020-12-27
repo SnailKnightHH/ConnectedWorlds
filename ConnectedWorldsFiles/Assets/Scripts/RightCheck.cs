@@ -4,25 +4,28 @@ using UnityEngine;
 
 public class RightCheck : MonoBehaviour
 {
+    [SerializeField] private GameObject player;
     private PlayerMovement playerMovement;
+    private Transform target; 
     private string whatIsGround = "WalkableSurface";
     private void Awake()
     {
-        playerMovement = FindObjectOfType<PlayerMovement>();
+        playerMovement = player.GetComponent<PlayerMovement>();
+        target = player.transform;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer(whatIsGround))
         {
-            playerMovement.isTouchingRightWall = true;
+            playerMovement.isTouchingBackWall = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer(whatIsGround))
         {
-            playerMovement.isTouchingRightWall = false;
+            playerMovement.isTouchingBackWall = false;
         }
     }
 }

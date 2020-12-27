@@ -7,11 +7,12 @@ public class ProjectileController : MonoBehaviour
     public int damage;
     public float areaOfEffect;
     [SerializeField] private GameObject explosion;
-    public LayerMask destructableEnvironment; 
+    public LayerMask destructableEnvironment;
+    private string whatIsGround = "WalkableSurface";
 
     private void OnTriggerEnter2D(Collider2D collider2D)
     {
-        if (collider2D.CompareTag("Wall") || collider2D.CompareTag("Ground"))
+        if (collider2D.gameObject.layer == LayerMask.NameToLayer(whatIsGround))
         {
             Collider2D[] objectsToDamage = Physics2D.OverlapCircleAll(transform.position, areaOfEffect, destructableEnvironment);
             for (int i = 0; i < objectsToDamage.Length; i++)

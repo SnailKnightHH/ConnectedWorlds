@@ -46,15 +46,15 @@ public class PlayerMovement : MonoBehaviour
     public BoxCollider2D RightBoxCollider;
 
     // move
-    private float horizontalInput;
+    [SerializeField] private float horizontalInput;
     private float verticalInput;
 
     // Player state
     public bool grounded = false;
     [SerializeField] bool isFacingRight;
     [SerializeField] bool isTouchingWall;
-    [SerializeField] public bool isTouchingLeftWall;
-    [SerializeField] public bool isTouchingRightWall;
+    [SerializeField] public bool isTouchingFrontWall;
+    [SerializeField] public bool isTouchingBackWall;
 
     // Jump
     private float jumpTimer;
@@ -81,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool isFalling;  
 
     // Dash
-    private int dashCount;
+    [SerializeField] private int dashCount;
     [SerializeField] private bool isDashing = false;
     [SerializeField] Vector2 dashDirection;
 
@@ -148,13 +148,14 @@ public class PlayerMovement : MonoBehaviour
         //glide(isFalling)
         //Jump(grounded), JumpHigher(isjumping), movement, 
     }
-    private void updatePlayerState()
+    private void UpdatePlayerState()
     {
         isWallSliding = (isTouchingWall && !grounded && horizontalInput != 0);
-        if (grounded) DashCountRefresh();
+        if (isWallSliding || isDashing) isJumping = false;
+        if (grounded && !isDashing) DashCountRefresh();
         isFalling = !(grounded || isJumping || isWallSliding);
         isFacingRight = lookDir.x > 0;
-        isTouchingWall = isTouchingLeftWall || isTouchingRightWall;
+        isTouchingWall = isTouchingFrontWall || isTouchingBackWall;
     }
 
 
@@ -173,16 +174,21 @@ public class PlayerMovement : MonoBehaviour
         {
             ChangeAnimationState("character_run");
         }
+        else if (isJumping)
+        {
+            ChangeAnimationState("character_jump");
+        }
+        else if (isWallJumping)
+        {
+            ChangeAnimationState("character_jump");
+        }
         else if (isWallSliding)
         {
             ChangeAnimationState("character_wallSlide");
+            if (isTouchingBackWall) transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
         }
         else if (isFalling)
         {
-            ChangeAnimationState("character_jump");
-            flipPlayerTransform();
-        }
-        else if (isJumping || isWallJumping) {
             ChangeAnimationState("character_jump");
             flipPlayerTransform();
         }
@@ -190,9 +196,8 @@ public class PlayerMovement : MonoBehaviour
         {
             if (horizontalInput == 0) ChangeAnimationState("character_idle");
             else ChangeAnimationState("character_run");
+            flipPlayerTransform();
         }
-       
-
         void flipPlayerTransform()
         {
             // flip character sprite
