@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrossHair : MonoBehaviour
+public class SceneManager : MonoBehaviour
 {
-    public Camera cam;
 
+    private void Awake()
+    {
+    }
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.visible = false; 
+        
     }
 
     // Update is called once per frame
-    public void LateUpdate()
+    void LateUpdate()
     {
-        transform.position = (Vector2) cam.ScreenToWorldPoint(Input.mousePosition);
     }
 }

@@ -219,8 +219,8 @@ public class PlayerController : MonoBehaviour
         void flipPlayerTransform()
         {
             // flip character sprite
-            if (isFacingRight) transform.localScale = new Vector2(1, transform.localScale.y);
-            else transform.localScale = new Vector2(-1, transform.localScale.y);
+            if (isFacingRight) transform.localScale = new Vector2(transform.localScale.y, transform.localScale.y);
+            else transform.localScale = new Vector2(-transform.localScale.y, transform.localScale.y);
         }
     }
     private void ChangeAnimationState(string newState)
