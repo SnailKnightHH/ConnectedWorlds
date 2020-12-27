@@ -11,7 +11,7 @@ public class EnemyClass : MonoBehaviour
     public Transform[] path;
     private int spotNumber;
     public Rigidbody2D enemyRB;
-    public PlayerMovement player;
+    public PlayerController player;
 
     void Start()
     {

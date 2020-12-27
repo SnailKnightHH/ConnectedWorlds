@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     // Move parameters
     [SerializeField] private float movementSpeed = 3f;
@@ -97,8 +97,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         getInputs();
-        updatePlayerState();
-        playerDeath();
+        UpdatePlayerState();
     }
 
     private void FixedUpdate()
@@ -185,7 +184,7 @@ public class PlayerMovement : MonoBehaviour
         else if (isWallSliding)
         {
             ChangeAnimationState("character_wallSlide");
-            if (isTouchingBackWall) transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+            if (isTouchingFrontWall) transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
         }
         else if (isFalling)
         {

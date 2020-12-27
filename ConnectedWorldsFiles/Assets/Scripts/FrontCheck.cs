@@ -2,30 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RightCheck : MonoBehaviour
+public class FrontCheck : MonoBehaviour
 {
     [SerializeField] private GameObject player;
-    private PlayerMovement playerMovement;
-    private Transform target; 
+    private PlayerController playerMovement;
     private string whatIsGround = "WalkableSurface";
     private void Awake()
     {
-        playerMovement = player.GetComponent<PlayerMovement>();
-        target = player.transform;
+        playerMovement = player.GetComponent<PlayerController>();
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer(whatIsGround))
         {
-            playerMovement.isTouchingBackWall = true;
+            playerMovement.isTouchingFrontWall = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer(whatIsGround))
         {
-            playerMovement.isTouchingBackWall = false;
+            playerMovement.isTouchingFrontWall = false;
         }
     }
 }

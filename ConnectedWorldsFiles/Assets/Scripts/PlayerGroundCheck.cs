@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerGroundCheck : MonoBehaviour
 {
-    private PlayerMovement playerMovement;
+    private PlayerController playerMovement;
     private string whatIsGround = "WalkableSurface";
     private void Awake()
     {
-        playerMovement = FindObjectOfType<PlayerMovement>();
+        playerMovement = FindObjectOfType<PlayerController>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

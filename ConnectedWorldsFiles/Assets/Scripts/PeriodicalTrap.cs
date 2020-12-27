@@ -8,7 +8,7 @@ public class PeriodicalTrap : MonoBehaviour
     private float trapResetTime;
     [Range (0, 5)]
     public int trapDamage;
-    public PlayerMovement player;
+    public PlayerController player;
     public float attackAvailableTime;
     private bool isAttackAvailable = false;
 

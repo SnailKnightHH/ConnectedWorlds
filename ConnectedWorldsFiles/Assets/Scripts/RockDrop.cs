@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RockDrop : MonoBehaviour
 {
-    [SerializeField] private PlayerMovement player;
+    [SerializeField] private PlayerController player;
     [SerializeField] private Rigidbody2D rockRB; // set to kinematics
     [SerializeField] private float dropSpeed;
 
