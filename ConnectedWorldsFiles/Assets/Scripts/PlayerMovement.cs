@@ -65,6 +65,12 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 lookDir;
     private Vector2 fireDir;
 
+    // Health 
+    [Range (0, 5)]
+    public int health;
+    public float invincibleTimeInitial;
+    public float invincibleTime;
+
     // Wall Slide
     [SerializeField] private bool isWallSliding = false;
 
@@ -85,12 +91,14 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         dashCount = dashCountInitial;
+        invincibleTime = invincibleTimeInitial;
     }
 
     void Update()
     {
         getInputs();
         updatePlayerState();
+        playerDeath();
     }
 
     private void FixedUpdate()
@@ -278,6 +286,25 @@ public class PlayerMovement : MonoBehaviour
     {
         isDashing = false;
         playerRB.velocity = new Vector2(playerRB.velocity.x, 0f);
+    }
+
+    public void ReceiveDamage (int damageAmount)
+    {
+        if (invincibleTime > 0)
+            invincibleTime -= Time.deltaTime;
+        else
+        {
+            health -= damageAmount;
+            invincibleTime = invincibleTimeInitial;
+        }
+    }
+
+    private void playerDeath()
+    {
+        if(health <= 0)
+        {
+            Debug.Log("Failed.");
+        }
     }
 }
 

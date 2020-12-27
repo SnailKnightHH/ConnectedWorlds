@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1170,9 +1170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd5329e846620c44592fa7f4de03593b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 2048
 --- !u!1001 &996615916
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2024,7 +2021,7 @@ GameObject:
   - component: {fileID: 1575663319}
   - component: {fileID: 1575663318}
   - component: {fileID: 1575663323}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2180,10 +2177,10 @@ MonoBehaviour:
   grounded: 0
   isFacingRight: 0
   isTouchingWall: 0
-  isJumping: 0
-  isWallSliding: 0
   isTouchingLeftWall: 0
   isTouchingRightWall: 0
+  isJumping: 0
+  isWallSliding: 0
   isWallJumping: 0
   isFalling: 0
   isDashing: 0
