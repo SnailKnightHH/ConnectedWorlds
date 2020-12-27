@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class LeftCheck : MonoBehaviour
 {
+    [SerializeField] private GameObject player;
     private PlayerMovement playerMovement;
     private string whatIsGround = "WalkableSurface";
     private void Awake()
     {
-        playerMovement = FindObjectOfType<PlayerMovement>();
+        playerMovement = player.GetComponent<PlayerMovement>();
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer(whatIsGround))
         {
-            playerMovement.isTouchingLeftWall = true;
+            playerMovement.isTouchingFrontWall = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer(whatIsGround))
         {
-            playerMovement.isTouchingLeftWall = false;
+            playerMovement.isTouchingFrontWall = false;
         }
     }
 }
