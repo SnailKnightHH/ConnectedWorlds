@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool isTouchingWall;
     [SerializeField] public bool isTouchingFrontWall;
     [SerializeField] public bool isTouchingBackWall;
+    [SerializeField] private bool isFalling;
 
     // Jump
     private float jumpTimer;
@@ -86,7 +87,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isWallJumping;
 
     // Glide
-    [SerializeField] private bool isFalling;
+    [SerializeField] private bool isGliding;
 
     // Dash
     [SerializeField] private int dashCount;
@@ -147,6 +148,7 @@ public class PlayerController : MonoBehaviour
             HorizontalMove();
             if (Input.GetMouseButtonDown(0)) attack();
             if (Input.GetKey(KeyCode.Space)) Glide();
+            if (Input.GetKeyUp(KeyCode.Space)) isGliding = false;
             if (Input.GetKeyDown(KeyCode.LeftShift)) Dash();
         }
         else
@@ -173,6 +175,7 @@ public class PlayerController : MonoBehaviour
         isFalling = !(grounded || isJumping || isWallSliding);
         isFacingRight = lookDir.x > 0;
         isTouchingWall = isTouchingFrontWall || isTouchingBackWall;
+        if (grounded)  isGliding = false;
     }
 
 
@@ -204,6 +207,11 @@ public class PlayerController : MonoBehaviour
         {
             ChangeAnimationState("character_wallSlide");
             if (isTouchingFrontWall) transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+        }
+        else if (isGliding)
+        {
+            ChangeAnimationState("character_glide");
+            flipPlayerTransform();
         }
         else if (isFalling)
         {
@@ -317,6 +325,7 @@ public class PlayerController : MonoBehaviour
 
     private void Glide()
     {
+        isGliding = true;
         playerRB.velocity = new Vector2(Mathf.Clamp(playerRB.velocity.x, -glideSpeedX, float.MaxValue),
                                         Mathf.Clamp(playerRB.velocity.y, -glideSpeedY, float.MaxValue)); // glide
     }

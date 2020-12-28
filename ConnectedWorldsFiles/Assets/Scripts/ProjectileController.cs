@@ -18,29 +18,29 @@ public class ProjectileController : MonoBehaviour
 
         if (collision.gameObject.layer == LayerMask.NameToLayer(whatIsGround))
         {
-            Instantiate(explosion, transform.position, Quaternion.Euler(new Vector3( 0f, 0f ,0f))); 
-            Destroy(gameObject);
+            Instantiate(explosion, transform.position, Quaternion.Euler(new Vector3( 0f, 0f ,0f)));
+            DestoryProjectile();
         }
 
         if (slime != null)
         {
             slime.EnemyReceiveDamage(damage);
             Instantiate(explosion, transform.position, Quaternion.Euler(new Vector3(0f, 0f, 0f)));
-            Destroy(gameObject);
+            DestoryProjectile();
         }
 
         if(destructableObjects != null)
         {
             destructableObjects.ReceiveDamage(damage);
             Instantiate(explosion, transform.position, Quaternion.Euler(new Vector3(0f, 0f, 0f)));
-            Destroy(gameObject);
+            DestoryProjectile();
         }
 
         if(hound != null)
         {
             hound.EnemyReceiveDamage(damage);
             Instantiate(explosion, transform.position, Quaternion.Euler(new Vector3(0f, 0f, 0f)));
-            Destroy(gameObject);
+            DestoryProjectile();
         }
 
 /*        {
@@ -56,6 +56,11 @@ public class ProjectileController : MonoBehaviour
 
     }
 
+    private void DestoryProjectile() {
+        Debug.Log("shake");
+        FindObjectOfType<CameraShake>().ShakeCamera();
+        Destroy(gameObject);
+    }
 /*    void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

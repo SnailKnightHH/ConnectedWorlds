@@ -106,6 +106,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8765732750396996023, guid: bd00abfd772f81b468223abd01e3ccec,
     type: 3}
   bulletForce: 6
+  attackCharge: 3
+  rechargeTimeInitial: 0
+  attackChargeUI: {fileID: 0}
   jumpForce: 6.07
   jumpTime: 0.5
   xWallForce: 0
@@ -118,8 +121,6 @@ MonoBehaviour:
   dashCountInitial: 1
   dashDuration: 0.1
   cam: {fileID: 0}
-  LeftBoxCollider: {fileID: 0}
-  RightBoxCollider: {fileID: 0}
   horizontalInput: 0
   grounded: 0
   isFacingRight: 0
@@ -127,6 +128,7 @@ MonoBehaviour:
   isTouchingFrontWall: 0
   isTouchingBackWall: 0
   isJumping: 0
+  currentAttackCharge: 0
   health: 3
   invincibleTimeInitial: 0
   invincibleTime: 0
