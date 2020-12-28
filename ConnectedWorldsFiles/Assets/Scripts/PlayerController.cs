@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     // Animations
+    [SerializeField] public bool dashingDirectionFoward;
 
     // move
     [SerializeField] private float horizontalInput;
@@ -63,6 +64,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public bool isTouchingFrontWall;
     [SerializeField] public bool isTouchingBackWall;
     [SerializeField] private bool isFalling;
+
 
     // Jump
     private float jumpTimer;
@@ -203,7 +205,9 @@ public class PlayerController : MonoBehaviour
     {
         if (isDashing)
         {
-            ChangeAnimationState("character_run");
+            if (dashingDirectionFoward)
+                ChangeAnimationState("character_dashFoward");
+            else ChangeAnimationState("character_dashBack");
         }
         else if (isJumping)
         {
@@ -362,6 +366,7 @@ public class PlayerController : MonoBehaviour
                 else dashDirection = Vector2.left;
             }
             else dashDirection = new Vector2(horizontalInputRaw, verticalInputRaw);
+            dashingDirectionFoward = dashDirection.x >= 0;
             playerRB.velocity = dashDirection.normalized * dashSpeed; // Dash
             Invoke("SetIsDashingToFalse", dashDuration);
         }
