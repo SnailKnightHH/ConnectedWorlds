@@ -17,7 +17,7 @@ public class EnemyClass : MonoBehaviour
         spotNumber = 0;
     }
 
-    public void EnemyReceiveHealth(int damageAmount)
+    public void EnemyReceiveDamage(int damageAmount)
     {
         health -= damageAmount;
     }
@@ -29,6 +29,11 @@ public class EnemyClass : MonoBehaviour
         if (Vector2.Distance(transform.position, path[spotNumber].position) < 0.2f)
             spotNumber++;
         if (spotNumber == path.Length) spotNumber = 0;
+    }
+
+    public void enemyDeath()
+    {
+        if (health <= 0) Destroy(gameObject);
     }
 
 }

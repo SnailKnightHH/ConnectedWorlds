@@ -265,7 +265,6 @@ public class PlayerController : MonoBehaviour
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.AddForce(firePoint.transform.up * bulletForce, ForceMode2D.Impulse);
         }
-        Debug.Log(currentAttackCharge);
     }
 
     private void RechargeAttack()

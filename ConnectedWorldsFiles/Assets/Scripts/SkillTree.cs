@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Destructable : MonoBehaviour
+public class SkillTree : MonoBehaviour
 {
-    public int health;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -15,17 +13,11 @@ public class Destructable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
+        
     }
 
-    public void ReceiveDamage (int damage)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        health -= damage;
+
     }
-
-
-
 }
