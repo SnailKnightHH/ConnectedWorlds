@@ -57,7 +57,6 @@ public class ProjectileController : MonoBehaviour
     }
 
     private void DestoryProjectile() {
-        Debug.Log("shake");
         FindObjectOfType<CameraShake>().ShakeCamera();
         Destroy(gameObject);
     }

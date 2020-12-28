@@ -127,6 +127,7 @@ MonoBehaviour:
   isTouchingWall: 0
   isTouchingFrontWall: 0
   isTouchingBackWall: 0
+  isFalling: 0
   isJumping: 0
   currentAttackCharge: 0
   health: 3
@@ -134,7 +135,7 @@ MonoBehaviour:
   invincibleTime: 0
   isWallSliding: 0
   isWallJumping: 0
-  isFalling: 0
+  isGliding: 0
   dashCount: 0
   isDashing: 0
   dashDirection: {x: 0, y: 0}
