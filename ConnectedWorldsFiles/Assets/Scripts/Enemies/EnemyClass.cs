@@ -26,6 +26,19 @@ public class EnemyClass : MonoBehaviour
     public void movePath()
     {
         transform.position = Vector2.MoveTowards(transform.position, path[spotNumber].position, movementSpeed * Time.deltaTime);
+
+        // Flip enemy
+        if (transform.position.x < path[spotNumber].position.x)
+        {
+            Debug.Log("true");
+            flipEnemyTransform(true);
+        }
+        else
+        {
+            Debug.Log("false");
+            flipEnemyTransform(false);
+        }
+
         if (Vector2.Distance(transform.position, path[spotNumber].position) < 0.2f)
             spotNumber++;
         if (spotNumber == path.Length) spotNumber = 0;
@@ -34,6 +47,13 @@ public class EnemyClass : MonoBehaviour
     public void enemyDeath()
     {
         if (health <= 0) Destroy(gameObject);
+    }
+
+    public void flipEnemyTransform(bool isFacingRight)
+    {
+        // flip character sprite
+        if (isFacingRight) transform.localScale = new Vector2(transform.localScale.y, transform.localScale.y);
+        else transform.localScale = new Vector2(-transform.localScale.y, transform.localScale.y);
     }
 
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyRottenRobot : EnemyClass
 {
-    [SerializeField] private float detectRange;
     private Vector3 playerPos;
     [SerializeField] private Rigidbody2D robotRB;
 
@@ -27,8 +26,12 @@ public class EnemyRottenRobot : EnemyClass
     {
         enemyDeath();
         playerPos = player.transform.position;
-        if (Vector2.Distance(transform.position, playerPos) < 4f) RobotAttack();
-        else if (Vector2.Distance(transform.position, playerPos) < 6f && Vector2.Distance(transform.position, playerPos) > 4f) detectPlayer(detectRange);
+        if (Vector2.Distance(transform.position, playerPos) < 6f)
+        {
+            robotRB.velocity = new Vector2(0, 0);
+            RobotAttack();
+        }
+        else if (Vector2.Distance(transform.position, playerPos) < 7.5f && Vector2.Distance(transform.position, playerPos) > 6f) detectPlayer();
         else
         {
             robotRB.velocity = new Vector2(0, 0);
@@ -36,22 +39,38 @@ public class EnemyRottenRobot : EnemyClass
         }
     }
 
-    private void detectPlayer(float detectRange)
+    private void detectPlayer()
     {
         if (player.transform.position.x < transform.position.x)
+        {
+            flipEnemyTransform(false);
             robotRB.velocity = new Vector2(-1, 0) * movementSpeed;
+        }
         else
+        {
+            flipEnemyTransform(true);
             robotRB.velocity = new Vector2(1, 0) * movementSpeed;
-        //transform.position = Vector2.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
+        }
     }
 
     private void RobotAttack()
     {
+        if (player.transform.position.x < transform.position.x)
+        {
+            flipEnemyTransform(false);
+        }
+        else
+        {
+            flipEnemyTransform(true);
+        }
+
         if (currentAttackTime <= 0)
         {
+            Vector2 shootDir = (player.transform.position - robotFirePoint.transform.position).normalized;
+            float FireAngle = Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg - 90f;
+            robotFirePoint.transform.eulerAngles = new Vector3(robotFirePoint.transform.rotation.x, robotFirePoint.transform.rotation.y, FireAngle);
             GameObject Robotbullet = Instantiate(robotbulletPrefab, robotFirePoint.transform.position, robotFirePoint.transform.rotation);
             Rigidbody2D rb = Robotbullet.GetComponent<Rigidbody2D>();
-            Vector2 shootDir = (player.transform.position - robotFirePoint.transform.position).normalized;
             rb.AddForce(shootDir * robotBulletForce, ForceMode2D.Impulse);
             currentAttackTime = attackTimeInitial;
         }
