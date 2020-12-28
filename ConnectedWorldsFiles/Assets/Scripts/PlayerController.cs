@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
 
     // Dash
     [SerializeField] private int dashCount;
-    [SerializeField] private bool isDashing = false;
+    [SerializeField] public bool isDashing = false;
     [SerializeField] Vector2 dashDirection;
 
     // Skill Tree
@@ -346,9 +346,9 @@ public class PlayerController : MonoBehaviour
 
     private void Glide()
     {
-        /*isGliding = true;
+        isGliding = true;
         playerRB.velocity = new Vector2(Mathf.Clamp(playerRB.velocity.x, -glideSpeedX, float.MaxValue),
-                                        Mathf.Clamp(playerRB.velocity.y, -glideSpeedY, float.MaxValue)); // glide*/
+                                        Mathf.Clamp(playerRB.velocity.y, -glideSpeedY, float.MaxValue)); // glide
     }
 
     private void Dash()
