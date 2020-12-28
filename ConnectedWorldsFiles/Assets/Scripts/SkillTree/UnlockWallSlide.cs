@@ -1,16 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
-public class UnlockJumpHigher : SkillTreeClass
+public class UnlockWallSlide : SkillTreeClass
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        theMessage = "Imagine being able to jump 10-feet high...";
+        theMessage = "The walls feel different... Can I now move like a ninja?";
         if (collision.tag == "Player")
         {
-            player.canJumpHigh = true;
+            player.canWallJump = true;
             spriteRenderer.enabled = false;
             StartCoroutine(displayMessage());
         }

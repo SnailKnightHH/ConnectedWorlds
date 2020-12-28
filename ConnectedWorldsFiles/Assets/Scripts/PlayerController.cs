@@ -177,7 +177,7 @@ public class PlayerController : MonoBehaviour
     {
         isWallSliding = (isTouchingWall && !grounded && horizontalInput != 0);
         if (isWallSliding || isDashing) isJumping = false;
-        if ((grounded || isWallSliding) && !isDashing) DashCountRefresh();
+        if (grounded && !isDashing) DashCountRefresh();
         isFalling = !(grounded || isJumping || isWallSliding);
         isFacingRight = lookDir.x > 0;
         isTouchingWall = isTouchingFrontWall || isTouchingBackWall;
@@ -281,7 +281,6 @@ public class PlayerController : MonoBehaviour
             {
                 currentAttackCharge--;
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation);
-                bullet.tag = "Projectile";
                 Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
                 rb.AddForce(firePoint.transform.up * bulletForce, ForceMode2D.Impulse);
             }
@@ -323,9 +322,12 @@ public class PlayerController : MonoBehaviour
 
     private void WallJump()
     {
-        isWallJumping = true;
-        playerRB.velocity = new Vector3(xWallForce * -horizontalInput, yWallForce, 0); // wall jump
-        Invoke("SetIsWallJumpingToFalse", wallJumpDuration);
+        if (canWallJump)
+        {
+            isWallJumping = true;
+            playerRB.velocity = new Vector3(xWallForce * -horizontalInput, yWallForce, 0); // wall jump
+            Invoke("SetIsWallJumpingToFalse", wallJumpDuration);
+        }
     }
     void SetIsWallJumpingToFalse()
     {
@@ -334,7 +336,8 @@ public class PlayerController : MonoBehaviour
 
     private void WallSliding()
     {
-        playerRB.velocity = new Vector2(playerRB.velocity.x, Mathf.Clamp(playerRB.velocity.y, -wallSlidingSpeed, float.MaxValue)); // wall slide
+        if(canWallJump)
+            playerRB.velocity = new Vector2(playerRB.velocity.x, Mathf.Clamp(playerRB.velocity.y, -wallSlidingSpeed, float.MaxValue)); // wall slide
     }
 
     private void Glide()

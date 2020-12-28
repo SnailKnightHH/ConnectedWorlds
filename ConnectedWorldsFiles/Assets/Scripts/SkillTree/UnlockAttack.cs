@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class UnlockJumpHigher : SkillTreeClass
+public class UnlockAttack : SkillTreeClass
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        theMessage = "Imagine being able to jump 10-feet high...";
+        theMessage = "Wow my hands are feeling a bit hot... Is it the sun or is it just me?";
         if (collision.tag == "Player")
         {
-            player.canJumpHigh = true;
+            player.canAttack = true;
             spriteRenderer.enabled = false;
             StartCoroutine(displayMessage());
         }
