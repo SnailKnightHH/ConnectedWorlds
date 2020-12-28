@@ -184,7 +184,7 @@ public class PlayerController : MonoBehaviour
         isWallSliding = (isTouchingWall && !grounded && horizontalInput != 0);
         if (isWallSliding || isDashing) isJumping = false;
         if (grounded && !isDashing) DashCountRefresh();
-        isFalling = !(grounded || isJumping || isWallSliding);
+        isFalling = !(grounded || isJumping || isWallSliding || playerRB.velocity.y >= 0);
         isFacingRight = lookDir.x > 0;
         isTouchingWall = isTouchingFrontWall || isTouchingBackWall;
         if (grounded)  isGliding = false;
@@ -350,9 +350,11 @@ public class PlayerController : MonoBehaviour
 
     private void Glide()
     {
+        if (isFalling) {
         isGliding = true;
         playerRB.velocity = new Vector2(Mathf.Clamp(playerRB.velocity.x, -glideSpeedX, float.MaxValue),
                                         Mathf.Clamp(playerRB.velocity.y, -glideSpeedY, float.MaxValue)); // glide
+        }
     }
 
     private void Dash()
