@@ -365,6 +365,21 @@ PrefabInstance:
       objectReference: {fileID: 1020039142}
     - target: {fileID: 4774570119266482036, guid: d55f62dcd99b190489895abb3aaee892,
         type: 3}
+      propertyPath: canAttack
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4774570119266482036, guid: d55f62dcd99b190489895abb3aaee892,
+        type: 3}
+      propertyPath: canJumpHigh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4774570119266482036, guid: d55f62dcd99b190489895abb3aaee892,
+        type: 3}
+      propertyPath: canWallJump
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4774570119266482036, guid: d55f62dcd99b190489895abb3aaee892,
+        type: 3}
       propertyPath: attackChargeUI
       value: 
       objectReference: {fileID: 2069842927}

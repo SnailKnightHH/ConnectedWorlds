@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour
     // move
     [SerializeField] private float horizontalInput;
     private float verticalInput;
+    [SerializeField] private float horizontalInputRaw;
+    private float verticalInputRaw;
 
     // Player state
     public bool grounded = false;
@@ -135,6 +137,8 @@ public class PlayerController : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
+        horizontalInputRaw = Input.GetAxisRaw("Horizontal");
+        verticalInputRaw = Input.GetAxisRaw("Vertical");
         GetMousePosition();
 
         if (isDashing)
@@ -325,7 +329,7 @@ public class PlayerController : MonoBehaviour
         if (canWallJump)
         {
             isWallJumping = true;
-            playerRB.velocity = new Vector3(xWallForce * -horizontalInput, yWallForce, 0); // wall jump
+            playerRB.velocity = new Vector3(xWallForce * horizontalInputRaw, yWallForce, 0); // wall jump
             Invoke("SetIsWallJumpingToFalse", wallJumpDuration);
         }
     }
@@ -342,9 +346,9 @@ public class PlayerController : MonoBehaviour
 
     private void Glide()
     {
-        isGliding = true;
+        /*isGliding = true;
         playerRB.velocity = new Vector2(Mathf.Clamp(playerRB.velocity.x, -glideSpeedX, float.MaxValue),
-                                        Mathf.Clamp(playerRB.velocity.y, -glideSpeedY, float.MaxValue)); // glide
+                                        Mathf.Clamp(playerRB.velocity.y, -glideSpeedY, float.MaxValue)); // glide*/
     }
 
     private void Dash()
@@ -352,12 +356,12 @@ public class PlayerController : MonoBehaviour
         if (dashCount-- > 0)
         {
             isDashing = true;
-            if (horizontalInput == 0 && verticalInput == 0)
+            if (horizontalInputRaw == 0 && verticalInputRaw == 0)
             {
                 if (isFacingRight) dashDirection = Vector2.right;
                 else dashDirection = Vector2.left;
             }
-            else dashDirection = new Vector2(horizontalInput, verticalInput);
+            else dashDirection = new Vector2(horizontalInputRaw, verticalInputRaw);
             playerRB.velocity = dashDirection.normalized * dashSpeed; // Dash
             Invoke("SetIsDashingToFalse", dashDuration);
         }
