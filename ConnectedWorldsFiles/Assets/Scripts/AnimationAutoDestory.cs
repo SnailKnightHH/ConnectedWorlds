@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class AnimationAutoDestory : MonoBehaviour
 {
+    [SerializeField] float dalay = 0.5f;
     void Start()
     {
-        
-        Destroy(gameObject, this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+        Destroy(gameObject, dalay);
     }
 }
