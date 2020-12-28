@@ -17,7 +17,6 @@ public class EnemyHound : EnemyClass
     void Update()
     {
         enemyDeath();
-        Debug.Log(Mathf.Abs(transform.position.y - playerPos.y));
         playerPos = player.transform.position;
         if (Vector2.Distance(transform.position, playerPos) < 0.3f && Mathf.Abs(transform.position.y - playerPos.y) < 0.2f) HoundAttack(damage);
         else if (Vector2.Distance(transform.position, playerPos) < 5f && Vector2.Distance(transform.position, playerPos) > 0.3f && Mathf.Abs(transform.position.y - playerPos.y) < 0.2f) detectPlayer(detectRange);

@@ -93,6 +93,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isDashing = false;
     [SerializeField] Vector2 dashDirection;
 
+    // Skill Tree
+    public bool canJumpHigh = false;
+    public bool canAttack = false;
+    public bool canWallJump = false;
+
     private void Awake()
     {
         playerRB = GetComponent<Rigidbody2D>();
@@ -116,6 +121,7 @@ public class PlayerController : MonoBehaviour
         playerDeath();
         if (currentAttackCharge < attackCharge) RechargeAttack();
         RechargeAttackUI();
+
     }
 
     private void FixedUpdate()
@@ -239,6 +245,9 @@ public class PlayerController : MonoBehaviour
     }
     private void JumpHigher()
     {
+        // Skill Tree Upgrade
+        if (canJumpHigh) UnlockJumpHigher();
+
         if (jumpTimer > 0 && isJumping)
         {
             playerRB.velocity = Vector2.up * jumpForce; // keep jumping
@@ -258,13 +267,18 @@ public class PlayerController : MonoBehaviour
 
     private void attack()
     {
-        if (currentAttackCharge > 0)
+        if (canAttack) // Skill Tree Upgrade
         {
-            currentAttackCharge--;
-            GameObject bullet = Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation);
-            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            rb.AddForce(firePoint.transform.up * bulletForce, ForceMode2D.Impulse);
+            if (currentAttackCharge > 0)
+            {
+                currentAttackCharge--;
+                GameObject bullet = Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation);
+                bullet.tag = "Projectile";
+                Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+                rb.AddForce(firePoint.transform.up * bulletForce, ForceMode2D.Impulse);
+            }
         }
+
     }
 
     private void RechargeAttack()
@@ -374,6 +388,11 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Failed.");
         }
+    }
+
+    private void UnlockJumpHigher()
+    {
+        jumpTime = 0.5f;
     }
 }
 

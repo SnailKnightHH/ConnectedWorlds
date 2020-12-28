@@ -14383,7 +14383,7 @@ GameObject:
   - component: {fileID: 5990781279718429525}
   m_Layer: 0
   m_Name: Projectile
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14471,9 +14471,6 @@ MonoBehaviour:
   areaOfEffect: 10
   explosion: {fileID: 1425377721693446395, guid: 789f25de91af7a54a8304cce05c71e0c,
     type: 3}
-  destructableEnvironment:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!61 &1920292021595714561
 BoxCollider2D:
   m_ObjectHideFlags: 0
