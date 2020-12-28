@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButtonDown(0)) attack();
             WallSliding();
             if (Input.GetKeyDown(KeyCode.Space)) WallJump();
-            if (Input.GetKeyDown(KeyCode.LeftShift)) Dash();
+            if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetMouseButtonDown(1)) Dash();
         }
         else if (isFalling)
         {
@@ -170,7 +170,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space)) Jump();
             if (Input.GetKey(KeyCode.Space)) JumpHigher();
             if (Input.GetKeyUp(KeyCode.Space)) isJumping = false;
-            if (Input.GetKeyDown(KeyCode.LeftShift)) Dash();
+            if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetMouseButtonDown(1)) Dash();
         }
 
 
