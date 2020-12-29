@@ -86,8 +86,9 @@ public class PlayerController : MonoBehaviour
     private float rechargeTime;
 
     // Health 
-    [Range(0, 5)]
-    public int health;
+    [Range(0, 10)]
+    public int maxHealth;
+    public int remainingHealth;
     public float invincibleTime;
     private bool isInvincible;
 
@@ -124,6 +125,7 @@ public class PlayerController : MonoBehaviour
         dashCount = dashCountInitial;
         currentAttackCharge = attackCharge;
         rechargeTime = rechargeTimeInitial;
+        remainingHealth = maxHealth;
         // Attack Charge UI 
         if(attackChargeUI != null) {
         attackChargeUI.leftUI.value = 1;
@@ -398,8 +400,8 @@ public class PlayerController : MonoBehaviour
 
     public void ReceiveDamage()
     {
-        health--;
-        if (health <= 0) KillPlayer();
+        remainingHealth--;
+        if (remainingHealth <= 0) KillPlayer();
         else StartInvincibility();
     }
 

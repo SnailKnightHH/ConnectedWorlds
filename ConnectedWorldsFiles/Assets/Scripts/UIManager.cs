@@ -4,8 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
-{
-    [SerializeField] private GameObject healthDisplay;
+{   // Health Display
+    [SerializeField] public int remainingHearts;
+    [SerializeField] public int numOfHearts;
+    public Image[] hearts;
+    public Sprite fullHeart;
+    public Sprite emptyHeart;
 
     private PlayerController playerController;
 
@@ -17,6 +21,19 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthDisplay.GetComponent<Text>().text = "Health: " + playerController.health.ToString();
+        UpdateHealthUI();
+    }
+
+    private void UpdateHealthUI()
+    {
+        if (remainingHearts > numOfHearts) remainingHearts = numOfHearts;
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if (i < remainingHearts) hearts[i].sprite = fullHeart;
+            else hearts[i].sprite = emptyHeart;
+
+            if (i < numOfHearts) hearts[i].enabled = true;
+            else hearts[i].enabled = false;
+        }
     }
 }

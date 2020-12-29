@@ -46,7 +46,7 @@ public class PeriodicalTrap : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(isAttackAvailable) player.health -= trapDamage;
+        if(isAttackAvailable) player.maxHealth -= trapDamage;
     }
 
 }

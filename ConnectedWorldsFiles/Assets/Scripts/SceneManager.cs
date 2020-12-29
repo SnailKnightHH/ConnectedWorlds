@@ -12,6 +12,7 @@ public class SceneManager : MonoBehaviour
     private GameObject player;
     private PlayerController playerController;
     [SerializeField] private CameraFollow cameraFollow;
+    [SerializeField] private UIManager uiManager;
 
 
     // Player State
@@ -28,9 +29,16 @@ public class SceneManager : MonoBehaviour
         if (playerSpawnLocation == null) playerSpawnLocation = defaltPlayerSpawnLocation;
         //playerSpawnLocation = playerController.transform;
     }
+
+    private void Update()
+    {
+        uiManager.numOfHearts = playerController.maxHealth;
+        uiManager.remainingHearts = playerController.remainingHealth;
+    }
     public void SpawnPlayer()
     {
         player = Instantiate(playerPrefab, playerSpawnLocation.position, Quaternion.Euler(new Vector3(0f, 0f, 0f)));
+        playerController = player.GetComponent<PlayerController>();
         cameraFollow.target = player.transform;
     }
 

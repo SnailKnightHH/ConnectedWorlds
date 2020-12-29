@@ -140,7 +140,8 @@ MonoBehaviour:
   jumpTimer: 0
   isJumping: 0
   currentAttackCharge: 0
-  health: 3
+  maxHealth: 4
+  remainingHealth: 0
   invincibleTime: 1
   isWallSliding: 0
   isWallJumping: 0
