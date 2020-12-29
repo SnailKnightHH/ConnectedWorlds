@@ -10,7 +10,8 @@ public class UnlockJumpHigher : SkillTreeClass
         theMessage = "Imagine being able to jump 10-feet high...";
         if (collision.tag == "Player")
         {
-            player.canJumpHigh = true;
+            sceneManager.canJumpHigh = true;
+            sceneManager.ChangeStatus();
             spriteRenderer.enabled = false;
             StartCoroutine(displayMessage());
         }

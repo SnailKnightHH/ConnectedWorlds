@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class SceneManager : MonoBehaviour
 {
+    public PlayerController playerController;
+    // Skill Tree
+    public bool canJumpHigh = false;
+    public bool canAttack = false;
+    public bool canWallJump = false;
+    public bool canGlide = false;
 
-    private void Awake()
-    {
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void LateUpdate()
+    public void ChangeStatus()
     {
+        if (canJumpHigh) { playerController.canJumpHigh = true; playerController.UnlockJumpHigher(); }
+        if (canAttack) playerController.canAttack = true;
+        if (canWallJump) playerController.canWallJump = true;
+        if (canGlide) playerController.canGlide = true;
     }
 }

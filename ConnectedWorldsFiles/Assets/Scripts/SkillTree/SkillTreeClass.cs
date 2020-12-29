@@ -11,6 +11,7 @@ public class SkillTreeClass : MonoBehaviour
     [SerializeField] private float displayTime;
     [HideInInspector]
     public string theMessage;
+    public SceneManager sceneManager;
 
     public IEnumerator displayMessage()
     {

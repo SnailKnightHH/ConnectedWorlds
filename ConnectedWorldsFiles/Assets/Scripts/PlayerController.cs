@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isFalling;
 
     // Jump
-    private float jumpTimer;
+    [SerializeField] private float jumpTimer;
     [SerializeField] private bool isJumping;
 
     // Attack
@@ -100,6 +100,8 @@ public class PlayerController : MonoBehaviour
     public bool canJumpHigh = false;
     public bool canAttack = false;
     public bool canWallJump = false;
+    public bool canGlide = false;
+
 
     private void Awake()
     {
@@ -179,13 +181,14 @@ public class PlayerController : MonoBehaviour
     }
     private void UpdatePlayerState()
     {
-        isWallSliding = (isTouchingWall && !grounded && horizontalInput != 0);
+        isWallSliding = (isTouchingWall && !grounded && horizontalInput != 0 && canWallJump);
         if (isWallSliding || isDashing) isJumping = false;
         if (grounded && !isDashing) DashCountRefresh();
         isFalling = !(grounded || isJumping || isWallSliding);
         isFacingRight = lookDir.x > 0;
         isTouchingWall = isTouchingFrontWall || isTouchingBackWall;
         if (grounded)  isGliding = false;
+        if (canJumpHigh) UnlockJumpHigher(); // to be deleted, changed in scene manager
     }
 
 
@@ -257,9 +260,6 @@ public class PlayerController : MonoBehaviour
     }
     private void JumpHigher()
     {
-        // Skill Tree Upgrade
-        if (canJumpHigh) UnlockJumpHigher();
-
         if (jumpTimer > 0 && isJumping)
         {
             playerRB.velocity = Vector2.up * jumpForce; // keep jumping
@@ -346,9 +346,13 @@ public class PlayerController : MonoBehaviour
 
     private void Glide()
     {
-        /*isGliding = true;
-        playerRB.velocity = new Vector2(Mathf.Clamp(playerRB.velocity.x, -glideSpeedX, float.MaxValue),
-                                        Mathf.Clamp(playerRB.velocity.y, -glideSpeedY, float.MaxValue)); // glide*/
+        if (canGlide)
+        {
+            isGliding = true;
+            playerRB.velocity = new Vector2(Mathf.Clamp(playerRB.velocity.x, -glideSpeedX, float.MaxValue),
+                                            Mathf.Clamp(playerRB.velocity.y, -glideSpeedY, float.MaxValue)); 
+        }
+
     }
 
     private void Dash()
@@ -406,7 +410,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void UnlockJumpHigher()
+    public void UnlockJumpHigher()
     {
         jumpTime = 0.5f;
     }

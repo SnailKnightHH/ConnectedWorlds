@@ -29,15 +29,9 @@ public class EnemyClass : MonoBehaviour
 
         // Flip enemy
         if (transform.position.x < path[spotNumber].position.x)
-        {
-            Debug.Log("true");
             flipEnemyTransform(true);
-        }
         else
-        {
-            Debug.Log("false");
             flipEnemyTransform(false);
-        }
 
         if (Vector2.Distance(transform.position, path[spotNumber].position) < 0.2f)
             spotNumber++;

@@ -10,7 +10,8 @@ public class UnlockAttack : SkillTreeClass
         theMessage = "Wow my hands are feeling a bit hot... Is it the sun or is it just me?";
         if (collision.tag == "Player")
         {
-            player.canAttack = true;
+            sceneManager.canAttack = true;
+            sceneManager.ChangeStatus();
             spriteRenderer.enabled = false;
             StartCoroutine(displayMessage());
         }

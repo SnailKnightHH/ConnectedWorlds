@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnlockWallSlide : SkillTreeClass
+public class UnlockGlide : SkillTreeClass
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        theMessage = "The walls feel different... Can I now move like a ninja?";
+        theMessage = "Lighter body means more free coffee! Could someone direct me to the nearest bar?";
         if (collision.tag == "Player")
         {
-            sceneManager.canWallJump = true;
+            sceneManager.canGlide = true;
             sceneManager.ChangeStatus();
             spriteRenderer.enabled = false;
             StartCoroutine(displayMessage());
