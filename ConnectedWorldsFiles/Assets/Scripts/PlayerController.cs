@@ -40,6 +40,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashDuration;
 
 
+    // Receive Damage
+    [SerializeField] private Vector2 knockBackVelocity;
+    [SerializeField] private float knockBackDuration = 0.3f;
+    [SerializeField] private float knockbackSpeed = 10f;
+
 
 
     // Refernces
@@ -59,11 +64,13 @@ public class PlayerController : MonoBehaviour
 
     // Player state
     public bool grounded = false;
+    [SerializeField] private bool canMove = true;
     [SerializeField] bool isFacingRight;
     [SerializeField] bool isTouchingWall;
     [SerializeField] public bool isTouchingFrontWall;
     [SerializeField] public bool isTouchingBackWall;
     [SerializeField] private bool isFalling;
+    [SerializeField] private bool isKnockedBack;
 
 
     // Jump
@@ -104,6 +111,10 @@ public class PlayerController : MonoBehaviour
     public bool canWallJump = false;
     public bool canGlide = false;
 
+    // Receive Damage
+    private string enemyLayer = "Enemy";
+
+
 
     private void Awake()
     {
@@ -122,7 +133,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        getInputs();
+        if(canMove) getInputs();
         UpdatePlayerState();
         InvincibleTime();
         playerDeath();
@@ -133,7 +144,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        HorizontalMove();
+        if (canMove) HorizontalMove();
         AnimatePlayer();
     }
 
@@ -190,6 +201,7 @@ public class PlayerController : MonoBehaviour
         isFacingRight = lookDir.x > 0;
         isTouchingWall = isTouchingFrontWall || isTouchingBackWall;
         if (grounded)  isGliding = false;
+        if (isKnockedBack) KnockBack();
         if (canJumpHigh) UnlockJumpHigher(); // to be deleted, changed in scene manager
     }
 
@@ -417,6 +429,35 @@ public class PlayerController : MonoBehaviour
     public void UnlockJumpHigher()
     {
         jumpTime = 0.5f;
+    }
+
+    private void KnockBack()
+    {
+        playerRB.velocity = knockBackVelocity * knockbackSpeed;
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer(enemyLayer)){
+            isKnockedBack = true;
+            canMove = false;
+           // if(playerRB.velocity.magnitude == 0)
+            //{
+                if (collision.gameObject.transform.position.x < transform.position.x) 
+                    knockBackVelocity = Vector2.right;
+                else knockBackVelocity = Vector2.left;
+           // }
+            //else knockBackVelocity = -playerRB.velocity.normalized;
+            cam.GetComponent<CameraShake>().ShakeCamera();
+            Invoke("SetIsKnockedBackToFalse", knockBackDuration);
+            
+        }
+    }
+    private void SetIsKnockedBackToFalse()
+    {
+        Debug.Log("set");
+        isKnockedBack = false;
+        canMove = true;
+        //playerRB.velocity = new Vector2(playerRB.velocity.x, 0f);
     }
 }
 
