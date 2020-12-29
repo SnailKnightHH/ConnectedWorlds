@@ -22,13 +22,13 @@ public class EnemyHound : EnemyClass
         else
         {
             houndRB.velocity = new Vector2(0, 0); 
-            movePath();
+            //movePath();
         }
     }
 
     private void detectPlayer()
     {
-        if (player.transform.position.x < transform.position.x)
+/*        if (player.transform.position.x < transform.position.x)
         {
             flipEnemyTransform(false);
             houndRB.velocity = new Vector2(-1, 0) * movementSpeed;
@@ -37,7 +37,7 @@ public class EnemyHound : EnemyClass
         {
             flipEnemyTransform(true);
             houndRB.velocity = new Vector2(1, 0) * movementSpeed;
-        }
+        }*/
     }
 
     private void HoundAttack(int damage)

@@ -11,7 +11,7 @@ public class ProjectileController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        EnemySlime slime = collision.GetComponent<EnemySlime>();
+        SlimeAI slime = collision.GetComponent<SlimeAI>();
         Destructable destructableObjects = collision.GetComponent<Destructable>();
         EnemyHound hound = collision.GetComponent<EnemyHound>();
 

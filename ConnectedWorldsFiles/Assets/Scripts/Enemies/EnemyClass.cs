@@ -8,10 +8,13 @@ public class EnemyClass : MonoBehaviour
     [Range (0, 5)]
     public int damage;
     public float movementSpeed;
-    public Transform[] path;
     private int spotNumber;
     public PlayerController player;
 
+    private void Awake()
+    {
+       // player = FindObjectOfType<PlayerController>();
+    }
     void Start()
     {
         spotNumber = 0;
@@ -23,7 +26,7 @@ public class EnemyClass : MonoBehaviour
     }
 
 
-    public void movePath()
+/*    public void movePath()
     {
         transform.position = Vector2.MoveTowards(transform.position, path[spotNumber].position, movementSpeed * Time.deltaTime);
 
@@ -36,18 +39,18 @@ public class EnemyClass : MonoBehaviour
         if (Vector2.Distance(transform.position, path[spotNumber].position) < 0.2f)
             spotNumber++;
         if (spotNumber == path.Length) spotNumber = 0;
-    }
+    }*/
 
     public void enemyDeath()
     {
         if (health <= 0) Destroy(gameObject);
     }
 
-    public void flipEnemyTransform(bool isFacingRight)
+/*    public void flipEnemyTransform(bool isFacingRight)
     {
         // flip character sprite
         if (isFacingRight) transform.localScale = new Vector2(transform.localScale.y, transform.localScale.y);
         else transform.localScale = new Vector2(-transform.localScale.y, transform.localScale.y);
-    }
+    }*/
 
 }

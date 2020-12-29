@@ -6,7 +6,6 @@ public class EnemySlime : EnemyClass
 {
     private void Update()
     {
-        movePath();
         enemyDeath();
     }
 
