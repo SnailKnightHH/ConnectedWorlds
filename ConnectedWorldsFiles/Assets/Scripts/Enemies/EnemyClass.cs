@@ -4,53 +4,54 @@ using UnityEngine;
 
 public class EnemyClass : MonoBehaviour
 {
-    public int health;
-    [Range (0, 5)]
-    public int damage;
-    public float movementSpeed;
-    private int spotNumber;
-    public PlayerController player;
+    // This class is for ground based enemies with standard patrol movement 
+
+
+    // Parameters
+    [SerializeField] private int MaxHealth;
+    [SerializeField] public float movementSpeed;
+    [SerializeField] [Range(-1, 1)] int initialDirection = 1;
+
+    // References 
+    public Rigidbody2D enemyRB;
+    // movement
+    private int horizontalMove;
+    // health
+    private float currentHealth;
+
+    private void Start()
+    {
+        currentHealth = MaxHealth;
+    }
 
     private void Awake()
     {
-       // player = FindObjectOfType<PlayerController>();
-    }
-    void Start()
-    {
-        spotNumber = 0;
+        enemyRB = GetComponent<Rigidbody2D>();
+        horizontalMove = initialDirection;
     }
 
-    public void EnemyReceiveDamage(int damageAmount)
+    private void FixedUpdate()
     {
-        health -= damageAmount;
+        enemyRB.velocity = new Vector2(horizontalMove * movementSpeed, 0f);
     }
 
-
-/*    public void movePath()
+    public void ChangeDirection()
     {
-        transform.position = Vector2.MoveTowards(transform.position, path[spotNumber].position, movementSpeed * Time.deltaTime);
-
-        // Flip enemy
-        if (transform.position.x < path[spotNumber].position.x)
-            flipEnemyTransform(true);
-        else
-            flipEnemyTransform(false);
-
-        if (Vector2.Distance(transform.position, path[spotNumber].position) < 0.2f)
-            spotNumber++;
-        if (spotNumber == path.Length) spotNumber = 0;
-    }*/
-
-    public void enemyDeath()
-    {
-        if (health <= 0) Destroy(gameObject);
+        horizontalMove = -horizontalMove;
+        transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
     }
 
-/*    public void flipEnemyTransform(bool isFacingRight)
+    public void ReceiveDamage(int damageAmount)
     {
-        // flip character sprite
-        if (isFacingRight) transform.localScale = new Vector2(transform.localScale.y, transform.localScale.y);
-        else transform.localScale = new Vector2(-transform.localScale.y, transform.localScale.y);
-    }*/
+        currentHealth -= damageAmount;
+        if (currentHealth <= 0) Destroy(gameObject);
+    }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            collision.gameObject.GetComponent<PlayerController>().ReceiveDamage();
+        }
+    }
 }

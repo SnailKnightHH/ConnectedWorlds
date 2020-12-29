@@ -41,7 +41,6 @@ public class GhostEffect : MonoBehaviour
 
     private void GenerateGhost()
     {
-        Debug.Log("instantiating");
         GameObject currentGhost = Instantiate(ghost, transform.position, transform.rotation);
         currentSprite = GetComponent<SpriteRenderer>().sprite;
         currentGhost.transform.localScale = transform.localScale;

@@ -4,64 +4,32 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
 {
+    // Parameter
     public int damage;
-    public float areaOfEffect;
+
+    // References
     [SerializeField] private GameObject explosion;
     private string whatIsGround = "WalkableSurface";
+    private string whatIsEnemies = "Enemy";
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        SlimeAI slime = collision.GetComponent<SlimeAI>();
-        Destructable destructableObjects = collision.GetComponent<Destructable>();
-        EnemyHound hound = collision.GetComponent<EnemyHound>();
+        LayerMask collidedLayer = collision.gameObject.layer;
 
-        if (collision.gameObject.layer == LayerMask.NameToLayer(whatIsGround))
+        if (collidedLayer == LayerMask.NameToLayer(whatIsGround))
         {
-            Instantiate(explosion, transform.position, Quaternion.Euler(new Vector3( 0f, 0f ,0f)));
             DestoryProjectile();
         }
-
-        if (slime != null)
+        else if (collidedLayer == LayerMask.NameToLayer(whatIsEnemies))
         {
-            slime.EnemyReceiveDamage(damage);
-            Instantiate(explosion, transform.position, Quaternion.Euler(new Vector3(0f, 0f, 0f)));
+            collision.GetComponent<EnemyClass>().ReceiveDamage(damage);
             DestoryProjectile();
         }
-
-        if(destructableObjects != null)
-        {
-            destructableObjects.ReceiveDamage(damage);
-            Instantiate(explosion, transform.position, Quaternion.Euler(new Vector3(0f, 0f, 0f)));
-            DestoryProjectile();
-        }
-
-        if(hound != null)
-        {
-            hound.EnemyReceiveDamage(damage);
-            Instantiate(explosion, transform.position, Quaternion.Euler(new Vector3(0f, 0f, 0f)));
-            DestoryProjectile();
-        }
-
-/*        {
-*//*            Collider2D[] objectsToDamage = Physics2D.OverlapCircleAll(transform.position, areaOfEffect);
-            for (int i = 0; i < objectsToDamage.Length; i++)
-            {
-                objectsToDamage[i].GetComponent<EnemySlime>().EnemyReceiveDamage(damage);
-            }*//*
-            
-            Instantiate(explosion, transform.position, Quaternion.Euler(new Vector3(0f, 0f, 0f)));
-            Destroy(gameObject);
-        }*/
-
     }
 
     private void DestoryProjectile() {
         FindObjectOfType<CameraShake>().ShakeCamera();
+        Instantiate(explosion, transform.position, Quaternion.Euler(new Vector3(0f, 0f, 0f)));
         Destroy(gameObject);
     }
-/*    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, areaOfEffect);
-    }*/
 }

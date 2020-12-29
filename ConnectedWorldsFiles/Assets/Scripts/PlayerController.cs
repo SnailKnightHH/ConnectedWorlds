@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
     public Camera cam;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    [SerializeField] private CapsuleCollider2D hitBox;
 
     // Animations
     [SerializeField] public bool dashingDirectionFoward;
@@ -87,9 +88,8 @@ public class PlayerController : MonoBehaviour
     // Health 
     [Range(0, 5)]
     public int health;
-    public float invincibleTimeInitial;
     public float invincibleTime;
-    private bool isInvincible = false;
+    private bool isInvincible;
 
     // Wall Slide
     [SerializeField] private bool isWallSliding = false;
@@ -115,14 +115,12 @@ public class PlayerController : MonoBehaviour
     private string enemyLayer = "Enemy";
 
 
-
     private void Awake()
     {
         playerRB = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         dashCount = dashCountInitial;
-        invincibleTime = invincibleTimeInitial;
         currentAttackCharge = attackCharge;
         rechargeTime = rechargeTimeInitial;
         // Attack Charge UI 
@@ -135,11 +133,6 @@ public class PlayerController : MonoBehaviour
     {
         if(canMove) getInputs();
         UpdatePlayerState();
-        InvincibleTime();
-        playerDeath();
-        if (currentAttackCharge < attackCharge) RechargeAttack();
-        RechargeAttackUI();
-
     }
 
     private void FixedUpdate()
@@ -203,6 +196,8 @@ public class PlayerController : MonoBehaviour
         if (grounded)  isGliding = false;
         if (isKnockedBack) KnockBack();
         if (canJumpHigh) UnlockJumpHigher(); // to be deleted, changed in scene manager
+        if (currentAttackCharge < attackCharge) RechargeAttack();
+        RechargeAttackUI();
     }
 
 
@@ -398,23 +393,25 @@ public class PlayerController : MonoBehaviour
         playerRB.velocity = new Vector2(playerRB.velocity.x, 0f);
     }
 
-    public void ReceiveDamage(int damageAmount)
+    public void ReceiveDamage()
     {
-        if (!isInvincible)
-        {
-            health -= damageAmount;
-            invincibleTime = invincibleTimeInitial;
-            isInvincible = true;
-        }
+        health--;
+        if (health <= 0) Debug.Log("Failed");
+        StartInvincibility();
     }
 
-    private void InvincibleTime()
+    private void StartInvincibility()
     {
-        if (isInvincible)
-            invincibleTime -= Time.deltaTime;
-        if (invincibleTime <= 0)
-            isInvincible = false;
-
+        isInvincible = true;
+        hitBox.enabled = false;
+        spriteRenderer.color = Color.yellow;
+        Invoke(nameof(SetIsInvincibleToFalse), invincibleTime);
+    }
+    private void SetIsInvincibleToFalse()
+    {
+        isInvincible = false;
+        spriteRenderer.color = Color.white;
+        hitBox.enabled = true;
     }
 
 
@@ -422,7 +419,7 @@ public class PlayerController : MonoBehaviour
     {
         if (health <= 0)
         {
-            Debug.Log("Failed.");
+            //Debug.Log("Failed.");
         }
     }
 
@@ -435,9 +432,10 @@ public class PlayerController : MonoBehaviour
     {
         playerRB.velocity = knockBackVelocity * knockbackSpeed;
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void ProcessHitBoxCollision(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer(enemyLayer)){
+            ReceiveDamage();
             isKnockedBack = true;
             canMove = false;
            // if(playerRB.velocity.magnitude == 0)
@@ -449,15 +447,12 @@ public class PlayerController : MonoBehaviour
             //else knockBackVelocity = -playerRB.velocity.normalized;
             cam.GetComponent<CameraShake>().ShakeCamera();
             Invoke("SetIsKnockedBackToFalse", knockBackDuration);
-            
         }
     }
     private void SetIsKnockedBackToFalse()
     {
-        Debug.Log("set");
         isKnockedBack = false;
         canMove = true;
-        //playerRB.velocity = new Vector2(playerRB.velocity.x, 0f);
     }
 }
 

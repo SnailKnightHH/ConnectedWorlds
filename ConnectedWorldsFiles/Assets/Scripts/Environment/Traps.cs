@@ -9,6 +9,6 @@ public class Traps : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Player") player.ReceiveDamage(trapDamage);
+        if (collision.tag == "Player") player.ReceiveDamage();
     }
 }

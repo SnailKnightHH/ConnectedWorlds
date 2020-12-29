@@ -45,7 +45,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.45816994, y: -0.44843793}
+  m_Offset: {x: 0.52445793, y: -0.56443965}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -56,7 +56,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.29926682, y: 0.39198065}
+  m_Size: {x: 0.14775467, y: 0.21679425}
   m_EdgeRadius: 0
 --- !u!114 &259380575
 MonoBehaviour:
@@ -115,7 +115,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.45816994, y: -0.05390215}
+  m_Offset: {x: 0.52524185, y: -0.25929403}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -126,7 +126,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.29926682, y: 0.3531723}
+  m_Size: {x: 0.1556549, y: 0.3779869}
   m_EdgeRadius: 0
 --- !u!114 &778608478
 MonoBehaviour:
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 2760665895758885965}
   - component: {fileID: 6921138458235574007}
   m_Layer: 12
-  m_Name: Slime ai
+  m_Name: Wolf ai
   m_TagString: Slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,7 +169,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1821728818171983452}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 37.96, y: 0.72, z: -29.007328}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 778608476}
@@ -216,7 +216,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -6537097002179028248, guid: 301a663e3eddf3643927eb3fda4890ae,
+  m_Sprite: {fileID: -6338973910496633850, guid: 0882322cd288ebf45b84aeeee5b156e3,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -241,10 +241,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0014038086, y: -0.06918299}
+  m_Offset: {x: 0.07547569, y: -0.256418}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.7034882}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
@@ -252,7 +252,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.55384064, y: 0.36777377}
+  m_Size: {x: 0.7323952, y: 0.3900931}
   m_EdgeRadius: 0
 --- !u!95 &6293176248309115488
 Animator:
@@ -264,7 +264,7 @@ Animator:
   m_GameObject: {fileID: 1821728818171983452}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 47fbe164893be804482a9c7c8e365f58, type: 2}
+  m_Controller: {fileID: 9100000, guid: d0bc3a0509aa88f40a87bd2fdaad4b94, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -309,4 +309,3 @@ MonoBehaviour:
   MaxHealth: 2
   movementSpeed: 2
   initialDirection: 1
-  enemyRB: {fileID: 0}

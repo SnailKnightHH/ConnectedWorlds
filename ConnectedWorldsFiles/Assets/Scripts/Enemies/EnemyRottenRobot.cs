@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyRottenRobot : EnemyClass
 {
-    private Vector3 playerPos;
+  /*  private Vector3 playerPos;
     [SerializeField] private Rigidbody2D robotRB;
 
 
@@ -24,7 +24,6 @@ public class EnemyRottenRobot : EnemyClass
     // Update is called once per frame
     void Update()
     {
-        enemyDeath();
         playerPos = player.transform.position;
         if (Vector2.Distance(transform.position, playerPos) < 6f)
         {
@@ -41,7 +40,7 @@ public class EnemyRottenRobot : EnemyClass
 
     private void detectPlayer()
     {
-/*        if (player.transform.position.x < transform.position.x)
+*//*        if (player.transform.position.x < transform.position.x)
         {
             flipEnemyTransform(false);
             robotRB.velocity = new Vector2(-1, 0) * movementSpeed;
@@ -50,19 +49,19 @@ public class EnemyRottenRobot : EnemyClass
         {
             flipEnemyTransform(true);
             robotRB.velocity = new Vector2(1, 0) * movementSpeed;
-        }*/
+        }*//*
     }
 
     private void RobotAttack()
     {
-/*        if (player.transform.position.x < transform.position.x)
+*//*        if (player.transform.position.x < transform.position.x)
         {
             flipEnemyTransform(false);
         }
         else
         {
             flipEnemyTransform(true);
-        }*/
+        }*//*
 
         if (currentAttackTime <= 0)
         {
@@ -77,5 +76,5 @@ public class EnemyRottenRobot : EnemyClass
         else
             currentAttackTime -= Time.deltaTime;
 
-    }
+    }*/
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyHound : EnemyClass
 {
-    private Vector3 playerPos;
+   /* private Vector3 playerPos;
     [SerializeField] private Rigidbody2D houndRB;
     [SerializeField] private float attackTimeInitial;
     private float currentAttackTime;
@@ -28,7 +28,7 @@ public class EnemyHound : EnemyClass
 
     private void detectPlayer()
     {
-/*        if (player.transform.position.x < transform.position.x)
+*//*        if (player.transform.position.x < transform.position.x)
         {
             flipEnemyTransform(false);
             houndRB.velocity = new Vector2(-1, 0) * movementSpeed;
@@ -37,7 +37,7 @@ public class EnemyHound : EnemyClass
         {
             flipEnemyTransform(true);
             houndRB.velocity = new Vector2(1, 0) * movementSpeed;
-        }*/
+        }*//*
     }
 
     private void HoundAttack(int damage)
@@ -51,5 +51,5 @@ public class EnemyHound : EnemyClass
         else
             currentAttackTime -= Time.deltaTime;
             
-    }
+    }*/
 }

@@ -14,7 +14,7 @@ public class CliffCheck : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer(whatIsGround))
         {
-            slimeAI.Changedirection();
+            slimeAI.ChangeDirection();
         }
     }
 }

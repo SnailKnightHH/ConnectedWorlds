@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySlime : EnemyClass
 {
-    private void Update()
+/*    private void Update()
     {
         enemyDeath();
     }
@@ -15,6 +15,6 @@ public class EnemySlime : EnemyClass
         {
             player.ReceiveDamage(damage);
         }
-    }
+    }*/
 
 }
