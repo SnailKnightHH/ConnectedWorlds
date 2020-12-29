@@ -11,7 +11,7 @@ public class UnlockAttack : SkillTreeClass
         if (collision.tag == "Player")
         {
             sceneManager.canAttack = true;
-            sceneManager.ChangeStatus();
+            sceneManager.UpdateStatus();
             spriteRenderer.enabled = false;
             StartCoroutine(displayMessage());
         }

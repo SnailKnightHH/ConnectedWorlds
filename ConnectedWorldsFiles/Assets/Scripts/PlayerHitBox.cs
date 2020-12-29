@@ -11,7 +11,6 @@ public class PlayerHitBox : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("collided");
         playerController.ProcessHitBoxCollision(collision);
     }
 }

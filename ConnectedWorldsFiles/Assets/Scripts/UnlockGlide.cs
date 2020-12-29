@@ -10,7 +10,7 @@ public class UnlockGlide : SkillTreeClass
         if (collision.tag == "Player")
         {
             sceneManager.canGlide = true;
-            sceneManager.ChangeStatus();
+            sceneManager.UpdateStatus();
             spriteRenderer.enabled = false;
             StartCoroutine(displayMessage());
         }

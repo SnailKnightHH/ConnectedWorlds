@@ -10,7 +10,7 @@ public class UnlockWallSlide : SkillTreeClass
         if (collision.tag == "Player")
         {
             sceneManager.canWallJump = true;
-            sceneManager.ChangeStatus();
+            sceneManager.UpdateStatus();
             spriteRenderer.enabled = false;
             StartCoroutine(displayMessage());
         }

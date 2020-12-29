@@ -213,8 +213,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 433037071
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: -6537097002179028248, guid: 301a663e3eddf3643927eb3fda4890ae,
     type: 3}
@@ -309,4 +309,6 @@ MonoBehaviour:
   MaxHealth: 2
   movementSpeed: 2
   initialDirection: 1
+  flashDuration: 0.1
   enemyRB: {fileID: 0}
+  spriteRenderer: {fileID: 0}

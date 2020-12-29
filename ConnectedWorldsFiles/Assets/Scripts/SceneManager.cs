@@ -5,6 +5,8 @@ using UnityEngine;
 public class SceneManager : MonoBehaviour
 {
     public PlayerController playerController;
+    // Player State
+    private Transform playerSpawnLocation;
     // Skill Tree
     public bool canJumpHigh = false;
     public bool canAttack = false;
@@ -12,11 +14,12 @@ public class SceneManager : MonoBehaviour
     public bool canGlide = false;
 
 
-    public void ChangeStatus()
+    public void UpdateStatus()
     {
-        if (canJumpHigh) { playerController.canJumpHigh = true; playerController.UnlockJumpHigher(); }
-        if (canAttack) playerController.canAttack = true;
-        if (canWallJump) playerController.canWallJump = true;
-        if (canGlide) playerController.canGlide = true;
+        playerController.canJumpHigh = canJumpHigh;
+        playerController.UnlockJumpHigher();
+        playerController.canAttack = canAttack;
+        playerController.canWallJump = canWallJump;
+        playerController.canGlide = canGlide;
     }
 }

@@ -11,7 +11,7 @@ public class UnlockJumpHigher : SkillTreeClass
         if (collision.tag == "Player")
         {
             sceneManager.canJumpHigh = true;
-            sceneManager.ChangeStatus();
+            sceneManager.UpdateStatus();
             spriteRenderer.enabled = false;
             StartCoroutine(displayMessage());
         }

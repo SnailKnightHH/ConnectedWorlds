@@ -35,5 +35,4 @@ public class AttackChargeUI : MonoBehaviour
     {
         rightUI.value = chargeTime;
     }
-
 }
