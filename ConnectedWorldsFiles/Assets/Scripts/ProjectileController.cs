@@ -11,6 +11,7 @@ public class ProjectileController : MonoBehaviour
     [SerializeField] private GameObject explosion;
     private string whatIsGround = "WalkableSurface";
     private string whatIsEnemies = "Enemy";
+    private string whatIsSkyEnemies = "SkyEnemy";
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -23,6 +24,11 @@ public class ProjectileController : MonoBehaviour
         else if (collidedLayer == LayerMask.NameToLayer(whatIsEnemies))
         {
             collision.GetComponent<EnemyClass>().ReceiveDamage(damage);
+            DestoryProjectile();
+        }
+        else if (collidedLayer == LayerMask.NameToLayer(whatIsSkyEnemies))
+        {
+            collision.GetComponent<SkyEnemyClass>().ReceiveDamage(damage);
             DestoryProjectile();
         }
     }

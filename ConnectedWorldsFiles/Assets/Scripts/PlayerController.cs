@@ -398,9 +398,9 @@ public class PlayerController : MonoBehaviour
         playerRB.velocity = new Vector2(playerRB.velocity.x, 0f);
     }
 
-    public void ReceiveDamage()
+    public void ReceiveDamage(int damageAmount)
     {
-        remainingHealth--;
+        remainingHealth -= damageAmount;
         if (remainingHealth <= 0) KillPlayer();
         else StartInvincibility();
     }
@@ -444,7 +444,7 @@ public class PlayerController : MonoBehaviour
     public void ProcessHitBoxCollision(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer(enemyLayer)){
-            ReceiveDamage();
+            ReceiveDamage(1);
             isKnockedBack = true;
             canMove = false;
            // if(playerRB.velocity.magnitude == 0)

@@ -12,12 +12,15 @@ public class EnemyClass : MonoBehaviour
     [SerializeField] private int MaxHealth;
     [SerializeField] public float movementSpeed;
     [SerializeField] [Range(-1, 1)] int initialDirection = 1;
+    [SerializeField] public int damage;
 
     // Damaged effect
     [SerializeField] private float flashDuration = 0.1f;
 
     // References 
+    [HideInInspector]
     public Rigidbody2D enemyRB;
+    [HideInInspector]
     public SpriteRenderer spriteRenderer;
     // movement
     private int horizontalMove;
@@ -32,7 +35,8 @@ public class EnemyClass : MonoBehaviour
         currentHealth = MaxHealth;
     }
 
-    private void FixedUpdate()
+
+    public void enemyVelocity()
     {
         enemyRB.velocity = new Vector2(horizontalMove * movementSpeed, 0f);
     }
@@ -61,7 +65,7 @@ public class EnemyClass : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            collision.gameObject.GetComponent<PlayerController>().ReceiveDamage();
+            collision.gameObject.GetComponent<PlayerController>().ReceiveDamage(damage);
         }
     }
 }

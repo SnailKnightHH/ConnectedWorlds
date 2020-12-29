@@ -5,6 +5,8 @@ using TMPro;
 
 public class UnlockJumpHigher : SkillTreeClass
 {
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         theMessage = "Imagine being able to jump 10-feet high...";

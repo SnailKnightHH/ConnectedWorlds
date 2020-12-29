@@ -14,7 +14,7 @@ public class CliffCheckHound : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer(whatIsGround))
         {
-            houndAI.Changedirection();
+            houndAI.ChangeDirection();
         }
     }
 }

@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 8193044162932172765}
   - component: {fileID: 8193044162932172737}
   - component: {fileID: 8193044162932172736}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: RustedRobot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,14 +127,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82fe4641c1fd2b643a72826962b41826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 60
-  damage: 1
+  MaxHealth: 40
   movementSpeed: 1.5
-  path:
-  - {fileID: 0}
-  - {fileID: 0}
+  flashDuration: 0.1
   player: {fileID: 0}
-  robotRB: {fileID: 8193044162932172737}
+  enemyRB: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  wayPoints: []
   attackTimeInitial: 1.5
   robotFirePoint: {fileID: 8193044162046946493}
   robotbulletPrefab: {fileID: 8765732750396996023, guid: bd00abfd772f81b468223abd01e3ccec,

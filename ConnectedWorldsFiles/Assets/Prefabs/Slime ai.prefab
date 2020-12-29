@@ -214,7 +214,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 433037071
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 2
   m_Sprite: {fileID: -6537097002179028248, guid: 301a663e3eddf3643927eb3fda4890ae,
     type: 3}
@@ -306,9 +306,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14c46997045c9fd47bc19ef6a1455cba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 2
+  MaxHealth: 20
   movementSpeed: 2
   initialDirection: 1
+  damage: 0
   flashDuration: 0.1
   enemyRB: {fileID: 0}
   spriteRenderer: {fileID: 0}

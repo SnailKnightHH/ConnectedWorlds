@@ -14,7 +14,7 @@ public class HoundVision : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer(whatIsGround) || collision.tag == "Hound")
         {
-            houndAI.Changedirection();
+            houndAI.ChangeDirection();
         }
     }
 }

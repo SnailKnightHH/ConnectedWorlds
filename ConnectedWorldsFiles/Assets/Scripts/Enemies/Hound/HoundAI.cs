@@ -1,28 +1,58 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HoundAI : EnemyClass
 {
-    private Rigidbody2D houndRB;
-    private int horizontalMove;
+    private PlayerController player;
+    private Vector3 playerPos;
+    [SerializeField] private float attackTimeInitial;
+    private float currentAttackTime;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        houndRB = GetComponent<Rigidbody2D>();
-        horizontalMove = 1;
+        player = FindObjectOfType<PlayerController>();
+        currentAttackTime = 0;
+    }
+    void Update()
+    {
+        playerPos = player.transform.position;
+        if (Vector2.Distance(transform.position, playerPos) < 1f && Mathf.Abs(transform.position.y - playerPos.y) < 0.2f) HoundAttack(damage);
+        else if (Vector2.Distance(transform.position, playerPos) < 5f && Vector2.Distance(transform.position, playerPos) > 1f && Mathf.Abs(transform.position.y - playerPos.y) < 0.2f) detectPlayer();
+        else enemyVelocity();
+        Debug.Log(Vector2.Distance(transform.position, playerPos));
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void detectPlayer()
     {
-        houndRB.velocity = new Vector2(horizontalMove * movementSpeed, 0f);
+        if (player.transform.position.x < transform.position.x)
+        {
+            flipEnemyTransform(false);
+            enemyRB.velocity = new Vector2(-1, 0) * movementSpeed;
+        }
+        else
+        {
+            flipEnemyTransform(true);
+            enemyRB.velocity = new Vector2(1, 0) * movementSpeed;
+        }
     }
 
-    public void Changedirection()
+    public void flipEnemyTransform(bool isFacingRight)
     {
-        horizontalMove = -horizontalMove;
-        transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+        // flip character sprite
+        if (isFacingRight) transform.localScale = new Vector2(transform.localScale.y, transform.localScale.y);
+        else transform.localScale = new Vector2(-transform.localScale.y, transform.localScale.y);
     }
+
+    private void HoundAttack(int damage)
+    {
+        enemyRB.velocity = new Vector2(0, 0);
+        if (currentAttackTime <= 0)
+        {
+            player.remainingHealth -= damage;
+            currentAttackTime = attackTimeInitial;
+        }
+        else
+            currentAttackTime -= Time.deltaTime;
+
+    }
+
 }

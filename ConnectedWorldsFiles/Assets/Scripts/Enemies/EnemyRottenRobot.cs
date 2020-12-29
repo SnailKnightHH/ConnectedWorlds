@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyRottenRobot : EnemyClass
+public class EnemyRottenRobot : SkyEnemyClass
 {
-  /*  private Vector3 playerPos;
-    [SerializeField] private Rigidbody2D robotRB;
-
+    private Vector3 playerPos;
 
     // Attack
     [SerializeField] private float attackTimeInitial;
@@ -15,53 +13,47 @@ public class EnemyRottenRobot : EnemyClass
     [SerializeField] private GameObject robotbulletPrefab;
     [SerializeField] private float robotBulletForce;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
         playerPos = player.transform.position;
         if (Vector2.Distance(transform.position, playerPos) < 6f)
         {
-            robotRB.velocity = new Vector2(0, 0);
+            enemyRB.velocity = new Vector2(0, 0);
             RobotAttack();
         }
         else if (Vector2.Distance(transform.position, playerPos) < 7.5f && Vector2.Distance(transform.position, playerPos) > 6f) detectPlayer();
         else
         {
-            robotRB.velocity = new Vector2(0, 0);
-            //movePath();
+            enemyRB.velocity = new Vector2(0, 0);
+            movePath();
         }
     }
 
     private void detectPlayer()
     {
-*//*        if (player.transform.position.x < transform.position.x)
+        if (player.transform.position.x < transform.position.x)
         {
             flipEnemyTransform(false);
-            robotRB.velocity = new Vector2(-1, 0) * movementSpeed;
+            enemyRB.velocity = new Vector2(-1, 0) * movementSpeed;
         }
         else
         {
             flipEnemyTransform(true);
-            robotRB.velocity = new Vector2(1, 0) * movementSpeed;
-        }*//*
+            enemyRB.velocity = new Vector2(1, 0) * movementSpeed;
+        }
     }
 
     private void RobotAttack()
     {
-*//*        if (player.transform.position.x < transform.position.x)
+        if (player.transform.position.x < transform.position.x)
         {
             flipEnemyTransform(false);
         }
         else
         {
             flipEnemyTransform(true);
-        }*//*
+        }
 
         if (currentAttackTime <= 0)
         {
@@ -76,5 +68,5 @@ public class EnemyRottenRobot : EnemyClass
         else
             currentAttackTime -= Time.deltaTime;
 
-    }*/
+    }
 }
