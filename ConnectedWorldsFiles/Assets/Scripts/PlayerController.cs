@@ -13,8 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject firePoint;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float bulletForce;
-    [SerializeField] private int attackCharge;
-    [SerializeField] private float rechargeTimeInitial;
+    [Range(0, 10)] [SerializeField] public int maxMana;
+    [SerializeField] private float manaRechargeTime;
 
     // Charge UI Parameters
     [SerializeField] public AttackChargeUI attackChargeUI;
@@ -82,8 +82,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 mousePos;
     private Vector2 lookDir;
     private Vector2 fireDir;
-    [SerializeField] private int currentAttackCharge;
-    private float rechargeTime;
+    [SerializeField] public int remainingMana;
+    private float ManaRechargeTimer;
 
     // Health 
     [Range(0, 10)]
@@ -123,8 +123,8 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         cam = FindObjectOfType<Camera>();
         dashCount = dashCountInitial;
-        currentAttackCharge = attackCharge;
-        rechargeTime = rechargeTimeInitial;
+        remainingMana = maxMana;
+        ManaRechargeTimer = manaRechargeTime;
         remainingHealth = maxHealth;
         // Attack Charge UI 
         if(attackChargeUI != null) {
@@ -201,8 +201,7 @@ public class PlayerController : MonoBehaviour
         if (grounded)  isGliding = false;
         if (isKnockedBack) KnockBack();
         if (canJumpHigh) UnlockJumpHigher(); // to be deleted, changed in scene manager
-        if (currentAttackCharge < attackCharge) RechargeAttack();
-        RechargeAttackUI();
+        if (remainingMana < maxMana) RechargeMana();
     }
 
 
@@ -297,9 +296,9 @@ public class PlayerController : MonoBehaviour
     {
         if (canAttack) // Skill Tree Upgrade
         {
-            if (currentAttackCharge > 0)
+            if (remainingMana > 0)
             {
-                currentAttackCharge--;
+                remainingMana--;
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation);
                 Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
                 rb.AddForce(firePoint.transform.up * bulletForce, ForceMode2D.Impulse);
@@ -308,36 +307,14 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void RechargeAttack()
+    private void RechargeMana()
     {
-        if (rechargeTime <= 0)
+        if (ManaRechargeTimer <= 0)
         {
-            currentAttackCharge++;
-            rechargeTime = rechargeTimeInitial;
+            remainingMana++;
+            ManaRechargeTimer = manaRechargeTime;
         }
-        else rechargeTime -= Time.deltaTime;
-    }
-
-    private void RechargeAttackUI()
-    {
-        if(currentAttackCharge == 2)
-        {
-            attackChargeUI.leftUI.value = 1;
-            attackChargeUI.midUI.value = 1;
-            attackChargeUI.rightUI.value =  1 - rechargeTime;
-        }
-        if (currentAttackCharge == 1)
-        {
-            attackChargeUI.leftUI.value = 1;
-            attackChargeUI.midUI.value = 1 - rechargeTime;
-            attackChargeUI.rightUI.value = 0;
-        }
-        if (currentAttackCharge == 0)
-        {
-            attackChargeUI.leftUI.value = 1 - rechargeTime;
-            attackChargeUI.midUI.value = 0;
-            attackChargeUI.rightUI.value = 0;
-        }
+        else ManaRechargeTimer -= Time.deltaTime;
     }
 
     private void WallJump()
