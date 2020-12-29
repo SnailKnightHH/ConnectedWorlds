@@ -11,6 +11,13 @@ public class UIManager : MonoBehaviour
     public Sprite fullHeart;
     public Sprite emptyHeart;
 
+    // Mana Display
+    [SerializeField] public int remainingMana;
+    [SerializeField] public int numOfManas;
+    public Image[] manas;
+    public Sprite fullMana;
+    public Sprite emptyMana;
+
     private PlayerController playerController;
 
     private void Awake()
@@ -22,6 +29,7 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         UpdateHealthUI();
+        UpdateManaUI();
     }
 
     private void UpdateHealthUI()
@@ -34,6 +42,19 @@ public class UIManager : MonoBehaviour
 
             if (i < numOfHearts) hearts[i].enabled = true;
             else hearts[i].enabled = false;
+        }
+    }
+
+    private void UpdateManaUI()
+    {
+        if (remainingMana > numOfManas) remainingMana = numOfManas;
+        for (int i = 0; i < manas.Length; i++)
+        {
+            if (i < remainingMana) manas[i].sprite = fullMana;
+            else manas[i].sprite = emptyMana;
+
+            if (i < numOfManas) manas[i].enabled = true;
+            else manas[i].enabled = false;
         }
     }
 }
