@@ -7,7 +7,6 @@ public class ProjectileController : MonoBehaviour
     public int damage;
     public float areaOfEffect;
     [SerializeField] private GameObject explosion;
-    private string destrutable = "destructableEnvironment";
     private string whatIsGround = "WalkableSurface";
 
     private void OnTriggerEnter2D(Collider2D collision)
