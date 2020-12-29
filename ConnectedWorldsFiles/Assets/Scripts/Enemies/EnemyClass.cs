@@ -10,8 +10,13 @@ public class EnemyClass : MonoBehaviour
     public float movementSpeed;
     public Transform[] path;
     private int spotNumber;
+    [HideInInspector]
     public PlayerController player;
 
+    private void Awake()
+    {
+        player = FindObjectOfType<PlayerController>();
+    }
     void Start()
     {
         spotNumber = 0;
