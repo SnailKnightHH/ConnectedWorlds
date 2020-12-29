@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     // Jump parameters
     [SerializeField] private float jumpForce = 30f;
-    [SerializeField] private float jumpTime;
+    [SerializeField] public float jumpTime;
 
     // Wall Jump parameters
     [SerializeField] private float xWallForce;
@@ -107,10 +107,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Vector2 dashDirection;
 
     // Skill Tree
-    public bool canJumpHigh = false;
-    public bool canAttack = false;
-    public bool canWallJump = false;
-    public bool canGlide = false;
+    public bool canJumpHigh;
+    public bool canAttack;
+    public bool canWallJump;
+    public bool canGlide;
+    public bool canDash;
 
     // Receive Damage
     private string enemyLayer = "Enemy";
@@ -200,7 +201,6 @@ public class PlayerController : MonoBehaviour
         isTouchingWall = isTouchingFrontWall || isTouchingBackWall;
         if (grounded)  isGliding = false;
         if (isKnockedBack) KnockBack();
-        if (canJumpHigh) UnlockJumpHigher(); // to be deleted, changed in scene manager
         if (remainingMana < maxMana) RechargeMana();
     }
 
@@ -349,7 +349,7 @@ public class PlayerController : MonoBehaviour
 
     private void Dash()
     {
-        if (dashCount-- > 0)
+        if (dashCount-- > 0 && canDash)
         {
             isDashing = true;
             if (horizontalInputRaw == 0 && verticalInputRaw == 0)
@@ -407,11 +407,6 @@ public class PlayerController : MonoBehaviour
     {
         isInvincible = false;
         hitBox.enabled = true;
-    }
-
-    public void UnlockJumpHigher()
-    {
-        jumpTime = 0.5f;
     }
 
     private void KnockBack()

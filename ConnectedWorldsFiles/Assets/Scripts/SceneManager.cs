@@ -22,10 +22,13 @@ public class SceneManager : MonoBehaviour
     [Range(0, 10)] [SerializeField] private int PlayerMaxHealth = 2;
     [Range(0, 10)] [SerializeField] private int PlayerMaxMana = 2;
     // Skill Tree
-    public bool canJumpHigh = false;
-    public bool canAttack = false;
-    public bool canWallJump = false;
-    public bool canGlide = false;
+    public bool canJumpHigh;
+    [Range(0, 10)] public float normalJumpDuration;
+    [Range(0, 10)] public float highJumpDuration;
+    public bool canAttack;
+    public bool canWallJump;
+    public bool canGlide;
+    public bool canDash;
 
     private void Awake()
     {
@@ -54,10 +57,12 @@ public class SceneManager : MonoBehaviour
     {
         // Update ability
         playerController.canJumpHigh = canJumpHigh;
-        playerController.UnlockJumpHigher();
+        if (canJumpHigh) playerController.jumpTime = highJumpDuration;
+        else playerController.jumpTime = normalJumpDuration;
         playerController.canAttack = canAttack;
         playerController.canWallJump = canWallJump;
         playerController.canGlide = canGlide;
+        playerController.canDash = canDash;
 
         // Update health and mana
         playerController.maxHealth = PlayerMaxHealth;
@@ -68,6 +73,33 @@ public class SceneManager : MonoBehaviour
 
 
     // Setters:
+    public void UnlockHighJump()
+    {
+        canJumpHigh = true;
+        UpdateStatus();
+    }
+    
+    public void UnlockAttack()
+    {
+        canAttack = true;
+        UpdateStatus();
+    }
+    public void UnlockWallJump()
+    {
+        canWallJump = true;
+        UpdateStatus();
+    }
+    public void UnlockGlide()
+    {
+        canGlide = true;
+        UpdateStatus();
+    }
+    public void UnlockDash()
+    {
+        canDash = true;
+        UpdateStatus();
+    }
+
     public void SetSpawnPoint(Transform spawnPointLocation)
     {
         playerSpawnLocation = spawnPointLocation;

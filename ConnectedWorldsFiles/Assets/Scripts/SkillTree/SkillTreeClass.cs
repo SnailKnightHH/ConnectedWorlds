@@ -13,6 +13,10 @@ public class SkillTreeClass : MonoBehaviour
     public string theMessage;
     public SceneManager sceneManager;
 
+    private void Awake()
+    {
+        sceneManager = FindObjectOfType<SceneManager>();
+    }
     public IEnumerator displayMessage()
     {
         unlockAbilityMessage.SetText(theMessage);

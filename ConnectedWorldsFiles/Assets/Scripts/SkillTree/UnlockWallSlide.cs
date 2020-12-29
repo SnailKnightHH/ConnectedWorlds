@@ -9,8 +9,7 @@ public class UnlockWallSlide : SkillTreeClass
         theMessage = "The walls feel different... Can I now move like a ninja?";
         if (collision.tag == "Player")
         {
-            sceneManager.canWallJump = true;
-            sceneManager.UpdateStatus();
+            sceneManager.UnlockWallJump();
             spriteRenderer.enabled = false;
             StartCoroutine(displayMessage());
         }
