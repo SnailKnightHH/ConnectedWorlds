@@ -1212,11 +1212,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1821728818171983458, guid: 7eef127ba4c7d26479868b8d58374132,
         type: 3}
-      propertyPath: path.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1821728818171983458, guid: 7eef127ba4c7d26479868b8d58374132,
-        type: 3}
       propertyPath: path.Array.data[0]
       value: 
       objectReference: {fileID: 694182651}
@@ -1225,21 +1220,6 @@ PrefabInstance:
       propertyPath: path.Array.data[1]
       value: 
       objectReference: {fileID: 715958213}
-    - target: {fileID: 1821728818171983458, guid: 7eef127ba4c7d26479868b8d58374132,
-        type: 3}
-      propertyPath: path.Array.data[2]
-      value: 
-      objectReference: {fileID: 694182651}
-    - target: {fileID: 1821728818171983458, guid: 7eef127ba4c7d26479868b8d58374132,
-        type: 3}
-      propertyPath: path.Array.data[3]
-      value: 
-      objectReference: {fileID: 715958213}
-    - target: {fileID: 6293176248309115488, guid: 7eef127ba4c7d26479868b8d58374132,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 47fbe164893be804482a9c7c8e365f58, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7eef127ba4c7d26479868b8d58374132, type: 3}
 --- !u!1 &885990505
