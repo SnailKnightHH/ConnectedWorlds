@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class SceneManager : MonoBehaviour
 {
-    public PlayerController playerController;
+    // Parameters
+    [SerializeField] private Transform defaltPlayerSpawnLocation;
+
+    // References
+    [SerializeField] private GameObject playerPrefab;
+    private GameObject player;
+    private PlayerController playerController;
+    [SerializeField] private CameraFollow cameraFollow;
+
+
     // Player State
     private Transform playerSpawnLocation;
     // Skill Tree
@@ -13,6 +22,23 @@ public class SceneManager : MonoBehaviour
     public bool canWallJump = false;
     public bool canGlide = false;
 
+    private void Awake()
+    {
+        playerController = FindObjectOfType<PlayerController>();
+        if (playerSpawnLocation == null) playerSpawnLocation = defaltPlayerSpawnLocation;
+        //playerSpawnLocation = playerController.transform;
+    }
+    public void SpawnPlayer()
+    {
+        player = Instantiate(playerPrefab, playerSpawnLocation.position, Quaternion.Euler(new Vector3(0f, 0f, 0f)));
+        cameraFollow.target = player.transform;
+    }
+
+    public void SetSpawnPoint(Transform spawnPointLocation)
+    {
+        playerSpawnLocation = spawnPointLocation;
+        Debug.Log("Spawn Point Set");
+    }
 
     public void UpdateStatus()
     {

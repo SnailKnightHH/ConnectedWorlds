@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
 
     // Refernces
     private Rigidbody2D playerRB;
-    public Camera cam;
+    private Camera cam;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     [SerializeField] private CapsuleCollider2D hitBox;
@@ -120,13 +120,16 @@ public class PlayerController : MonoBehaviour
         playerRB = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        cam = FindObjectOfType<Camera>();
         dashCount = dashCountInitial;
         currentAttackCharge = attackCharge;
         rechargeTime = rechargeTimeInitial;
         // Attack Charge UI 
+        if(attackChargeUI != null) {
         attackChargeUI.leftUI.value = 1;
         attackChargeUI.midUI.value = 1;
         attackChargeUI.rightUI.value = 1;
+        }
     }
 
     void Update()
@@ -396,31 +399,35 @@ public class PlayerController : MonoBehaviour
     public void ReceiveDamage()
     {
         health--;
-        if (health <= 0) Debug.Log("Failed");
-        StartInvincibility();
+        if (health <= 0) KillPlayer();
+        else StartInvincibility();
+    }
+
+    private void KillPlayer()
+    {
+        GameObject.FindObjectOfType<SceneManager>().SpawnPlayer();
+        Destroy(gameObject);
     }
 
     private void StartInvincibility()
     {
         isInvincible = true;
         hitBox.enabled = false;
-        spriteRenderer.color = Color.yellow;
+        StartCoroutine(PlayInvincibleEffect());
+
         Invoke(nameof(SetIsInvincibleToFalse), invincibleTime);
+    }
+
+    private IEnumerator PlayInvincibleEffect()
+    {
+        spriteRenderer.color = Color.yellow;
+        yield return new WaitForSeconds(invincibleTime);
+        spriteRenderer.color = Color.white;
     }
     private void SetIsInvincibleToFalse()
     {
         isInvincible = false;
-        spriteRenderer.color = Color.white;
         hitBox.enabled = true;
-    }
-
-
-    private void playerDeath()
-    {
-        if (health <= 0)
-        {
-            //Debug.Log("Failed.");
-        }
     }
 
     public void UnlockJumpHigher()
