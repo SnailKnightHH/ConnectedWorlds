@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     // Animations
+    [SerializeField] public bool dashingDirectionFoward;
 
     // move
     [SerializeField] private float horizontalInput;
@@ -63,6 +64,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public bool isTouchingFrontWall;
     [SerializeField] public bool isTouchingBackWall;
     [SerializeField] private bool isFalling;
+
 
     // Jump
     [SerializeField] private float jumpTimer;
@@ -93,7 +95,7 @@ public class PlayerController : MonoBehaviour
 
     // Dash
     [SerializeField] private int dashCount;
-    [SerializeField] private bool isDashing = false;
+    [SerializeField] public bool isDashing = false;
     [SerializeField] Vector2 dashDirection;
 
     // Skill Tree
@@ -153,7 +155,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButtonDown(0)) attack();
             WallSliding();
             if (Input.GetKeyDown(KeyCode.Space)) WallJump();
-            if (Input.GetKeyDown(KeyCode.LeftShift)) Dash();
+            if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetMouseButtonDown(1)) Dash();
         }
         else if (isFalling)
         {
@@ -170,7 +172,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space)) Jump();
             if (Input.GetKey(KeyCode.Space)) JumpHigher();
             if (Input.GetKeyUp(KeyCode.Space)) isJumping = false;
-            if (Input.GetKeyDown(KeyCode.LeftShift)) Dash();
+            if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetMouseButtonDown(1)) Dash();
         }
 
 
@@ -184,7 +186,7 @@ public class PlayerController : MonoBehaviour
         isWallSliding = (isTouchingWall && !grounded && horizontalInput != 0 && canWallJump);
         if (isWallSliding || isDashing) isJumping = false;
         if (grounded && !isDashing) DashCountRefresh();
-        isFalling = !(grounded || isJumping || isWallSliding);
+        isFalling = !(grounded || isJumping || isWallSliding || playerRB.velocity.y >= 0);
         isFacingRight = lookDir.x > 0;
         isTouchingWall = isTouchingFrontWall || isTouchingBackWall;
         if (grounded)  isGliding = false;
@@ -206,7 +208,9 @@ public class PlayerController : MonoBehaviour
     {
         if (isDashing)
         {
-            ChangeAnimationState("character_run");
+            if (dashingDirectionFoward)
+                ChangeAnimationState("character_dashFoward");
+            else ChangeAnimationState("character_dashBack");
         }
         else if (isJumping)
         {
@@ -346,13 +350,12 @@ public class PlayerController : MonoBehaviour
 
     private void Glide()
     {
-        if (canGlide)
+        if (canGlide && isFalling)
         {
             isGliding = true;
             playerRB.velocity = new Vector2(Mathf.Clamp(playerRB.velocity.x, -glideSpeedX, float.MaxValue),
                                             Mathf.Clamp(playerRB.velocity.y, -glideSpeedY, float.MaxValue)); 
         }
-
     }
 
     private void Dash()
@@ -366,6 +369,7 @@ public class PlayerController : MonoBehaviour
                 else dashDirection = Vector2.left;
             }
             else dashDirection = new Vector2(horizontalInputRaw, verticalInputRaw);
+            dashingDirectionFoward = dashDirection.x >= 0;
             playerRB.velocity = dashDirection.normalized * dashSpeed; // Dash
             Invoke("SetIsDashingToFalse", dashDuration);
         }
