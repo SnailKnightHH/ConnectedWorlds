@@ -6,6 +6,7 @@ public class RustedRobotBullet : MonoBehaviour
 {
     private GameObject player;
     private SceneManager sceneManager;
+    private string whatIsGround = "WalkableSurface";
     [SerializeField] private int bulletDamage;
     [SerializeField] private GameObject explosion;
 
@@ -24,9 +25,15 @@ public class RustedRobotBullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject == player)
+        {
             collision.gameObject.GetComponent<PlayerController>().ReceiveDamage(bulletDamage);
+            DestoryProjectile();
+        }
 
-        DestoryProjectile();
+        else if (collision.gameObject.layer == LayerMask.NameToLayer(whatIsGround))
+        {
+            DestoryProjectile();
+        }
     }
     private void DestoryProjectile()
     {
