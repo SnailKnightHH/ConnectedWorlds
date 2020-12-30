@@ -9,8 +9,7 @@ public class UnlockDash : SkillTreeClass
         theMessage = "Shift or right click to dash";
         if (collision.tag == "Player")
         {
-            sceneManager.canGlide = true;
-            sceneManager.UpdateStatus();
+            sceneManager.UnlockDash();
             spriteRenderer.enabled = false;
             StartCoroutine(displayMessage());
         }

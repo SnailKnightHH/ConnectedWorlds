@@ -165,7 +165,6 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButtonDown(0)) attack();
             WallSliding();
             if (Input.GetKeyDown(KeyCode.Space)) WallJump();
-            if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetMouseButtonDown(1)) Dash();
         }
         else if (isFalling)
         {

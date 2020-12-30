@@ -17,9 +17,7 @@ public class SkyEnemyClass : MonoBehaviour
     // References 
     [HideInInspector]
     public SceneManager sceneManager;
-    [HideInInspector]
     public Rigidbody2D enemyRB;
-    [HideInInspector]
     public SpriteRenderer spriteRenderer;
 
     // health
@@ -30,19 +28,21 @@ public class SkyEnemyClass : MonoBehaviour
     [SerializeField] private Transform[] wayPoints;
 
 
-    private void Awake()
+    protected virtual void Awake()
     {
         enemyRB = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         currentHealth = MaxHealth;
         sceneManager = FindObjectOfType<SceneManager>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         currentSpot = 0;
     }
+
+    protected virtual void Update()
+    {
+
+    }
+
+
 
     public void movePath()
     {

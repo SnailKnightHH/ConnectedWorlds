@@ -14,11 +14,16 @@ public class EnemyRottenRobot : SkyEnemyClass
     [SerializeField] private float robotBulletForce;
     private GameObject player;
 
+    protected override void Awake()
+    {
+        currentAttackTime = 0;
+    }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        player = sceneManager.player;
+        //player = sceneManager.player;
+        player = FindObjectOfType<PlayerController>().gameObject;
         playerPos = player.transform.position;
         if (Vector2.Distance(transform.position, playerPos) < 6f)
         {

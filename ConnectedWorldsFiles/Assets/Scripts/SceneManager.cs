@@ -30,12 +30,12 @@ public class SceneManager : MonoBehaviour
     public bool canGlide;
     public bool canDash;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         playerController = FindObjectOfType<PlayerController>();
-        //player = playerController.gameObject;
         if (playerController == null) SpawnPlayer();
         else UpdateStatus();
+        player = playerController.gameObject;
     }
 
     private void Update()
