@@ -33,6 +33,7 @@ public class SceneManager : MonoBehaviour
     private void Awake()
     {
         playerController = FindObjectOfType<PlayerController>();
+        player = playerController.gameObject;
         if (playerController == null) SpawnPlayer();
         else UpdateStatus();
     }
