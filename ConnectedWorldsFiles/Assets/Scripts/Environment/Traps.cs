@@ -9,11 +9,12 @@ public class Traps : MonoBehaviour
 
     private void Awake()
     {
-        player = FindObjectOfType<PlayerController>();
+        
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        player = FindObjectOfType<PlayerController>();
         if (collision.tag == "Player") player.ReceiveDamage(trapDamage);
     }
 }
