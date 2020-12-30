@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class LavaController : MonoBehaviour
 {
-    void OnTriggerEnter2D (Collider2D collider)
+    void OnTriggerEnter2D (Collider2D collision)
     {
-        if (collider.tag == "Player") Destroy(collider.gameObject);
+        if (collision.tag == "Player") collision.gameObject.GetComponent<PlayerController>().ReceiveDamage(100);
     }
 }
