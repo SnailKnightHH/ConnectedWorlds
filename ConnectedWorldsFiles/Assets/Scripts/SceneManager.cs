@@ -9,7 +9,7 @@ public class SceneManager : MonoBehaviour
 
     // References
     [SerializeField] private GameObject playerPrefab;
-    private GameObject player;
+    public GameObject player;
     private PlayerController playerController;
     [SerializeField] private CameraFollow cameraFollow;
     [SerializeField] private UIManager uiManager;

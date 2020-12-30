@@ -12,10 +12,13 @@ public class EnemyRottenRobot : SkyEnemyClass
     [SerializeField] private GameObject robotFirePoint;
     [SerializeField] private GameObject robotbulletPrefab;
     [SerializeField] private float robotBulletForce;
+    private GameObject player;
+
 
     // Update is called once per frame
     void Update()
     {
+        player = sceneManager.player;
         playerPos = player.transform.position;
         if (Vector2.Distance(transform.position, playerPos) < 6f)
         {

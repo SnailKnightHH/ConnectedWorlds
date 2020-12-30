@@ -12,6 +12,7 @@ public class ProjectileController : MonoBehaviour
     private string whatIsGround = "WalkableSurface";
     private string whatIsEnemies = "Enemy";
     private string whatIsSkyEnemies = "SkyEnemy";
+    private string whatIsDestructableEnvironment = "destructableEnvironment";
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -29,6 +30,11 @@ public class ProjectileController : MonoBehaviour
         else if (collidedLayer == LayerMask.NameToLayer(whatIsSkyEnemies))
         {
             collision.GetComponent<SkyEnemyClass>().ReceiveDamage(damage);
+            DestoryProjectile();
+        }
+        else if(collidedLayer == LayerMask.NameToLayer(whatIsDestructableEnvironment))
+        {
+            collision.GetComponent<Destructable>().ReceiveDamage(damage);
             DestoryProjectile();
         }
     }

@@ -15,6 +15,7 @@ public class SkyEnemyClass : MonoBehaviour
     [SerializeField] private float flashDuration = 0.1f;
 
     // References 
+    [HideInInspector]
     public SceneManager sceneManager;
     [HideInInspector]
     public Rigidbody2D enemyRB;
