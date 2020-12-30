@@ -173,7 +173,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButtonDown(0)) attack();
             if (Input.GetKey(KeyCode.Space)) Glide();
             if (Input.GetKeyUp(KeyCode.Space)) isGliding = false;
-            if (Input.GetKeyDown(KeyCode.LeftShift)) Dash();
+            if (Input.GetKeyDown(KeyCode.LeftShift ) || Input.GetMouseButtonDown(1)) Dash();
         }
         else
         {
@@ -195,7 +195,7 @@ public class PlayerController : MonoBehaviour
     {
         isWallSliding = (isTouchingWall && !grounded && horizontalInput != 0 && canWallJump);
         if (isWallSliding || isDashing) isJumping = false;
-        if (grounded && !isDashing) DashCountRefresh();
+        if ((grounded || isWallSliding) && !isDashing) DashCountRefresh();
         isFalling = !(grounded || isJumping || isWallSliding || playerRB.velocity.y >= 0);
         isFacingRight = lookDir.x > 0;
         isTouchingWall = isTouchingFrontWall || isTouchingBackWall;
