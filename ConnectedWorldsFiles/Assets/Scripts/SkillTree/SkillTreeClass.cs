@@ -17,6 +17,7 @@ public class SkillTreeClass : MonoBehaviour
     private void Awake()
     {
         sceneManager = FindObjectOfType<SceneManager>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public IEnumerator displayMessage()

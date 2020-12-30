@@ -108,8 +108,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8765732750396996023, guid: bd00abfd772f81b468223abd01e3ccec,
     type: 3}
   bulletForce: 10
-  attackCharge: 3
-  rechargeTimeInitial: 0
+  maxMana: 4
+  manaRechargeTime: 1
   attackChargeUI: {fileID: 0}
   jumpForce: 6.07
   jumpTime: 0.5
@@ -139,7 +139,7 @@ MonoBehaviour:
   isKnockedBack: 0
   jumpTimer: 0
   isJumping: 0
-  currentAttackCharge: 0
+  remainingMana: 0
   maxHealth: 4
   remainingHealth: 0
   invincibleTime: 1
@@ -153,6 +153,7 @@ MonoBehaviour:
   canAttack: 1
   canWallJump: 1
   canGlide: 0
+  canDash: 0
 --- !u!50 &4774570119266482040
 Rigidbody2D:
   serializedVersion: 4
