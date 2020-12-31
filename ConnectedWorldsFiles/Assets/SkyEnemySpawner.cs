@@ -30,7 +30,7 @@ public class SkyEnemySpawner : MonoBehaviour
         child.SetActive(false);
         yield return new WaitForSeconds(2f);
         child.SetActive(true);
-        child.GetComponent<SkyEnemyClass>().RespawnHealth();
+        child.GetComponentInChildren<SkyEnemyClass>().RespawnHealth();
     }
 
 
