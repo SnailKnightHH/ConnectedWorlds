@@ -66,7 +66,7 @@ public class EnemyRottenRobot : SkyEnemyClass
         if (currentAttackTime <= 0)
         {
             Vector2 shootDir = (player.transform.position - robotFirePoint.transform.position).normalized;
-            float FireAngle = Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg - 90f;
+            float FireAngle = Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg - 90;
             robotFirePoint.transform.eulerAngles = new Vector3(robotFirePoint.transform.rotation.x, robotFirePoint.transform.rotation.y, FireAngle);
             GameObject Robotbullet = Instantiate(robotbulletPrefab, robotFirePoint.transform.position, robotFirePoint.transform.rotation);
             Rigidbody2D rb = Robotbullet.GetComponent<Rigidbody2D>();

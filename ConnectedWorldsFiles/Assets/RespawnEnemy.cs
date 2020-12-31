@@ -18,11 +18,6 @@ public class RespawnEnemy : MonoBehaviour
                 child.GetComponent<EnemyClass>().isDead = false; 
             }
 
-            if (child.GetComponent<SkyEnemyClass>() != null && child.GetComponent<SkyEnemyClass>().isDead)
-            {
-                StartCoroutine(EnemyRespawn(child.gameObject));
-                child.GetComponent<SkyEnemyClass>().isDead = false;
-            }
         }
     }
 
@@ -31,5 +26,6 @@ public class RespawnEnemy : MonoBehaviour
         child.SetActive(false);
         yield return new WaitForSeconds(respawnTime);
         child.SetActive(true);
+        child.GetComponent<EnemyClass>().RespawnHealth();
     }
 }

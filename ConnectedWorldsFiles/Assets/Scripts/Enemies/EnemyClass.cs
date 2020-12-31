@@ -67,4 +67,9 @@ public class EnemyClass : MonoBehaviour
         spriteRenderer.color = Color.white;
     }
 
+    public void RespawnHealth()
+    {
+        currentHealth = MaxHealth;
+    }
+
 }

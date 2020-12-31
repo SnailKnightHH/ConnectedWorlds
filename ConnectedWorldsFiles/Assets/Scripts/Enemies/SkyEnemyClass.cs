@@ -81,4 +81,9 @@ public class SkyEnemyClass : MonoBehaviour
         yield return new WaitForSeconds(flashDuration);
         spriteRenderer.color = Color.white;
     }
+
+    public void RespawnHealth()
+    {
+        currentHealth = MaxHealth;
+    }
 }
