@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SkyEnemySpawner : MonoBehaviour
 {
+
+    [SerializeField] private float respawnTime = 2f;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,8 +30,9 @@ public class SkyEnemySpawner : MonoBehaviour
     private IEnumerator EnemyRespawn(GameObject child)
     {
         child.SetActive(false);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(respawnTime);
         child.SetActive(true);
+        child.GetComponentInChildren<SkyEnemyClass>().spriteRenderer.color = Color.white;
         child.GetComponentInChildren<SkyEnemyClass>().RespawnHealth();
     }
 

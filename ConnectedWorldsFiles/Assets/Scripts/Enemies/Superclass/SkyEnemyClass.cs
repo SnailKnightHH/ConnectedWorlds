@@ -12,7 +12,7 @@ public class SkyEnemyClass : MonoBehaviour
     [SerializeField] public float movementSpeed;
 
     // Damaged effect
-    [SerializeField] private float flashDuration = 0.1f;
+    public float flashDuration = 0.1f;
 
     // References 
     [HideInInspector]

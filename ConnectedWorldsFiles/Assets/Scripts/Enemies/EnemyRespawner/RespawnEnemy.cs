@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RespawnEnemy : MonoBehaviour
 {
-    private float respawnTime = 2f;
+    [SerializeField] private float respawnTime = 2f;
 
     // Update is called once per frame
     void Update()
@@ -26,6 +26,7 @@ public class RespawnEnemy : MonoBehaviour
         child.SetActive(false);
         yield return new WaitForSeconds(respawnTime);
         child.SetActive(true);
+        child.GetComponent<EnemyClass>().spriteRenderer.color = Color.white;
         child.GetComponent<EnemyClass>().RespawnHealth();
     }
 }
