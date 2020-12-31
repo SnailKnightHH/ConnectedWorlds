@@ -66,5 +66,4 @@ public class EnemyClass : MonoBehaviour
         yield return new WaitForSeconds(flashDuration);
         spriteRenderer.color = Color.white;
     }
-
 }
