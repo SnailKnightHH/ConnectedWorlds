@@ -184,8 +184,6 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.Space)) isJumping = false;
             if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetMouseButtonDown(1)) Dash();
         }
-
-
         //Dash(chargeLeft>0)
         //WallJump(isWallSliding)
         //glide(isFalling)
