@@ -559,11 +559,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackStoryCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 8977541564636742030, guid: 7acabe664ee29104cb441361bf288f63,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7acabe664ee29104cb441361bf288f63, type: 3}
 --- !u!114 &497197765 stripped
