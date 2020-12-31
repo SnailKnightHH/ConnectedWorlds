@@ -85,7 +85,7 @@ GameObject:
   - component: {fileID: 4138165475729266913}
   - component: {fileID: 4294523445011577673}
   - component: {fileID: 4585869440937890548}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Hound
   m_TagString: Hound
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4138165475729266924}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 78.49997, y: 2.61, z: 0}
+  m_LocalPosition: {x: 78.471, y: 2.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4568469141967190667}
@@ -201,11 +201,11 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_GravityScale: 4.2
+  m_Material: {fileID: 6200000, guid: 93a0952cc074ee142b0a2f6b8aa88bca, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!95 &4294523445011577673
 Animator:
@@ -239,13 +239,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 40
-  movementSpeed: 4
+  movementSpeed: 2
   initialDirection: 1
   damage: 1
   flashDuration: 0.1
   enemyRB: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  attackTimeInitial: 2
+  isDead: 0
+  attackTimeInitial: 1.5
   isDetected: 0
 --- !u!1 &7380100863311723529
 GameObject:

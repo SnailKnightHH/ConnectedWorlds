@@ -27,12 +27,18 @@ public class EnemyClass : MonoBehaviour
     // health
     private float currentHealth;
 
+    // respawn
+    public bool isDead;
+
+
+
     private void Awake()
     {
         enemyRB = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         horizontalMove = initialDirection;
         currentHealth = MaxHealth;
+        isDead = false;
     }
 
 
@@ -51,7 +57,7 @@ public class EnemyClass : MonoBehaviour
     {
         currentHealth -= damageAmount;
         StartCoroutine(PlayDamageEffect());
-        if (currentHealth <= 0) Destroy(gameObject);
+        if (currentHealth <= 0) isDead = true;
     }
 
     private IEnumerator PlayDamageEffect()
@@ -61,11 +67,4 @@ public class EnemyClass : MonoBehaviour
         spriteRenderer.color = Color.white;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
-        {
-            collision.gameObject.GetComponent<PlayerController>().ReceiveDamage(damage);
-        }
-    }
 }

@@ -16,6 +16,7 @@ public class DetectPlayer : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            houndAI.currentAttackTime = 0;//?
             houndAI.isDetected = true;
             Vector2 playerPos = collision.gameObject.transform.position; 
 
@@ -26,8 +27,7 @@ public class DetectPlayer : MonoBehaviour
             {
                 houndAI.HoundAttack(damage, collision.gameObject.GetComponent<PlayerController>());
             }
-                
-
+            
         }
     }
 

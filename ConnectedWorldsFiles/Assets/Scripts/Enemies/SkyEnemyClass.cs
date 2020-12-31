@@ -27,6 +27,8 @@ public class SkyEnemyClass : MonoBehaviour
     private int currentSpot;
     [SerializeField] private Transform[] wayPoints;
 
+    // Respawn
+    public bool isDead = false;
 
     protected virtual void Awake()
     {
@@ -70,7 +72,7 @@ public class SkyEnemyClass : MonoBehaviour
     {
         currentHealth -= damageAmount;
         StartCoroutine(PlayDamageEffect());
-        if (currentHealth <= 0) Destroy(gameObject);
+        if (currentHealth <= 0) isDead = true;
     }
 
     private IEnumerator PlayDamageEffect()
