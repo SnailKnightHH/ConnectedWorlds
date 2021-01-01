@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class InGameMenu : MonoBehaviour
 {
-    public static bool isGamePause = false;
+    public bool isGamePause = false;
     public GameObject Panel;
+    //public static bool isPausedAlready = false;
 
     // Start is called before the first frame update
     void Start()

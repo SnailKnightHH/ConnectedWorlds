@@ -4,24 +4,31 @@ using UnityEngine;
 
 public class PauseMenu : InGameMenu
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        isGamePause = false;
-    }
 
     // Update is called once per frame
-/*    void Update()
+     void Update()
     {
         Pausemenu();
     }
 
     private void Pausemenu()
     {
+       // Debug.Log(isGamePause);
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isGamePause) Resume();
-            else Pause();
+            if (isGamePause) 
+            { 
+                Resume();
+                isGamePause = false;
+                Debug.Log("received1" + isGamePause); 
+            }
+            else 
+            { 
+                Pause();
+                isGamePause = true;
+                Debug.Log("received2" + isGamePause); 
+            }
         }
-    }*/
+        
+    }
 }

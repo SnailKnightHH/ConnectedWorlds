@@ -22,7 +22,7 @@ public class BackStoryBook : MonoBehaviour
     void Update()
     {
         player = sceneManager.player;
-        if (DisplayBackStory.isGamePause) quitWindow();
+        if (displayBackStory.isGamePause) quitWindow();
         else Interact();
     }
 
@@ -34,7 +34,7 @@ public class BackStoryBook : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 displayBackStory.Pause();
-                DisplayBackStory.isGamePause = true;
+                displayBackStory.isGamePause = true;
             }
         }
         else
