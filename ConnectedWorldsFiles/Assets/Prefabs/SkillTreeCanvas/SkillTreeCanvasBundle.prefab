@@ -152,6 +152,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UnlockWallJumpCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5274066037095542638, guid: 255d799b57125e8459c04f60b74f9c4b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 255d799b57125e8459c04f60b74f9c4b, type: 3}
 --- !u!224 &4658636254087710177 stripped
@@ -171,6 +176,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UnlockAttackCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6643612071068499042, guid: d94e9aa792074204a9567e573adf7071,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6643612071068499047, guid: d94e9aa792074204a9567e573adf7071,
         type: 3}
@@ -402,6 +412,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UnlockGlideCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2979126353496596223, guid: 6953f0acb0acd0540a5a5d137a25c9c8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6953f0acb0acd0540a5a5d137a25c9c8, type: 3}
 --- !u!224 &4658636255593072770 stripped
@@ -526,6 +541,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UnlockDashCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3495513014325056612, guid: 3010f6f48493a264eb026493865c8cf3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3010f6f48493a264eb026493865c8cf3, type: 3}

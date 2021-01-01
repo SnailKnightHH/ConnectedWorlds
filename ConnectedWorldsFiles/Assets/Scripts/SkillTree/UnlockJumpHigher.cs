@@ -13,7 +13,7 @@ public class UnlockJumpHigher : SkillTreeClass
     {
         if (collision.tag == "Player")
         {             
-            sceneManager.UnlockWallJump();
+            sceneManager.UnlockHighJump();
             displayUnlockJumpHigher.Pause();
             Destroy(gameObject);
         }
