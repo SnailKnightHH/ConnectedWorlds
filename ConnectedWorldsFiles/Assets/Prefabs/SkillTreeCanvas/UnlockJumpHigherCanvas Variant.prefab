@@ -1,0 +1,188 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1480364946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3674806886633215526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4329e2f59b18c648bdf2d504945f017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGamePause: 0
+  Panel: {fileID: 3674806887380431179}
+--- !u!1001 &5650094591128688552
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8977541563112395956, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541563112395956, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1480364946}
+    - target: {fileID: 8977541563112395956, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Resume
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541563112395956, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541563889280739, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_Name
+      value: UnlockJumpHighPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541563889280739, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564287940909, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_text
+      value: '"Imagine being able to jump 10-feet high..."'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742030, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_Name
+      value: UnlockJumpHigherCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742030, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8977541564636742031, guid: 7acabe664ee29104cb441361bf288f63, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 7acabe664ee29104cb441361bf288f63, type: 3}
+--- !u!1 &3674806886633215526 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8977541564636742030, guid: 7acabe664ee29104cb441361bf288f63,
+    type: 3}
+  m_PrefabInstance: {fileID: 5650094591128688552}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3674806887380431179 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8977541563889280739, guid: 7acabe664ee29104cb441361bf288f63,
+    type: 3}
+  m_PrefabInstance: {fileID: 5650094591128688552}
+  m_PrefabAsset: {fileID: 0}

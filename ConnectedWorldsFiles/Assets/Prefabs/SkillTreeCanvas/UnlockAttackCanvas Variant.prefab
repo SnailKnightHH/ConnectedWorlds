@@ -1,0 +1,189 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &592760786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6643612071068499042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f40dbd1d88e02f0448e0f87bb3c66d6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGamePause: 0
+  Panel: {fileID: 6643612071883594511}
+--- !u!1001 &2352140722426265068
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8977541563112395956, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541563112395956, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 592760786}
+    - target: {fileID: 8977541563112395956, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Resume
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541563112395956, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541563889280739, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_Name
+      value: UnlockAttackPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541563889280739, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564287940909, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_text
+      value: '"Wow my hands are feeling a bit hot... Is it the sun or is it just
+        me?"'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742027, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742030, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_Name
+      value: UnlockAttackCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977541564636742030, guid: 7acabe664ee29104cb441361bf288f63,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8977541564636742031, guid: 7acabe664ee29104cb441361bf288f63, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 7acabe664ee29104cb441361bf288f63, type: 3}
+--- !u!1 &6643612071068499042 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8977541564636742030, guid: 7acabe664ee29104cb441361bf288f63,
+    type: 3}
+  m_PrefabInstance: {fileID: 2352140722426265068}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6643612071883594511 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8977541563889280739, guid: 7acabe664ee29104cb441361bf288f63,
+    type: 3}
+  m_PrefabInstance: {fileID: 2352140722426265068}
+  m_PrefabAsset: {fileID: 0}
