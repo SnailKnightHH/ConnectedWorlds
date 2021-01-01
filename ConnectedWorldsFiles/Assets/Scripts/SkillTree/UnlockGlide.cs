@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class UnlockGlide : SkillTreeClass
 {
+
+    public DisplayUnlockGlide displayUnlockGlide;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         theMessage = "Lighter body means more free coffee! Could someone direct me to the nearest bar?";
         if (collision.tag == "Player")
         {
-            sceneManager.canGlide = true;
-            sceneManager.UpdateStatus();
-            spriteRenderer.enabled = false;
-            StartCoroutine(displayMessage());
+            sceneManager.UnlockGlide();
+            displayUnlockGlide.Pause();
+            Destroy(gameObject);
         }
     }
+
 }

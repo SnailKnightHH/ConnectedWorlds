@@ -26,4 +26,5 @@ public class SkillTreeClass : MonoBehaviour
         yield return new WaitForSeconds(displayTime);
         unlockAbilityMessage.alpha = 0;
     }
+
 }

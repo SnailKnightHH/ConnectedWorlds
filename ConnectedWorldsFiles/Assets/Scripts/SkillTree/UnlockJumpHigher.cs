@@ -6,15 +6,16 @@ using TMPro;
 public class UnlockJumpHigher : SkillTreeClass
 {
 
+    public DisplayUnlockJumpHigher displayUnlockJumpHigher;
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        theMessage = "Imagine being able to jump 10-feet high...";
         if (collision.tag == "Player")
-        {
-            sceneManager.UnlockHighJump();
-            spriteRenderer.enabled = false;
-            StartCoroutine(displayMessage());
+        {             
+            sceneManager.UnlockWallJump();
+            displayUnlockJumpHigher.Pause();
+            Destroy(gameObject);
         }
     }
 }
