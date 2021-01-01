@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class UnlockWallSlide : SkillTreeClass
 {
+    public DisplayUnlockWallJump displayUnlockWallJump;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         theMessage = "The walls feel different... Can I now move like a ninja?";
         if (collision.tag == "Player")
         {
             sceneManager.UnlockWallJump();
-            spriteRenderer.enabled = false;
-            StartCoroutine(displayMessage());
+            displayUnlockWallJump.Pause();
+            Destroy(gameObject);
         }
     }
+
 }

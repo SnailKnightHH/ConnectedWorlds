@@ -34,7 +34,7 @@ public class BackStoryBook : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 displayBackStory.Pause();
-                displayBackStory.isGamePause = true;
+                //displayBackStory.isGamePause = true;
             }
         }
         else
