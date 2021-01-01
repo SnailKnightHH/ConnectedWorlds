@@ -13,6 +13,7 @@ public class ProjectileController : MonoBehaviour
     private string whatIsEnemies = "Enemy";
     private string whatIsSkyEnemies = "SkyEnemy";
     private string whatIsDestructableEnvironment = "destructableEnvironment";
+    private string whatIsBlockers = "Blockers";
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -36,6 +37,10 @@ public class ProjectileController : MonoBehaviour
         {
             collision.GetComponent<Destructable>().ReceiveDamage(damage);
             DestoryProjectile();
+        }
+        else if(collidedLayer == LayerMask.NameToLayer(whatIsBlockers))
+        {
+            Destroy(gameObject);
         }
     }
 

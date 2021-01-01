@@ -116,6 +116,9 @@ public class PlayerController : MonoBehaviour
     // Receive Damage
     private string enemyLayer = "Enemy";
 
+    // Audio
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip LaunchFireBall;
 
     private void Awake()
     {
@@ -300,6 +303,7 @@ public class PlayerController : MonoBehaviour
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation);
                 Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
                 rb.AddForce(firePoint.transform.up * bulletForce, ForceMode2D.Impulse);
+                audioSource.PlayOneShot(LaunchFireBall);
             }
         }
 
