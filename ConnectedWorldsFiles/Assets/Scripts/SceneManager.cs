@@ -12,7 +12,7 @@ public class SceneManager : MonoBehaviour
     public GameObject player;
     private PlayerController playerController;
     [SerializeField] private CameraFollow cameraFollow;
-    [SerializeField] private UIManager uiManager;
+    [SerializeField] public UIManager uiManager;
 
     // Constants
     private const int UIMaxHealth = 10;
@@ -42,8 +42,12 @@ public class SceneManager : MonoBehaviour
     {
         uiManager.numOfHearts = playerController.maxHealth;
         uiManager.remainingHearts = playerController.remainingHealth;
-        uiManager.numOfManas = playerController.maxMana;
-        uiManager.remainingMana = playerController.remainingMana;
+        if (player.GetComponent<PlayerController>().canAttack)
+        {
+            uiManager.numOfManas = playerController.maxMana;
+            uiManager.remainingMana = playerController.remainingMana;
+        }
+
     }
     public void SpawnPlayer()
     {
@@ -68,8 +72,11 @@ public class SceneManager : MonoBehaviour
         // Update health and mana
         playerController.maxHealth = PlayerMaxHealth;
         playerController.remainingHealth = PlayerMaxHealth;
-        playerController.maxMana = PlayerMaxMana;
-        playerController.remainingMana = PlayerMaxMana;
+        if (player.GetComponent<PlayerController>().canAttack)
+        {
+            playerController.maxMana = PlayerMaxMana;
+            playerController.remainingMana = PlayerMaxMana;
+        }
     }
 
 
@@ -104,7 +111,6 @@ public class SceneManager : MonoBehaviour
     public void SetSpawnPoint(Transform spawnPointLocation)
     {
         playerSpawnLocation = spawnPointLocation;
-        Debug.Log("Spawn Point Set");
     }
 
     public void IncreaseMaxHealth()

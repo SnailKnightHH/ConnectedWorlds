@@ -18,13 +18,6 @@ public class UIManager : MonoBehaviour
     public Sprite fullMana;
     public Sprite emptyMana;
 
-    private PlayerController playerController;
-
-    private void Awake()
-    {
-        playerController = FindObjectOfType<PlayerController>();
-    }
-
     // Update is called once per frame
     void Update()
     {

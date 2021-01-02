@@ -5,27 +5,36 @@ using UnityEngine;
 public class InGameMenu : MonoBehaviour
 {
     public bool isGamePause = false;
-    public GameObject Panel;
-    //public static bool isPausedAlready = false;
+    public GameObject[] panels;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        Panel.SetActive(false);
+        foreach (GameObject panel in panels)
+        {
+            panel.SetActive(false);
+        }
     }
 
     public void Pause()
     {
-        Panel.SetActive(true);
+        foreach (GameObject panel in panels)
+        {
+            panel.SetActive(true);
+        }
         Time.timeScale = 0f;
         isGamePause = true;
+        Debug.Log("pause");
     }
 
     public void Resume()
     {
-        Panel.SetActive(false);
+        foreach (GameObject panel in panels)
+        {
+            panel.SetActive(false);
+        }
         Time.timeScale = 1f;
         isGamePause = false;
+        Debug.Log("resume");
     }
 
     public void Quit()

@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
 
     // Player state
     public bool grounded = false;
-    [SerializeField] private bool canMove = true;
+    [SerializeField] public bool canMove = true;
     [SerializeField] bool isFacingRight;
     [SerializeField] bool isTouchingWall;
     [SerializeField] public bool isTouchingFrontWall;

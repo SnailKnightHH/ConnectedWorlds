@@ -4,31 +4,53 @@ using UnityEngine;
 
 public class PauseMenu : InGameMenu
 {
+    [SerializeField] private MainMenu mainMenu;
+
+/*    private void Start()
+    {
+        if (!mainMenu.isInMainMenu)
+            Pausemenu();
+        
+    }*/
 
     // Update is called once per frame
-     void Update()
+    void Update()
     {
-        Pausemenu();
+        if (!mainMenu.isInMainMenu)
+            Pausemenu();
     }
 
     private void Pausemenu()
     {
-       // Debug.Log(isGamePause);
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isGamePause) 
-            { 
+            foreach(GameObject panel in panels)
+            {
+                panel.SetActive(false);
+            }
+
+            if (isGamePause)
+            {
                 Resume();
                 isGamePause = false;
-                Debug.Log("received1" + isGamePause); 
             }
-            else 
-            { 
-                Pause();
+            else
+            {
+                pausing();
                 isGamePause = true;
-                Debug.Log("received2" + isGamePause); 
             }
         }
-        
+
+    }
+
+    public void pausing()
+    {
+        foreach (GameObject panel in panels)
+        {
+            if(panel.gameObject.name == "PauseMenuPanel")
+                panel.SetActive(true);
+        }
+        Time.timeScale = 0f;
+        isGamePause = true;
     }
 }
