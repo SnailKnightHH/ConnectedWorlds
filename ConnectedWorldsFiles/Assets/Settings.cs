@@ -5,11 +5,21 @@ using UnityEngine.Audio;
 
 public class Settings : MonoBehaviour
 {
-    public AudioMixer audioMixer;
+    public AudioMixer mainMixer;
 
-    public void SetVolume(float volume)
+    public void SetMasterVolume(float volume)
     {
-        audioMixer.SetFloat("Volume", volume);
+        mainMixer.SetFloat("Volume", volume); 
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        mainMixer.SetFloat("SFX", volume);
+    }
+
+    public void SetBGMVolume(float volume)
+    {
+        mainMixer.SetFloat("BGM", volume);
     }
 
     public void SetFullScreen (bool isFullScreen)
