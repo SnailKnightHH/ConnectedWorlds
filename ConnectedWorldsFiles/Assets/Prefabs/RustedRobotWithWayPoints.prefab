@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82fe4641c1fd2b643a72826962b41826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 40
+  MaxHealth: 80
   movementSpeed: 1.5
   flashDuration: 0.1
   sceneManager: {fileID: 0}
@@ -190,6 +190,7 @@ MonoBehaviour:
   - {fileID: 2154818828461061267}
   - {fileID: 2154818827375561082}
   - {fileID: 2154818828940509778}
+  isDead: 0
   attackTimeInitial: 1.5
   robotFirePoint: {fileID: 109266011355968100}
   robotbulletPrefab: {fileID: 5561961618423952248, guid: 444cb2fccc032244d8662040d1aa64c8,
