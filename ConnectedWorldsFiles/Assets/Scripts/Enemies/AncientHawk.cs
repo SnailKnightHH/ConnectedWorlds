@@ -12,6 +12,7 @@ public class AncientHawk : SkyEnemyClass
     void Start()
     {
         //Physics2D.queriesStartInColliders = false;
+        raycastDetect();
     }
 
     // Update is called once per frame
@@ -19,9 +20,9 @@ public class AncientHawk : SkyEnemyClass
     {
         if (!isDetect)
         {
-            enemyRB.velocity = new Vector2(0, 0);
-            movePath();
-            raycastDetect();
+            //enemyRB.velocity = new Vector2(0, 0);
+            //movePath();
+            //raycastDetect();
             //enemyRB.velocity = new Vector2(0, 0);
         }
             
@@ -53,9 +54,9 @@ public class AncientHawk : SkyEnemyClass
         RaycastHit2D[] hitInfo = Physics2D.CircleCastAll(transform.position, detectRadius, Vector3.forward); //"PlayerPhysics"
         foreach (RaycastHit2D collision in hitInfo)
         {
+            Debug.Log(collision.transform.gameObject);
             if (collision.transform.tag == "Player")
             {
-                Debug.Log("reached");
                 Vector2 playerPos = collision.transform.position;
                 Vector2 shootDir = (collision.transform.position - transform.position).normalized;
                 float FireAngle = Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg - 90;

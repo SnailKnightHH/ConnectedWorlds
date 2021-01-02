@@ -157,6 +157,7 @@ MonoBehaviour:
   canDash: 0
   audioSource: {fileID: 6969678636143487194}
   LaunchFireBall: {fileID: 8300000, guid: 525c806249e78cd4f98b313e2925f53d, type: 3}
+  walkOnGrass: {fileID: 8300000, guid: 0c65a46210772e640a67054cf14d2b54, type: 3}
 --- !u!50 &4774570119266482040
 Rigidbody2D:
   serializedVersion: 4
@@ -238,7 +239,8 @@ AudioSource:
   m_GameObject: {fileID: 4774570119266482043}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 5eebf2fcbe169b6479f03515f25c39f0,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1

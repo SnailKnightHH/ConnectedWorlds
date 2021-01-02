@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public bool dashingDirectionFoward;
 
     // move
-    [SerializeField] private float horizontalInput;
+    [SerializeField] public float horizontalInput;
     private float verticalInput;
     [SerializeField] private float horizontalInputRaw;
     private float verticalInputRaw;
@@ -143,6 +143,8 @@ public class PlayerController : MonoBehaviour
         if(canMove) getInputs();
         UpdatePlayerState();
     }
+
+
 
     private void FixedUpdate()
     {
@@ -437,5 +439,7 @@ public class PlayerController : MonoBehaviour
         isKnockedBack = false;
         canMove = true;
     }
+
+
 }
 
