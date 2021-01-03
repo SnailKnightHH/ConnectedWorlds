@@ -15,28 +15,38 @@ public class ProjectileController : MonoBehaviour
     private string whatIsDestructableEnvironment = "destructableEnvironment";
     private string whatIsBlockers = "Blockers";
 
+    private AudioSource audioSource;
+    private CircleCollider2D circleCollider2D;
+    [SerializeField] private GameObject ParticleSystemGameObject;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        circleCollider2D = GetComponent<CircleCollider2D>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         LayerMask collidedLayer = collision.gameObject.layer;
 
         if (collidedLayer == LayerMask.NameToLayer(whatIsGround))
         {
-            DestoryProjectile();
+            StartCoroutine(DestoryProjectile());
         }
         else if (collidedLayer == LayerMask.NameToLayer(whatIsEnemies))
         {
             collision.GetComponent<EnemyClass>().ReceiveDamage(damage);
-            DestoryProjectile();
+            StartCoroutine(DestoryProjectile());
         }
         else if (collidedLayer == LayerMask.NameToLayer(whatIsSkyEnemies))
         {
             collision.GetComponent<SkyEnemyClass>().ReceiveDamage(damage);
-            DestoryProjectile();
+            StartCoroutine(DestoryProjectile());
         }
         else if(collidedLayer == LayerMask.NameToLayer(whatIsDestructableEnvironment))
         {
             collision.GetComponent<Destructable>().ReceiveDamage(damage);
-            DestoryProjectile();
+            StartCoroutine(DestoryProjectile());
         }
         else if(collidedLayer == LayerMask.NameToLayer(whatIsBlockers))
         {
@@ -44,9 +54,13 @@ public class ProjectileController : MonoBehaviour
         }
     }
 
-    private void DestoryProjectile() {
+    private IEnumerator DestoryProjectile() {
+        ParticleSystemGameObject.SetActive(false);
+        circleCollider2D.enabled = false;
         FindObjectOfType<CameraShake>().ShakeCamera();
         Instantiate(explosion, transform.position, Quaternion.Euler(new Vector3(0f, 0f, 0f)));
+        audioSource.Play();
+        yield return new WaitForSeconds(2f);
         Destroy(gameObject);
     }
 }
