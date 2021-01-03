@@ -13,6 +13,7 @@ public class EnemyRottenRobot : SkyEnemyClass
     [SerializeField] private GameObject robotbulletPrefab;
     [SerializeField] private float robotBulletForce;
     private GameObject player;
+    [SerializeField] private AudioSource audioSource;
 
     protected override void Awake()
     {
@@ -26,12 +27,12 @@ public class EnemyRottenRobot : SkyEnemyClass
         //player = sceneManager.player;
         player = FindObjectOfType<PlayerController>().gameObject;
         playerPos = player.transform.position;
-        if (Vector2.Distance(transform.position, playerPos) < 6f)
+        if (Vector2.Distance(transform.position, playerPos) < 5f)
         {
             enemyRB.velocity = new Vector2(0, 0);
             RobotAttack();
         }
-        else if (Vector2.Distance(transform.position, playerPos) < 7.5f && Vector2.Distance(transform.position, playerPos) > 6f) detectPlayer();
+        else if (Vector2.Distance(transform.position, playerPos) < 7.5f && Vector2.Distance(transform.position, playerPos) > 5f) detectPlayer();
         else
         {
             enemyRB.velocity = new Vector2(0, 0);
@@ -66,7 +67,8 @@ public class EnemyRottenRobot : SkyEnemyClass
 
         if (currentAttackTime <= 0)
         {
-            Vector2 shootDir = (player.transform.position - robotFirePoint.transform.position).normalized;
+            audioSource.Play();
+               Vector2 shootDir = (player.transform.position - robotFirePoint.transform.position).normalized;
             float FireAngle = Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg - 90;
             robotFirePoint.transform.eulerAngles = new Vector3(robotFirePoint.transform.rotation.x, robotFirePoint.transform.rotation.y, FireAngle);
             GameObject Robotbullet = Instantiate(robotbulletPrefab, robotFirePoint.transform.position, robotFirePoint.transform.rotation);
