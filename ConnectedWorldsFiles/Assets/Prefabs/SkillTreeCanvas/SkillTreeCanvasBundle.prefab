@@ -50,6 +50,12 @@ PrefabInstance:
       propertyPath: panels.Array.data[0]
       value: 
       objectReference: {fileID: 4658636254868480649}
+    - target: {fileID: 1182921487043449496, guid: 255d799b57125e8459c04f60b74f9c4b,
+        type: 3}
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: 31d865121b1be634f91dd9ffca50ba3f,
+        type: 3}
     - target: {fileID: 5274066037095542635, guid: 255d799b57125e8459c04f60b74f9c4b,
         type: 3}
       propertyPath: m_Pivot.x
@@ -165,6 +171,15 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5274066037461850061, guid: 255d799b57125e8459c04f60b74f9c4b,
+        type: 3}
+      propertyPath: m_text
+      value: 'Wall Jump: Hold [A] or [D] when near wall and press [Space] to wall
+        jump.
+
+
+        "The walls feel different... Can I now move like a ninja?"'
+      objectReference: {fileID: 0}
     - target: {fileID: 5274066037860370433, guid: 255d799b57125e8459c04f60b74f9c4b,
         type: 3}
       propertyPath: m_Color.b
@@ -212,8 +227,8 @@ PrefabInstance:
     - target: {fileID: 6643612070411322561, guid: d94e9aa792074204a9567e573adf7071,
         type: 3}
       propertyPath: m_text
-      value: "[Left Click] to cast spells. \n\n\"Wow my hands are feeling a bit hot...
-        Is it the sun or is it just me?\""
+      value: "Attack: [Left Click] to cast spells. \n\n\"Wow my hands are feeling
+        a bit hot... Is it the sun or is it just me?\""
       objectReference: {fileID: 0}
     - target: {fileID: 6643612071068499042, guid: d94e9aa792074204a9567e573adf7071,
         type: 3}
@@ -345,6 +360,12 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9098039
       objectReference: {fileID: 0}
+    - target: {fileID: 9135555632134677880, guid: d94e9aa792074204a9567e573adf7071,
+        type: 3}
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: a2ea37203f36b0a429e28b8242a111e6,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d94e9aa792074204a9567e573adf7071, type: 3}
 --- !u!224 &4658636254717142147 stripped
@@ -392,8 +413,8 @@ PrefabInstance:
     - target: {fileID: 2979126353124583004, guid: 6953f0acb0acd0540a5a5d137a25c9c8,
         type: 3}
       propertyPath: m_text
-      value: "Hold [Space] while falling down to glide. \n\n\"Lighter body means
-        more free coffee! Could someone direct me to the nearest bar please?\"\n"
+      value: "Glide: Hold [Space] while falling down to glide. \n\n\"Lighter body
+        means more free coffee! Could someone direct me to the nearest bar please?\"\n"
       objectReference: {fileID: 0}
     - target: {fileID: 2979126353496596218, guid: 6953f0acb0acd0540a5a5d137a25c9c8,
         type: 3}
@@ -510,6 +531,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4423638251250579841, guid: 6953f0acb0acd0540a5a5d137a25c9c8,
+        type: 3}
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: edf927d4789054645b74015481374afa,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6953f0acb0acd0540a5a5d137a25c9c8, type: 3}
 --- !u!224 &4658636255593072770 stripped
@@ -657,8 +684,8 @@ PrefabInstance:
     - target: {fileID: 3495513015242730695, guid: 3010f6f48493a264eb026493865c8cf3,
         type: 3}
       propertyPath: m_text
-      value: 'Press [Shift] or [Right Click] to Dash. Land on walls or ground to
-        reset charges.
+      value: 'Dash: Press [Shift] or [Right Click] to Dash. Land on walls or ground
+        to reset charges.
 
 
         "Whiz, buzz, no one ever catches the blitz!"'
@@ -678,6 +705,12 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9098039
       objectReference: {fileID: 0}
+    - target: {fileID: 4735440301633312561, guid: 3010f6f48493a264eb026493865c8cf3,
+        type: 3}
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: df93cf0af06103b4fa5f498c9112ad21,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3010f6f48493a264eb026493865c8cf3, type: 3}
 --- !u!224 &4658636255257460582 stripped
@@ -707,6 +740,11 @@ PrefabInstance:
       propertyPath: panels.Array.data[0]
       value: 
       objectReference: {fileID: 4658636254576467372}
+    - target: {fileID: 1940944728, guid: ba78dca3e83da9c4094ce61e9ae8ffa9, type: 3}
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: 866f6d289713f694f9ff85e5f52d3d47,
+        type: 3}
     - target: {fileID: 3674806885900037765, guid: ba78dca3e83da9c4094ce61e9ae8ffa9,
         type: 3}
       propertyPath: m_text
