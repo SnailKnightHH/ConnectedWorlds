@@ -18,6 +18,7 @@ public class ProjectileController : MonoBehaviour
     private AudioSource audioSource;
     private CircleCollider2D circleCollider2D;
     [SerializeField] private GameObject ParticleSystemGameObject;
+    [SerializeField] private GameObject fireBallLight;
 
     private void Start()
     {
@@ -56,6 +57,7 @@ public class ProjectileController : MonoBehaviour
 
     private IEnumerator DestoryProjectile() {
         ParticleSystemGameObject.SetActive(false);
+        fireBallLight.SetActive(false);
         circleCollider2D.enabled = false;
         FindObjectOfType<CameraShake>().ShakeCamera();
         Instantiate(explosion, transform.position, Quaternion.Euler(new Vector3(0f, 0f, 0f)));
