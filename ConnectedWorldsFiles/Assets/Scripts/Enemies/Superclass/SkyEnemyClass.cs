@@ -70,6 +70,7 @@ public class SkyEnemyClass : MonoBehaviour
 
     public void ReceiveDamage(int damageAmount)
     {
+        Debug.Log(damageAmount);
         currentHealth -= damageAmount;
         StartCoroutine(PlayDamageEffect());
         if (currentHealth <= 0) isDead = true;
