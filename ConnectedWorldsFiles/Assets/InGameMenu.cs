@@ -6,6 +6,7 @@ public class InGameMenu : MonoBehaviour
 {
     public bool isGamePause = false;
     public GameObject[] panels;
+    private WalkOnGrassSFX walkOnGrassSFX;
 
     private void Start()
     {
@@ -13,28 +14,29 @@ public class InGameMenu : MonoBehaviour
         {
             panel.SetActive(false);
         }
+        walkOnGrassSFX = FindObjectOfType<WalkOnGrassSFX>();
     }
 
     public void Pause()
     {
+        walkOnGrassSFX.canPlay = false;
         foreach (GameObject panel in panels)
         {
             panel.SetActive(true);
         }
         Time.timeScale = 0f;
         isGamePause = true;
-        Debug.Log("pause");
     }
 
     public void Resume()
     {
+        walkOnGrassSFX.canPlay = true;
         foreach (GameObject panel in panels)
         {
             panel.SetActive(false);
         }
         Time.timeScale = 1f;
         isGamePause = false;
-        Debug.Log("resume");
     }
 
     public void Quit()
