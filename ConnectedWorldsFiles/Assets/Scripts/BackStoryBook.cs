@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class BackStoryBook : MonoBehaviour
@@ -9,12 +10,16 @@ public class BackStoryBook : MonoBehaviour
     private GameObject player;
     public DisplayBackStory displayBackStory;
     [SerializeField] private float distance;
-    [SerializeField] private TextMeshProUGUI interactHint;
+    [SerializeField] private GameObject interactHint;
+    private Image interactHintImage;
 
     // Start is called before the first frame update
     void Start()
     {
-        interactHint.alpha = 0f;
+        interactHintImage = interactHint.GetComponent<Image>();
+        var tempColor = interactHintImage.color;
+        tempColor.a = 0f;
+        interactHintImage.color = tempColor;
         sceneManager = FindObjectOfType<SceneManager>();
     }
 
@@ -30,7 +35,9 @@ public class BackStoryBook : MonoBehaviour
     {
         if (Vector2.Distance(transform.position, player.transform.position) < distance)
         {
-            interactHint.alpha = 1f;
+            var tempColor = interactHintImage.color;
+            tempColor.a = 1f;
+            interactHintImage.color = tempColor;
             if (Input.GetKeyDown(KeyCode.E))
             {
                 displayBackStory.Pause();
@@ -39,7 +46,9 @@ public class BackStoryBook : MonoBehaviour
         }
         else
         {
-            interactHint.alpha = 0f;
+            var tempColor = interactHintImage.color;
+            tempColor.a = 0f;
+            interactHintImage.color = tempColor;
         }
     }
 
