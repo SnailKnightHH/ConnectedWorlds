@@ -40,10 +40,7 @@ public class RustedRobotBullet : MonoBehaviour
         {
             StartCoroutine(DestoryProjectile());
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+
     }
     private IEnumerator DestoryProjectile()
     {

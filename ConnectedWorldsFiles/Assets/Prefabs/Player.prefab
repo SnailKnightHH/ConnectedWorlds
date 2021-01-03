@@ -156,7 +156,7 @@ MonoBehaviour:
   canGlide: 0
   canDash: 0
   audioSource: {fileID: 6969678636143487194}
-  LaunchFireBall: {fileID: 8300000, guid: 815954203a18c284a84545832f0ebfbe, type: 3}
+  LaunchFireBall: {fileID: 8300000, guid: 74f3c76a8662a1b45bd68badeaeea342, type: 3}
 --- !u!50 &4774570119266482040
 Rigidbody2D:
   serializedVersion: 4

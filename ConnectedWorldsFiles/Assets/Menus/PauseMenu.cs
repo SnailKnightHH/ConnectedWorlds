@@ -45,6 +45,7 @@ public class PauseMenu : InGameMenu
 
     public void pausing()
     {
+        walkOnGrassSFX.canPlay = false;
         foreach (GameObject panel in panels)
         {
             if(panel.gameObject.name == "PauseMenuPanel")
@@ -53,4 +54,5 @@ public class PauseMenu : InGameMenu
         Time.timeScale = 0f;
         isGamePause = true;
     }
+
 }

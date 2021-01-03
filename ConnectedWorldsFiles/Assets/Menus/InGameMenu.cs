@@ -6,7 +6,8 @@ public class InGameMenu : MonoBehaviour
 {
     public bool isGamePause = false;
     public GameObject[] panels;
-    private WalkOnGrassSFX walkOnGrassSFX;
+    [HideInInspector]
+    public WalkOnGrassSFX walkOnGrassSFX;
 
     private void Start()
     {
