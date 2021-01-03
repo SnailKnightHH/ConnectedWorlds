@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82fe4641c1fd2b643a72826962b41826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 80
+  MaxHealth: 60
   movementSpeed: 1.5
   flashDuration: 0.1
   sceneManager: {fileID: 0}
