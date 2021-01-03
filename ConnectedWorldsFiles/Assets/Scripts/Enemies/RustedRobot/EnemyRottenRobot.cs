@@ -17,6 +17,7 @@ public class EnemyRottenRobot : SkyEnemyClass
     protected override void Awake()
     {
         currentAttackTime = 0;
+        base.Awake();
     }
 
     // Update is called once per frame

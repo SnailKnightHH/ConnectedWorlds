@@ -41,7 +41,6 @@ public class SkyEnemyClass : MonoBehaviour
 
     protected virtual void Update()
     {
-
     }
 
 
@@ -70,7 +69,8 @@ public class SkyEnemyClass : MonoBehaviour
 
     public void ReceiveDamage(int damageAmount)
     {
-        Debug.Log(damageAmount);
+        //Debug.Log("dmg: " + damageAmount);
+        //Debug.Log(currentHealth);
         currentHealth -= damageAmount;
         StartCoroutine(PlayDamageEffect());
         if (currentHealth <= 0) isDead = true;
